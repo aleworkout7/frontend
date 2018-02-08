@@ -1,0 +1,27 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Products</h1>
+
+ <div class="row">
+    <% @products.each do |product| %>
+      <div class="col-sm-6 col-md-4">
+        <div class="thumbnail">
+          <img src="<%= product.img %> " alt="imagen_producto">
+          <div class="caption">
+            <h3><%= product.name %></h3>
+            <p>$<%= product.price %> (CLP)</p>
+            <p>ID TIENDA: <%= product.id_shop %></p>
+            <p>
+            <%= link_to 'Show', product, role: 'button', class: 'btn btn-primary' %>
+            <%= link_to 'Edit', edit_product_path(product), role: 'button', class: 'btn btn-primary' %>
+            <%= link_to 'Destroy', product, method: :delete, data: { confirm: 'Are you sure?' }, role: 'button', class: 'btn btn-primary' %>
+            </p>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+  
+<br>
+
+<%= link_to 'New Product', new_product_path %>

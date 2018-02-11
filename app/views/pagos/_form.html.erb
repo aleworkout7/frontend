@@ -1,0 +1,77 @@
+<%= form_for @pago, validate: true do |f| %>
+  <% if @pago.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@pago.errors.count, "error") %> prohibited this pago from being saved:</h2>
+
+      <ul>
+      <% @pago.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  
+  <% if user_signed_in? %>
+  <% if current_user.email == "ale@ale.cl" %>
+    <div class="field">
+      <%= f.label :checked %><br>
+      <%= f.check_box :checked %>
+    </div>
+    <div class="field">
+      <%= f.label :email %><br>
+      <%= f.text_field :email %>
+    </div>
+    <div class="field">
+      <%= f.label :user_id %><br>
+      <%= f.number_field :user_id %>
+    </div>
+  <% end %>
+  <% end %>
+
+  <div class="field">
+    <%= f.label 'Membresia' %><br>
+    <%= f.collection_select :member_id, @members, :id, :name %>
+  </div>
+  <div class="field">
+    <%= f.label 'Fecha en que realizó el pago' %><br>
+    <%= f.date_select :payment_date %>
+  </div>
+  <div class="field">
+    <%= f.label 'Pago' %><br>
+    <%= f.number_field :amount %>
+  </div>
+  <div class="field">
+    <%= f.label 'Suba Comprobante del pago' %><br>
+    <%= f.file_field :image %>
+  </div>
+  <hr />
+  <h3>Rellene sólo si hizo transferencia bancaria</h3><br />
+  <div class="field">
+    <%= f.label 'Nombre de su banco' %><br>
+    <%= f.collection_select :banco_id, @bancos, :id, :name %>
+  </div>
+  <div class="field">
+    <%= f.label 'Tipo de cuenta' %><br>
+    <%= f.collection_select :account_id, @cuentas, :id, :name %>
+  </div>
+  <div class="field">
+    <%= f.label 'N° Cuenta' %><br>
+    <%= f.number_field :account_number %>
+  </div>
+  <hr />
+  <div class="field">
+    <%= f.label 'Nombre de su edificio/condominio' %><br>
+    <%= f.text_field :predio_name %>
+  </div>
+  <div class="field">
+    <%= f.label 'Dirección de su edificio/condominio' %><br>
+    <%= f.text_area :predio_address %>
+  </div>
+  <div class="field">
+    <%= f.label 'Mensaje' %><br>
+    <%= f.text_area :message %>
+  </div>
+  <div class="actions">
+    <%= f.submit "Listo", class: 'button button3 btn-block', role: 'button' %>
+  </div>
+<% end %>

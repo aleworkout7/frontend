@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  email: MyString
+  payment: 1
+  payment_date: 2017-11-25
+  due_date: 2017-11-25
+  message: MyText
+  id_member: 1
+
+two:
+  email: MyString
+  payment: 1
+  payment_date: 2017-11-25
+  due_date: 2017-11-25
+  message: MyText
+  id_member: 1

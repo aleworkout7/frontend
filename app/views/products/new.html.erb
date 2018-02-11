@@ -1,5 +1,9 @@
-<h1>New Product</h1>
+<h1>Nuevo Producto</h1>
+<p>(Para crear producto debes tener una tienda</p>
+<p><%= link_to 'Crea una tienda aquí', new_shop_path, class: 'link' %>)</p>
+
+<br />
 
 <%= render 'form' %>
-
-<%= link_to 'Back', products_path %>
+<br />
+<%= link_to 'Volver', products_path, role: 'button', class: 'btn btn-success btn-sm' %>

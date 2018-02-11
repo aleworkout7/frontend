@@ -1,0 +1,51 @@
+<%= form_for @shop, validate: true do |f| %>
+  <% if @shop.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@shop.errors.count, "error") %> prohibited this shop from being saved:</h2>
+
+      <ul>
+      <% @shop.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  
+  <div class="field">
+    <%= f.label 'La tienda está abierta?' %><br>
+    <%= f.check_box :available %>
+  </div>
+  <div class="field">
+    <%= f.label 'Foto de la tienda' %><br>
+    <%= f.file_field :image %>
+  </div>
+  <div class="field">
+    <%= f.label 'Edificio a la que pertenece' %><br>
+    <%= f.collection_select :predio_id, @predios, :id, :name %>
+  </div>  
+  <div class="field">
+    <%= f.label "Numero de contacto" %><br>
+    <%= f.text_field :number %>
+  </div>
+  <div class="field">
+    <%= f.label "Tiene Whatsapp?" %><br>
+    <%= f.check_box :whatsapp %>
+  </div>
+  <div class="field">
+    <%= f.label "Le pueden llamar?" %><br>
+    <%= f.check_box :phone %>
+  </div>
+  <div class="field">
+    <%= f.label 'Nombre de la tienda' %><br>
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label "Categoria de la tienda" %><br>
+    <%= f.collection_select :category_id, @categories, :id, :name %>
+  </div>
+  
+  <div class="actions">
+    <%= f.submit "Listo", class: 'button button3 btn-block', role: 'button' %>
+  </div>
+  <br />
+<% end %>  

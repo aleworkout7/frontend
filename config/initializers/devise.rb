@@ -6,12 +6,13 @@ Devise.setup do |config|
   # confirmation, reset password and unlock tokens in the database.
   # Devise will use the `secret_key_base` as its `secret_key`
   # by default. You can change it below and use your own secret key.
-  # config.secret_key = '4e9829793b3439b3dce3e6817f101e106da6b8375e6ab0842dd647143c557c9d6a36a207d977a98543fb8e06e41716a297a0bd72a087d842e09ec52386ae4989'
-
+  # config.secret_key = '973670381f0010d666cf9d3fb0cd9ddb3b4afb231ef0e0735288ad77f940f4cab2c90482b37f03d07f02f0205aba729b48f8f4237a02e4ac3ff299de5a294df7'
+  #config.secret_key = '8a0ca02331861f83ff1a7af0e35696c14ae390849c4a17b6e436d8673846ada937b75ee4a7225b0adb10e81f679c2c527b431b2d0bc94de88444d1f0ea0febf7'
   # ==> Mailer Configuration
   # Configure the e-mail address which will be shown in Devise::Mailer,
   # note that it will be overwritten if you use your own mailer class
   # with default "from" parameter.
+  config.secret_key = '20c3f1e1232072557dafbc4ff86a5a71c678c6d618c9be00e0565d62492db761f00aa9c4f4d616e66a991de1d6de9ad3585cb806a91ee569c0889554c0e6c837'
   config.mailer_sender = 'please-change-me-at-config-initializers-devise@example.com'
 
   # Configure the class responsible to send e-mails.
@@ -108,7 +109,7 @@ Devise.setup do |config|
   config.stretches = Rails.env.test? ? 1 : 11
 
   # Set up a pepper to generate the hashed password.
-  # config.pepper = 'd1fd4773fc327556160e0579619d416f693f3d4fcdb0777412b328bf7b1376f5234f17015afb85db15e937666d12c38b46cfacf446b45e1156c35515c13fa45d'
+  # config.pepper = '977e7089fed8b5158712308cde7c4c144f1f9f8f3dee47670c1819b7ac16b6d9babf0b8d13667ff0404a8bed5ce9726aaade2d839cd6ec510318d5773c52d752'
 
   # Send a notification to the original email when the user's email is changed.
   # config.send_email_changed_notification = false
@@ -136,7 +137,7 @@ Devise.setup do |config|
   # initial account confirmation) to be applied. Requires additional unconfirmed_email
   # db field (see migrations). Until confirmed, new email is stored in
   # unconfirmed_email column, and copied to email column on successful confirmation.
-  config.reconfirmable = true
+  config.reconfirmable = false
 
   # Defines which key will be used when confirming an account
   # config.confirmation_keys = [:email]

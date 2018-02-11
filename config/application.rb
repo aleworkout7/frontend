@@ -22,5 +22,29 @@ module Workspace
 
     # Do not swallow errors in after_commit/after_rollback callbacks.
     config.active_record.raise_in_transactional_callbacks = true
+
+    config.action_mailer.delivery_method = :smtp
+    config.action_mailer.perform_deliveries = true
+    config.action_mailer.raise_delivery_errors = true
+
+    config.assets.paths << Rails.root.join("vendor","assets", "fonts")
+
+
+ #   config.action_controller.asset_host = 'localhost:3000'
+ #   config.action_mailer.asset_host = 'http://localhost:3000'
+
+    config.action_mailer.smtp_settings = {
+      :address              => "smtp.gmail.com",
+      :port                 =>  587, # 25,
+      :domain               => 'gmail.com',
+      :user_name            => 'predios.smtp@gmail.com', # 'sistemas',
+      :password             =>  ENV["email_password"],
+      :authentication       => 'plain',
+      #:ssl => true,
+      :enable_starttls_auto => true, # Si lo colocaba en true daba este error= OpenSSL::SSL::SSLError (hostname does not match the server certificate)
+       #      :openssl_verify_mode  => OpenSSL::SSL::VERIFY_CLIENT_ONCE,
+    }
+
+
   end
 end

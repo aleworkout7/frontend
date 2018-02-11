@@ -3,11 +3,11 @@
 one:
   name: MyString
   price: 1
-  img: MyString
-  id_shop: 1
+  detail: MyText
+  shop_id: 1
 
 two:
   name: MyString
   price: 1
-  img: MyString
-  id_shop: 1
+  detail: MyText
+  shop_id: 1

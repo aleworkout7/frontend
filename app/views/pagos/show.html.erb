@@ -1,0 +1,50 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Membresia:</strong>
+  <%= @pago.member.name %>
+</p>
+
+<p>
+  <strong>Pago:</strong>
+  <%= @pago.amount %>
+</p>
+
+<p>
+  <strong>Mensaje:</strong>
+  <%= @pago.message %>
+</p>
+
+<p>
+  <strong>Estado del pago:</strong>
+  <% if @pago.checked %>
+          <%= "Aceptado y validado" %>
+  <% else %>
+          <%= "En revisión" %>
+  <% end %>
+  
+</p>
+
+<p>
+  <strong>Nombre de su edificio/condominio:</strong><br />
+  <%= @pago.predio_name %>
+</p>
+
+<p>
+  <strong>Dirección de su edificio/condominio:</strong><br />
+  <%= @pago.predio_address %>
+</p>
+
+<p>
+  <strong>Fecha en que realiza el pago:</strong><br />
+  <%= @pago.payment_date %>
+</p>
+
+<p>
+  <strong>Fecha de aviso de pago por parte del usuario:</strong><br />
+  <%= @pago.notice_date %>
+</p>
+
+<br />
+<%= link_to 'Volver', pagos_path, role: 'button', class: 'btn btn-success btn-sm' %>
+<%= link_to 'Editar', edit_pago_path(@pago), role: 'button', class: 'navbar-fixed-bottom button button3 btn-block' %>

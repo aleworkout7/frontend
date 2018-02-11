@@ -1,3 +1,16 @@
 // Place all the styles related to the Shops controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.bootstrap-select.btn-group .dropdown-toggle .filter-option {
+  display: inline-block;
+  overflow: hidden;
+  width: 100%;
+  text-align: left;
+  color:#000;
+}
+.btn-default{/* color:#fff; */background-color: rgba(174, 167, 159, 0);border-color:#aea79f;}
+.btn-default:hover,.btn-default:focus,.btn-default:active,.btn-default.active,.open .dropdown-toggle.btn-default{color:#fff;background-color:#fff;border-color:#92897e}
+.btn-default .caret {
+  border-top-color: #000
+}

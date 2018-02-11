@@ -1,6 +1,9 @@
-<h1>Editing Shop</h1>
+<h1>Editar Tienda</h1>
 
-<%= render 'form' %>
+<br />
+<%= render 'form_edit' %>
 
-<%= link_to 'Show', @shop %> |
-<%= link_to 'Back', shops_path %>
+<br />
+
+<%= link_to 'Ver la Tienda', @shop, role: 'button', class: 'btn btn-success btn-sm' %> |
+<%= link_to 'Todas las Tiendas', shops_path, role: 'button', class: 'btn btn-success btn-sm' %>

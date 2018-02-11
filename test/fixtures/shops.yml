@@ -2,12 +2,16 @@
 
 one:
   name: MyString
-  greeting: MyString
-  img: MyString
-  img_seller: MyString
+  greeting: MyText
+  number: MyString
+  whatsapp: false
+  phone: false
+  user_id: 1
 
 two:
   name: MyString
-  greeting: MyString
-  img: MyString
-  img_seller: MyString
+  greeting: MyText
+  number: MyString
+  whatsapp: false
+  phone: false
+  user_id: 1

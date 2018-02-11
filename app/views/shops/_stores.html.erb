@@ -1,0 +1,44 @@
+<% @shops.each do |shop| %>
+  <% @alejandros.each do |user| %>
+    <% if shop.user.email == user.email %>
+      <div class="col-sm-6 col-md-4">
+        <div class="thumbnail">
+          <%= link_to image_tag(shop.image_url, class: "img-responsive aspect"), shop %><br>
+          <div class="caption">
+            <div class="bb">
+              <% if shop.available %>
+                <h2 class="clase"><span class="span"><%= shop.name %></span></h2><p class="otra">(abierta ahora)</p>
+              <% else %>
+                <h2 class="clase"><span class="span"><%= shop.name %></span></h2><p class="otra">(cerrada ahora)</p>
+              <% end %>
+            </div>
+            <% if user_signed_in? %>
+              <% if current_user.email == "ale@ale.cl" %>
+                <h3><%= shop.user.email %></h3>
+              <% end %>
+            <% end %>
+            <h4><%= shop.number %></h4>
+            <% if shop.whatsapp %>
+              <ul>
+                <li>Tenemos Whatsapp</li>
+              </ul>
+            <% end %>
+            <% if shop.phone %>
+              <ul>
+                <li>Puede llamarnos</li>
+              </ul>
+            <% end %>
+            <p>
+            <% if user_signed_in? %>
+            <% if current_user.id == shop.user_id or current_user.email == "ale@ale.cl" %>
+              <%= link_to 'Editar', edit_shop_path(shop), role: 'button', class: 'btn btn-success btn-sm' %>
+              <%= link_to 'Eliminar', shop, method: :delete, data: { confirm: 'Are you sure?' }, role: 'button', class: 'btn btn-success btn-sm' %>
+            <% end %>  
+            <% end %>
+            </p>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
+<% end %>

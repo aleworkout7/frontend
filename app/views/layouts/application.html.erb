@@ -72,7 +72,8 @@
   <!-- Menu Mobile -->
   <div class="menu-mobile hide">
     <div class="header-mob">
-      <%= image_tag("logo", class: "logo-mob") %>
+      <%#= image_tag("logo", class: "logo-mob") %>
+      <img src="https://photos-2.dropbox.com/t/2/AAAbchg1lh767S5le3DngeKo_M_1oZD-IBwJSyYiFADXHw/12/2285070/png/32x32/1/_/1/2/logo.png/ENfc5AEYstHXLiACKAI/H825iVgoVbVhaHWT4FggHRlq6A5tM6xlamPbxFVo2-8?preserve_transparency=1&size=1600x1200&size_mode=3" class="logo-mob">
     </div>
     <ul class="nav-mob">
       <% if user_signed_in? %>
@@ -102,8 +103,10 @@
   <div class="container-fluid">
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
-      <%= image_tag "burger", class: 'burger' %>
-      <%= link_to image_tag("logo", class: 'logo-header'), root_path %>
+      <%#= image_tag "burger", class: 'burger' %>
+      <img src="https://photos-5.dropbox.com/t/2/AADvX5_D-QeyVMEtgUpCFakQUWpUNBfa9K_GTdL5ERu-1g/12/2285070/png/32x32/1/_/1/2/burger.png/ENfc5AEYstHXLiACKAI/azHD3UiQZ9ns0IRRiSGFHZZv9YmcV39R2f3IYXf6nZQ?preserve_transparency=1&size=1600x1200&size_mode=3" class="burger">
+      <%= link_to raw('<img src="https://photos-2.dropbox.com/t/2/AAAbchg1lh767S5le3DngeKo_M_1oZD-IBwJSyYiFADXHw/12/2285070/png/32x32/1/_/1/2/logo.png/ENfc5AEYstHXLiACKAI/H825iVgoVbVhaHWT4FggHRlq6A5tM6xlamPbxFVo2-8?preserve_transparency=1&size=1600x1200&size_mode=3" class="logo-header">'), root_path %>
+      <%#= link_to image_tag("logo", class: 'logo-header', src:'https://www.dropbox.com/s/9zliryk9alf7vvy/logo.png?dl=0'), root_path %>
       <%= link_to 'Fazer login', new_user_session_path, class: 'mob-login' %>
     </div>
 

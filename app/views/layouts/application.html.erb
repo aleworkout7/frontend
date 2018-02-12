@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" style="height: 100%;">
 <head>
   <!-- Global site tag (gtag.js) - Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=UA-109310748-2"></script>
@@ -7,7 +7,7 @@
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-  
+
     gtag('config', 'UA-109310748-2');
   </script>
 
@@ -37,8 +37,8 @@
     cursor: pointer;
     }
     .button3 {
-    background-color: white; 
-    color: black; 
+    background-color: white;
+    color: black;
     border: 2px solid #f44336;
     }
     .button3:hover {
@@ -46,8 +46,8 @@
     color: white;
     }
     .button1 {
-    background-color: white; 
-    color: black; 
+    background-color: white;
+    color: black;
     border: 2px solid #4CAF50;
     }
     .button1:hover {
@@ -68,18 +68,43 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 </head>
-<body>
+<body style="height: 100%; background-color: #FFFF01;">
+  <!-- Menu Mobile -->
+  <div class="menu-mobile hide">
+    <div class="header-mob">
+      <%= image_tag("logo", class: "logo-mob") %>
+    </div>
+    <ul class="nav-mob">
+      <% if user_signed_in? %>
+        <li><a><%= current_user.email %></a></li>
+        <li><%= link_to 'Cerrar sesión', destroy_user_session_path, method: :delete %></li>
+      <% else %>
+        <li><%= link_to 'Iniciar sesión', new_user_session_path %></li>
+      <% end %>
+      <li><%= link_to "Tiendas", shops_path %></li>
+      <li><%= link_to "Pagos", pagos_path %></li>
+      <li><%= link_to "Consultas", queries_path %></li>
+      <% if user_signed_in? %>
+      <li><%= link_to "Crear nuevo producto", new_product_path %></li>
+      <% if current_user.email == "ale@ale.cl" %>
+        <li><%= link_to "Predios", predios_path %></li>
+        <li><%= link_to "Categories", categories_path %></li>
+        <li><%= link_to "Alejandros", alejandros_path %></li>
+        <li><%= link_to "Bancos", bancos_path %></li>
+        <li><%= link_to "Tipos de cuenta", accounts_path %></li>
+      <% end %>
+      <% end %>
+    </ul>
+  </div>
+
+
 <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container-fluid">
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <%= link_to "Predios App", root_path, class: 'navbar-brand' %>
+      <%= image_tag "burger", class: 'burger' %>
+      <%= link_to image_tag("logo", class: 'logo-header'), root_path %>
+      <%= link_to 'Fazer login', new_user_session_path, class: 'mob-login' %>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->

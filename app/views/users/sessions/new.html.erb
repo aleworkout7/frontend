@@ -1,94 +1,41 @@
-<!-- <h2>Iniciar Sesión</h2> -->
-
-<!--
-<%#= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="field">
-    <%#= f.label :email %><br />
-    <%#= f.email_field :email, autofocus: true %>
-  </div>
-
-  <div class="field">
-    <%#= f.label "Contraseña" %><br />
-    <%#= f.password_field :password, autocomplete: "off" %>
-  </div>
-
-  <%# if devise_mapping.rememberable? -%>
-    <div class="field">
-      <%#= f.check_box :remember_me %>
-      <%#= f.label 'Recordar' %>
-    </div>
-  <%# end -%>
-
-  <div class="actions">
-    <%#= f.submit "Entrar" %>
-  </div>
-<%# end %>
-
-<%-# if devise_mapping.registerable? && controller_name != 'registrations' %>
-  <%#= link_to "Crear cuenta", new_registration_path(resource_name) %><br />
-<%# end -%>
-
-<%-# if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations' %>
-  <%#= link_to "Olvidó su contraseña?", new_password_path(resource_name) %><br />
-<%# end -%>
--->
-  
 <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-
-  <div class="container" style="margin-top:50px">
+  <div class="container" style="margin-top:25px">
     <div class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
       <div class="panel panel-default">
-        <div class="panel-heading">      
-          <h3 class="panel-title"><strong>Iniciar Sesión </strong></h3>
-          <div style="float:right; font-size: 80%; position: relative; top:-10px">  
-            <%= link_to "Olvidó su contraseña?", new_password_path(resource_name) %><br />
-          </div>
-        </div>
+        <p style="font-size: 25px;line-height: 30px;font-weight: bold;">Realize seus sonhos agora.</p>
+        <p style="font-weight: normal;margin-top: 20px;font-size: 20px;margin-bottom: 35px;line-height: 26px;">Compre e venda nos Prédios.</p>
         <div class="panel-body">
-          <div class="form-group">
-            <%= f.label :email %><br />
-            <%= f.email_field :email, autofocus: true, class:"form-control", placeholder:"Ingrese email" %>
-            <!-- <label for="exampleInputEmail1">Email</label>
-            <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Ingrese email"> -->
-          </div>
-          <div class="form-group">
-            <%= f.label "Contraseña" %><br />
-            <%= f.password_field :password, autocomplete: "off", class:"form-control", placeholder:"Ingrese contraseña"%>
 
-            <!-- <label for="exampleInputPassword1">Contraseña</label>
-            <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Ingrese contraseña"> -->
-          </div>
-          <% if devise_mapping.rememberable? -%>
-            <div class="checkbox">
-              <%= f.check_box :remember_me %>
-              <%= f.label 'Recordar' %>
+          <div class="block-mail">
+            <div class="form-group">
+              <%= f.email_field :email, autofocus: true, class:"form-control black-border", placeholder:"Insira o seu e-mail" %>
             </div>
-          <% end -%>
-        <!--   <div class="checkbox">
-            <label>
-              <input name="remember" type="checkbox" value="Remember Me">Recordar
-            </label>
-          </div>  -->
-          <div class="actions">
-            <%= f.submit "Entrar", class:"btn btn-sm btn-primary" %>
-          </div>
-          <!-- <div class="row">
-            <div class="col-md-12">
-              <button type="submit" class="btn btn-sm btn-primary">Aceptar</button>
+            <div class="actions">
+              <a href="javascript:void(0);" class="btn btn-sm btn-primary btn-avanzar">Avançar</a>
+              <img src="https://s3.amazonaws.com/predios/right.png" class="btn-right">
             </div>
-          </div> -->
-          <div style="margin-top:10px" class="form-group">
-            <div class="col-md-12 control">
-              <div style="border-top: 1px solid#ddd; padding-top:15px;" >
-                ¿No tienes una cuenta?
-                <%= link_to "Regístrate Aquí", new_registration_path(resource_name) %><br />
+          </div>
+
+          <div class="block-pass hide">
+            <div class="form-group">
+              <img src="https://s3.amazonaws.com/predios/left.png" class="backLogin">
+              <%= f.password_field :password, autocomplete: "off", class:"form-control black-border", placeholder:"Insira a sua senha"%>
+            </div>
+            <div class="actions">
+              <%= f.submit "Iniciar sessão", class:"btn btn-sm btn-primary btn-black" %>
+            </div>
+            <div style="margin-top:10px" class="form-group">
+              <div class="col-md-12 control lateral-clean">
+                <div style="border-top: 1px solid#ddd; padding-top:15px;" >
+                  <p>Não está cadastrado? <%= link_to "Crie sua conta aqui", new_registration_path(resource_name) %></p>
+                  <p>Esqueceu a sua senha? <%= link_to "Clique aqui", new_password_path(resource_name) %></p>
                 </div>
+              </div>
             </div>
-          </div>  
+          </div>
+
         </div>
       </div>
     </div>
-
   </div>
-
 <% end  %>

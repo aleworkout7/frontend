@@ -1,41 +1,30 @@
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= devise_error_messages! %>
+  <%#= devise_error_messages! %>
 
   <div class="container" style="margin-top:50px">
-    <div class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+    <div class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2 lateral-clean">
       <div class="panel panel-default">
-        <div class="panel-heading">      
-          <h3 class="panel-title"><strong>Registrarse </strong></h3>
-          <div style="float:right; font-size: 80%; position: relative; top:-10px">  
-            <%#= link_to "Olvidó su contraseña?", new_password_path(resource_name) %><br />
-          </div>
-        </div>
         <div class="panel-body">
+          <p class="login-text">Cadastre-se para experimentar conexões e interações com a sua vizinhança.</p>
+          </br>
           <div class="form-group">
-            <%= f.label :email %><br />
-            <%= f.email_field :email, autofocus: true, class:"form-control", placeholder:"Ingrese email" %>
+            <%= f.email_field :email, autofocus: true, class:"form-control", placeholder:"Insira o seu e-mail" %>
+            <img src="https://s3.amazonaws.com/predios/mail.png" class="input-mail">
           </div>
           <div class="form-group">
-            <%= f.label "Contraseña" %>
-            <% if @minimum_password_length %>
-            <em>(<%= @minimum_password_length %> caracteres mínimos)</em>
-            <% end %><br />
-            <%= f.password_field :password, autocomplete: "off", class:"form-control", placeholder:"Ingrese contraseña" %>
+            <%= f.password_field :password, autocomplete: "off", class:"form-control", placeholder:"Insira a sua senha" %>
           </div>
           <div class="form-group">
-            <%= f.label "Confirmar Contraseña" %><br/>
-            <%= f.password_field :password_confirmation, autocomplete: "off", class:"form-control", placeholder:"Ingrese confirmación de contraseña" %>
+            <%= f.password_field :password_confirmation, autocomplete: "off", class:"form-control", placeholder:"Confirmar sua senha" %>
           </div>
           <div class="row actions">
-            <div class="col-md-6">
-              <%= f.submit "Registrarse", class:"btn btn-sm btn-primary" %>
+            <div class="col-md-12">
+              <div>
+                <%= f.submit "CADASTRE-SE", class:"btn btn-sm btn-primary btn-send" %>
+                <img src="https://s3.amazonaws.com/predios/right.png" class="btn-right">
+              </div>
             </div>
-            <div align="right" class="col-md-6">
-              <%- if controller_name != 'sessions' %>
-                <%= link_to "Cancelar, e iniciar sesión", new_session_path(resource_name) %><br />
-              <% end -%>
-            </div>
-          </div> 
+          </div>
         </div>
       </div>
     </div>

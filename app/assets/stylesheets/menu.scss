@@ -23,6 +23,7 @@
   background-color: #1A1A1A;
   height: 100%;
   width: 85%;
+  right: 0;
 }
 .logo-mob {
   width: 250px;
@@ -65,14 +66,49 @@ input {
   -webkit-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
   transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
 }
+.backLogin {
+  position: absolute;
+  margin-top: 7px;
+  left: -30px;
+  display: block;
+}
+.btn-avanzar {
+  width: 100%;
+  text-align: left;
+  border-radius: 0;
+  padding: 9px;
+  font-size: 16px;
+  padding-left: 11px;
+  background-color: #000;
+  border-color: #000;
+}
+.btn-avanzar:hover, .btn-avanzar:focus {
+  background-color: #212121 !important;
+  border-color: #212121 !important;
+}
+.input-mail {
+  position: relative;
+  width: 16px;
+  float: right;
+  top: -31px;
+  margin-right: 15px;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
 .btn-send {
   width: 100%;
   text-align: left;
   border-radius: 0;
-
   font-size: 17px;
   background-color: #57AD57;
   border-color: #57AD57;
+}
+.btn-right {
+  position: relative;
+  width: 25px;
+  float: right;
+  top: -35px;
+  margin-right: 15px;
 }
 .login-text {
   font-size: 18px;

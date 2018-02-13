@@ -8,11 +8,15 @@
           <br>
           <div class="form-group">
             <%= f.email_field :email, autofocus: false, class:"form-control", placeholder:"E-mail" %>
+            <img src="https://s3.amazonaws.com/predios/mail.png" class="input-mail">
           </div>
           <div class="actions">
             <div class="row">
               <div class="col-md-12">
-                <%= f.submit "ENVIAR", class:"btn btn-sm btn-primary btn-send" %>
+                <div>
+                  <%= f.submit "ENVIAR", class:"btn btn-sm btn-primary btn-send" %>
+                  <img src="https://s3.amazonaws.com/predios/right.png" class="btn-right">
+                </div>
               </div>
             </div>
           </div>

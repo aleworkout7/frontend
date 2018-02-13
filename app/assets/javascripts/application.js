@@ -15,13 +15,22 @@
 //= require turbolinks
 //= require rails.validations
 //= require bootstrap-select
+//= require jquery.mask
 //= require_tree .
 
 $(document).ready(function () {
-  $(document).off('change', "#shops_index select").on('change', "#shops_index select", function (e) {
-  //$('#shops_index select').change(function () {
-    $.get($('#shops_index').attr('action'), 
-      $('#shops_index').serialize(), null, 'script');
-    return false;
-  });
+	$(document).off('change', "#shops_index select").on('change', "#shops_index select", function (e) {
+		//$('#shops_index select').change(function () {
+
+		$.get(
+			$('#shops_index').attr('action'),
+			$('#shops_index').serialize(),
+			null,
+			'script'
+		);
+
+		return false;
+	});
+
+	$('.phone').mask('(00) 0000-00009');
 });

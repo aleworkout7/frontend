@@ -43,8 +43,8 @@ set :puma_preload_app, false
 set :nginx_use_ssl, false
 
 set :ssh_options, {
-                    keys: %w(~/.ssh/id_rsa),
-                    user: ENV["server_username"],
-                    password: ENV["server_password"],
-                    auth_methods: %w(publickey password)
-                }
+    keys: %w(~/.ssh/id_rsa),
+    user: ENV["server_username"],
+    password: ENV["server_password"],
+    auth_methods: %w(publickey password)
+}

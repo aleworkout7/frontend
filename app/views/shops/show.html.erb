@@ -1,77 +1,81 @@
 <p id="notice"><%= notice %></p>
 
-
-
 <%= image_tag(@shop.image_url, class: "img-responsive aspect") %>
-            
+
 <h1><%= @shop.name %></h1>
-<% if user_signed_in? %>
-<% if current_user.id == @shop.user_id %>
-<%= link_to 'Editar Tienda', edit_shop_path(@shop), role: 'button', class: 'btn btn-success btn-sm' %>
-<% end %>
-<% end %>
 
 <% if user_signed_in? %>
-  <% if @shop.number.nil? && current_user.id == @shop.user_id %>
-  <h3><%= link_to "Agregar numero de contacto aquí", edit_shop_path(@shop), class: 'link'%> </h3>
-  <% else %>
-  <h3><%= @shop.number %></h3>
-  <% end %>
-<% else  %>
-  <h3><%= @shop.number %></h3>
+	<% if current_user.id == @shop.user_id %>
+		<%= link_to 'Editar Tienda', edit_shop_path(@shop), role: 'button', class: 'btn btn-success btn-sm' %>
+	<% end %>
 <% end %>
-            <% if @shop.whatsapp %>
-              <ul>
-                <li>Tenenemos Whatsapp</li>
-              </ul>
-            <% end %>
-            <% if @shop.phone %>
-              <ul>
-                <li>Puedes llamarnos</li>
-              </ul>
-            <% end %>
-            
-  <div>
-    <%= search_form_for @q do |f| %>
-  
-    <%= f.search_field :name_cont %>
-  
-    <%= f.submit "Buscar Producto" %>
-  
-    <% end %>
-  </div>
-  <h3>productos en tienda</h3>
-  <br />
 
-  <div class="row">
-    <% @products.each do |product| %>
-      <% if product.shop_id == @shop.id %>
-      <div class="col-sm-6 col-md-4">
-        <div class="thumbnail">
-          <%= image_tag(product.image_url, class: "img-responsive aspect") %>
-          <div class="caption">
-            <h3><%= product.name %></h3>
-            <p>$<%= product.price %> (CLP)</p>
-            <p><%= product.detail %></p>            
-            <p>
-            <% if user_signed_in? %>
-            <% if current_user.id == product.shop.user_id %>
-              <%= link_to 'Editar', edit_product_path(product), role: 'button', class: 'btn btn-success btn-sm' %>
-              <%= link_to 'Eliminar', product, method: :delete, data: { confirm: 'Are you sure?' }, role: 'button', class: 'btn btn-success btn-sm' %>
-            <% end %>
-            <% end %>
-            </p>
-          </div>
-        </div>
-      </div>
-      <% end %>
-    <% end %>
-  </div>
+<h3>
+	<% if user_signed_in? %>
+		<% if @shop.number.nil? && current_user.id == @shop.user_id %>
+			<%= link_to "Agregar numero de contacto aquí", edit_shop_path(@shop), class: 'link'%>
+		<% else %>
+			<%= @shop.number %>
+		<% end %>
+	<% else  %>
+		<%= @shop.number %>
+	<% end %>
+</h3>
+
+<% if @shop.whatsapp %>
+	<ul>
+		<li>Tenenemos Whatsapp</li>
+	</ul>
+<% end %>
+
+<% if @shop.phone %>
+	<ul>
+		<li>Puedes llamarnos</li>
+	</ul>
+<% end %>
+
+<div>
+	<%= search_form_for @q do |f| %>
+		<%= f.search_field :name_cont %>
+		<%= f.submit "Buscar Producto" %>
+	<% end %>
+</div>
+
+<h3>productos en tienda</h3>
+<br />
+
+<div class="row">
+	<% @products.each do |product| %>
+		<% if product.shop_id == @shop.id %>
+			<div class="col-sm-6 col-md-4">
+				<div class="thumbnail">
+					<%= image_tag(product.image_url, class: "img-responsive aspect") %>
+					<div class="caption">
+						<h3><%= product.name %></h3>
+						<p>$<%= product.price %> (CLP)</p>
+						<p><%= product.detail %></p>
+						<p>
+							<% if user_signed_in? %>
+								<% if current_user.id == product.shop.user_id %>
+									<%= link_to 'Editar', edit_product_path(product), role: 'button', class: 'btn btn-success btn-sm' %>
+									<%= link_to 'Eliminar', product, method: :delete, data: { confirm: 'Are you sure?' }, role: 'button', class: 'btn btn-success btn-sm' %>
+								<% end %>
+							<% end %>
+						</p>
+					</div>
+				</div>
+			</div>
+		<% end %>
+	<% end %>
+</div>
+
 <br /><br /><br />
+
 <% if user_signed_in? %>
-<% if current_user.id == @shop.user_id %>
-<%= link_to 'Crear un producto', new_product_path, role: 'button', class: 'navbar-fixed-bottom button button3 btn-block' %>
+	<% if current_user.id == @shop.user_id %>
+		<%= link_to 'Crear un producto', new_product_path, role: 'button', class: 'navbar-fixed-bottom button button3 btn-block' %>
+	<% end %>
 <% end %>
-<% end %>
-<%= link_to 'Volver', shops_path, role: 'button', class: 'btn btn-success btn-sm' %>
+
+<%= link_to 'Volver', predio_shops_path(@shop.predio_id), role: 'button', class: 'btn btn-success btn-sm' %>
 <hr />

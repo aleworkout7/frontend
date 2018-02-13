@@ -21,31 +21,32 @@ gem 'coffee-rails', '~> 4.1.0'
 gem 'jquery-rails'
 gem 'turbolinks'
 gem 'jbuilder', '~> 2.0'
+gem 'jquery_mask_rails'
 gem 'sdoc', '~> 0.4.0', group: :doc
 
 group :development, :test do
-  gem 'byebug'
+	gem 'byebug'
 end
 
 group :development do
-  gem 'web-console', '~> 2.0'
-  gem 'spring'
-  gem 'sqlite3'
-  #Capistrano
-  gem 'capistrano', '3.6.1'
-  gem 'capistrano-figaro-yml', '~> 1.0.2'
-  gem 'webrick'
-  gem 'rvm1-capistrano3', require: false
-  gem 'capistrano-rvm'
-  gem 'capistrano3-puma'
-  gem 'capistrano-bundler'
-  gem 'capistrano-rails'
-  gem 'capistrano-rails-console'
+	gem 'web-console', '~> 2.0'
+	gem 'spring'
+	gem 'sqlite3'
+	#Capistrano
+	gem 'capistrano', '3.6.1'
+	gem 'capistrano-figaro-yml', '~> 1.0.2'
+	gem 'webrick'
+	gem 'rvm1-capistrano3', require: false
+	gem 'capistrano-rvm'
+	gem 'capistrano3-puma'
+	gem 'capistrano-bundler'
+	gem 'capistrano-rails'
+	gem 'capistrano-rails-console'
 end
 
 group :production do
-  gem 'rails_12factor'
-  gem 'pg'
+	gem 'rails_12factor'
+	gem 'pg'
 end
 
 ruby "2.3.0"

@@ -106,6 +106,10 @@ input {
   border-color: #000000;
   padding-top: 1px;
 }
+.btn-black:hover, .btn-black:focus {
+  background-color: #212121;
+  border-color: #212121;
+}
 .lateral-clean {
   padding-left: 0;
   padding-right: 0;

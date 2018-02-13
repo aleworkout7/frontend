@@ -17,8 +17,9 @@ class ShopsController < ApplicationController
 	# GET /shops/1
 	# GET /shops/1.json
 	def show
-		@q = Product.ransack(params[:q])
-		@products = @q.result(distinct: true)
+		params[:q] = "" if params[:q].blank?
+		@shop = Shop.find(params[:id])
+		@products = @shop.products.where("lower(name) like :name", { name: "%#{params[:q].downcase}%" })
 	end
 
 	# GET /shops/new

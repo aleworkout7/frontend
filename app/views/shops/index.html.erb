@@ -3,27 +3,15 @@
 
 <!-- <p id="notice"><%#= notice %></p> -->
 
-<%= form_for("", url: shops_path, method:'get', remote: true, html: { id: 'shops_index', role: 'form'} ) do |f| %>
+<%= form_for("", url: shops_path, method:'get', html: { role: 'form'} ) do |f| %>
 	<h1 align="center">Edificios con tiendas disponibles</h1>
+
 	<br>
 	<div class="col-md-12 pure-css-select-style theme-default">
 		<%= select_tag(:predio_id, options_for_select( @my_shops.collect {|p| [p.predio.name, p.predio_id] }), { prompt: 'Elige un edificio', class: 'edificios'})%>
-		<!-- <div class="pure-css-select-style theme-default">
-			<select>
-				<option value="volvo">Lorem ipsum dolor sit amet</option>
-				<option value="saab">Consectetur adipisicing</option>
-				<option value="mercedes">At molestiae blanditiis</option>
-				<option value="audi">corrupti veritatis magni</option>
-			</select>
-		</div> -->
 	</div>
-	<!-- <ul class="nav nav-pills" role="tablist">
-		<li><%#= link_to 'Todas las tiendas', shops_path, class: 'nav-item' %></li>
-		<%# @my_shops.each do |s| %>
-			<li><%#= link_to "#{s.predio.name}", controller: "shops", predio_id: "#{s.predio_id}" %></li>
-		<%# end %>
-	</ul> -->
 	<br />
+
 	<% if user_signed_in? %>
 		<%= link_to "Mis Tiendas", user_shops_path(current_user), role: 'button', class: 'btn btn-success btn-xs' %>
 	<% end %>

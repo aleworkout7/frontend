@@ -1,27 +1,22 @@
 <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
- <%= devise_error_messages! %>
+ <%#= devise_error_messages! %>
   <div class="container" style="margin-top:50px">
-    <div class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+    <div class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2 lateral-clean">
       <div class="panel panel-default">
-        <div class="panel-heading">      
-          <h3 class="panel-title"><strong>Restablecer Contraseña </strong></h3>
-        </div>
         <div class="panel-body">
-          Ingrese su correo electrónico y le enviaremos instrucciones sobre cómo restablecer su contraseña.
-          <br></br>
+          <p class="login-text">Insira o seu e-mail. A gente enviará para você instruções sobre como redefinir a sua senha.</p>
+          <br>
           <div class="form-group">
-            <%= f.label :email %><br />
-            <%= f.email_field :email, autofocus: false, class:"form-control", placeholder:"Ingrese email" %>
+            <%= f.email_field :email, autofocus: false, class:"form-control", placeholder:"E-mail" %>
+            <img src="https://s3.amazonaws.com/predios/mail.png" class="input-mail">
           </div>
           <div class="actions">
             <div class="row">
-              <div class="col-md-6">
-                <%= f.submit "Aceptar", class:"btn btn-sm btn-primary" %>
-              </div>
-              <div align="right" class="col-md-6">
-                <%- if controller_name != 'sessions' %>
-                  <%= link_to "Cancelar, e iniciar sesión", new_session_path(resource_name) %><br />
-                <% end -%>
+              <div class="col-md-12">
+                <div>
+                  <%= f.submit "ENVIAR", class:"btn btn-sm btn-primary btn-send" %>
+                  <img src="https://s3.amazonaws.com/predios/right.png" class="btn-right">
+                </div>
               </div>
             </div>
           </div>

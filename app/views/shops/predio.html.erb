@@ -8,7 +8,7 @@
 		<div class="col-md-12">
 			<%= link_to "Volver", root_path, role: 'button', class: 'btn btn-primary btn-xs' %>
 			<% if user_signed_in? %>
-			<%= link_to "Mis Tiendas", user_shops_path(current_user), role: 'button', class: 'btn btn-success btn-xs' %>
+				<%= link_to "Mis Tiendas", user_shops_path(current_user), role: 'button', class: 'btn btn-success btn-xs' %>
 			<% end %>
 		</div>
 	</div>
@@ -22,7 +22,7 @@
 						<%= text_field_tag :search, params[:search], class: "form-control", placeholder: "Buscar por nombre de las tiendas o de los productos" %>
 					</div>
 					<div class="col-sm-2">
-						<%= submit_tag "Buscar", class: "btn btn-success" %>
+						<%= submit_tag "Buscar", class: "btn btn-success", name: nil %>
 					</div>
 				</div>
 			<% end %>

@@ -21,7 +21,9 @@ class Shop < ActiveRecord::Base
 		end
 
 		if params[:search].present?
-			result = result.joins("left join products on products.shop_id = shops.id").where("lower(shops.name) like :search or lower(products.name) like :search", { search: "%#{params[:search].downcase}%" })
+			result = result.joins("left join products on products.shop_id = shops.id")
+							.where("lower(shops.name) like :search or lower(products.name) like :search", { search: "%#{params[:search].downcase}%" })
+							.distinct
 		end
 
 		result

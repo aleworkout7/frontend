@@ -9,4 +9,5 @@ class Product < ActiveRecord::Base
 	def validate
 		true
 	end
+
 end

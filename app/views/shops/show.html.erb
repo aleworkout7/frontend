@@ -59,7 +59,11 @@
 					<p><%= product.detail %></p>
 					<% if user_signed_in? %>
 						<p>
-							<%= link_to 'Adicionar ao carrinho', add_to_cart_shop_path(@shop, product), role: 'button', class: 'btn btn-success btn-sm' %>
+							<% unless is_in_cart? product %>
+								<%= link_to 'Adicionar ao carrinho', add_to_cart_shop_path(@shop, product), role: 'button', class: 'btn btn-success btn-sm' %>
+							<% else %>
+								<span class="btn btn-sm">Já adicionado no carrinho</span>
+							<% end %>
 
 							<% if current_user.id == product.shop.user_id %>
 								<%= link_to 'Editar', edit_product_path(product), role: 'button', class: 'btn btn-success btn-sm' %>

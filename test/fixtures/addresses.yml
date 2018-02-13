@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  predio_id: 
+  number: MyString
+  block: MyString
+  floor: 1
+  complement: MyString
+  user_id: 
+
+two:
+  predio_id: 
+  number: MyString
+  block: MyString
+  floor: 1
+  complement: MyString
+  user_id: 

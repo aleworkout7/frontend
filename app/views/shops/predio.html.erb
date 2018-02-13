@@ -1,0 +1,42 @@
+<meta name="apple-mobile-web-app-capable" content="yes">
+<link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Montserrat:400,700" rel="stylesheet" type="text/css">
+
+<div class="container">
+	<h1 align="center" style="padding: 10px;">Tiendas disponibles</h1>
+
+	<div class="row">
+		<div class="col-md-12">
+			<%= link_to "Volver", root_path, role: 'button', class: 'btn btn-primary btn-xs' %>
+			<% if user_signed_in? %>
+			<%= link_to "Mis Tiendas", user_shops_path(current_user), role: 'button', class: 'btn btn-success btn-xs' %>
+			<% end %>
+		</div>
+	</div>
+
+	<div class="row" style="padding: 10px 0;">
+		<div class="col-md-12">
+
+			<%= form_tag(predio_shops_path(@predio), method:'get') do %>
+				<div class="form-group row">
+					<div class="col-sm-10">
+						<%= text_field_tag :search, params[:search], class: "form-control", placeholder: "Buscar por nombre de las tiendas o de los productos" %>
+					</div>
+					<div class="col-sm-2">
+						<%= submit_tag "Buscar", class: "btn btn-success" %>
+					</div>
+				</div>
+			<% end %>
+
+		</div>
+	</div>
+
+	<div class="row" style="margin-top: 10px;">
+		<div id="stores">
+			<%= render 'stores' %>
+		</div>
+	</div>
+</div>
+
+<% if user_signed_in? %>
+	<%= link_to 'Crear Nueva Tienda', new_shop_path, role: 'button', class: 'navbar-fixed-bottom button button3 btn-block' %>
+<% end %>

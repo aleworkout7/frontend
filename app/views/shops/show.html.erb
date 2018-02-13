@@ -1,4 +1,16 @@
-<p id="notice"><%= notice %></p>
+<div class="row">
+	<p id="notice"><%= notice %></p>
+
+	<div class="col-sm-12 text-right">
+		<h1 class="cart-text">
+			<div id="cart">
+				<%= link_to "Items in Cart (#{amount_items_in_cart})", cart_shop_path(@shop), class: "btn btn-link", "data-count": amount_items_in_cart %>
+			</div>
+		</h1>
+	</div>
+
+	<%= render partial: "/cart/modal_empty_cart" %>
+</div>
 
 <%= image_tag(@shop.image_url, class: "img-responsive aspect") %>
 

@@ -16,7 +16,8 @@
 //= require rails.validations
 //= require bootstrap-select
 //= require jquery.mask
-//= require_tree .
+//= require menu
+//= require rails.validations
 
 $(document).ready(function () {
 	$(document).off('change', "#shops_index select").on('change', "#shops_index select", function (e) {

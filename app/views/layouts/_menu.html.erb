@@ -1,0 +1,29 @@
+<div class="menu-mobile hide">
+	<div class="header-mob">
+		<%#= image_tag("logo", class: "logo-mob") %>
+		<img src="https://s3.amazonaws.com/predios/logo.png" class="logo-mob">
+	</div>
+	<ul class="nav-mob">
+		<% if user_signed_in? %>
+			<li><%= link_to current_user.email, edit_user_registration_path %></li>
+			<li><%= link_to 'Cerrar sesión', destroy_user_session_path, method: :delete %></li>
+		<% else %>
+			<li><%= link_to 'Iniciar sesión', new_user_session_path %></li>
+		<% end %>
+
+		<li><%= link_to "Tiendas", shops_path %></li>
+		<li><%= link_to "Pagos", pagos_path %></li>
+		<li><%= link_to "Consultas", queries_path %></li>
+
+		<% if user_signed_in? %>
+			<li><%= link_to "Crear nuevo producto", new_product_path %></li>
+			<% if current_user.admin? %>
+				<li><%= link_to "Predios", predios_path %></li>
+				<li><%= link_to "Categories", categories_path %></li>
+				<li><%= link_to "Alejandros", alejandros_path %></li>
+				<li><%= link_to "Bancos", bancos_path %></li>
+				<li><%= link_to "Tipos de cuenta", accounts_path %></li>
+			<% end %>
+		<% end %>
+	</ul>
+</div>

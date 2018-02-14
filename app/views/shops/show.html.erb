@@ -1,93 +1,89 @@
-<div class="row">
-	<p id="notice"><%= notice %></p>
+<div class="header-store">
+	<div class="container">
 
-	<div class="col-sm-12 text-right">
-		<h1 class="cart-text">
-			<div id="cart">
-				<%= link_to "Items in Cart (#{amount_items_in_cart})", cart_shop_path(@shop), class: "btn btn-link", "data-count": amount_items_in_cart, data: { turbolinks: false } %>
+		<div class="row">
+			<div class="col-sm-12 text-right">
+				<h1 class="cart-text">
+					<div id="cart">
+						<%= link_to "Items in Cart (#{amount_items_in_cart})", cart_shop_path(@shop), class: "btn btn-link", "data-count": amount_items_in_cart, data: { turbolinks: false } %>
+					</div>
+				</h1>
 			</div>
-		</h1>
+		</div>
+
+		<div class="col-md-6">
+			<%= image_tag(@shop.image_url, class: "img-responsive aspect logo-product") %>
+		</div>
+		<div class="col-md-6">
+			<h1 class="margin-top-0">
+				<%= @shop.name %>
+			</h1>
+			<div class="inline">
+				<img src="https://s3.amazonaws.com/predios/build.png" class="build">
+				<h1 class="build-name">
+					<%= @shop.predio.name %>
+				</h1>
+			</div>
+		</div>
+		<div class="col-md-12">
+			<%= form_tag(shop_path(@shop), method: "get") do %>
+				<div class="col-md-10">
+					<%= text_field_tag :q, params[:q], class: "input-search", placeholder: 'Estou a procura de...' %>
+				</div>
+				<div class="col-md-2">
+					<%= submit_tag "Busque", class: "input-btn-search", name: nil %>
+				</div>
+			<% end %>
+		</div>
 	</div>
 </div>
 
-<%= image_tag(@shop.image_url, class: "img-responsive aspect") %>
-
-<h1><%= @shop.name %></h1>
-
+<p id="notice"><%= notice %></p>
 <% if user_signed_in? %>
 	<% if current_user.id == @shop.user_id %>
 		<%= link_to 'Editar Tienda', edit_shop_path(@shop), role: 'button', class: 'btn btn-success btn-sm' %>
 	<% end %>
 <% end %>
 
-<h3>
-	<% if user_signed_in? %>
-		<% if @shop.number.nil? && current_user.id == @shop.user_id %>
-			<%= link_to "Agregar numero de contacto aquí", edit_shop_path(@shop), class: 'link'%>
-		<% else %>
-			<%= @shop.number %>
-		<% end %>
-	<% else  %>
-		<%= @shop.number %>
-	<% end %>
-</h3>
-
-<% if @shop.whatsapp %>
-	<ul>
-		<li>Tenenemos Whatsapp</li>
-	</ul>
-<% end %>
-
-<% if @shop.phone %>
-	<ul>
-		<li>Puedes llamarnos</li>
-	</ul>
-<% end %>
-
-<div class="row">
-	<%= form_tag(shop_path(@shop), method: "get") do %>
-		<div class="col-md-10">
-			<%= text_field_tag :q, params[:q], class: "form-control" %>
-		</div>
-		<div class="col-md-2">
-			<%= submit_tag "Buscar Producto", class: "btn btn-success", name: nil %>
-		</div>
-	<% end %>
-</div>
-
-<h3><%= @products.blank? ? "sin productos en la tienda" : "productos en tienda"  %></h3>
-<br />
-
-<div class="row">
+<div class="container wrapper">
+	<div class="col-md-12 row">
+		<p class="text-found">
+			<%= @products.blank? ? "Nenhum producto encontrado" : "Productos encontrados"  %>
+		</p>
+	</div>
 	<% @products.each do |product| %>
 		<div class="col-sm-6 col-md-4">
-			<div class="thumbnail">
-				<%= image_tag(product.image_url, class: "img-responsive aspect") %>
-				<div class="caption">
-					<h3><%= product.name %></h3>
-					<p>$<%= product.price %> (CLP)</p>
-					<p><%= product.detail %></p>
-					<% if user_signed_in? %>
-						<p>
-							<% unless is_in_cart? product %>
-								<%= link_to 'Adicionar ao carrinho', add_to_cart_shop_path(@shop, product), role: 'button', class: 'btn btn-success btn-sm', data: { turbolinks: false } %>
-							<% else %>
-								<span class="btn btn-sm">Já adicionado no carrinho</span>
-							<% end %>
+			<div class="thumbnail margin-top-40">
+				<div class="price-product">
+					<span>R$<%= product.price %></span>
+				</div>
 
-							<% if current_user.id == product.shop.user_id %>
-								<%= link_to 'Editar', edit_product_path(product), role: 'button', class: 'btn btn-success btn-sm' %>
-								<%= link_to 'Eliminar', product, method: :delete, data: { confirm: 'Are you sure?' }, role: 'button', class: 'btn btn-success btn-sm' %>
-							<% end %>
-						</p>
+				<%= image_tag(product.image_url, class: "img-responsive aspect", style:"padding-top: 35px;") %>
+
+				<div class="caption" style="text-align: center;">
+					<h3><%= product.name %></h3>
+					<% if user_signed_in? %>
+						<% if current_user.id == product.shop.user_id %>
+							<%= link_to 'Editar', edit_product_path(product), role: 'button', class: 'btn btn-success btn-sm' %>
+							<%= link_to 'Eliminar', product, method: :delete, data: { confirm: 'Are you sure?' }, role: 'button', class: 'btn btn-success btn-sm' %>
+						<% end %>
 					<% end %>
 				</div>
+
+				<% unless is_in_cart? product %>
+					<%= link_to add_to_cart_shop_path(@shop, product), class: 'btn-plus', data: { turbolinks: false } do %>
+						<img src="https://s3.amazonaws.com/predios/plus.png" class="plus">
+					<% end %>
+				<% else %>
+					<span class="btn btn-sm">Já adicionado no carrinho</span>
+				<% end %>
 			</div>
 		</div>
 	<% end %>
 </div>
 
-<br /><br /><br />
+<div class="push"></div>
+
 
 <% if user_signed_in? %>
 	<% if current_user.id == @shop.user_id %>
@@ -95,14 +91,18 @@
 	<% end %>
 <% end %>
 
-<%= link_to 'Volver', predio_shops_path(@shop.predio_id), role: 'button', class: 'btn btn-success btn-sm' %>
-<hr />
+<footer class="footer">
+	<div class="footer-cart">
+		<a href="#">
+			<img src="https://s3.amazonaws.com/predios/cart.png">
+		</a>
+	</div>
+</footer>
 
 <%= render partial: "/shops/modal_exit_shop" %>
 <%= render partial: "/cart/modal_empty_cart" %>
 
 <script type="text/javascript">
-
 document.addEventListener('turbolinks:before-visit', (event) => {
 	if ( $("#cart a").data('count') > 0 ) {
 

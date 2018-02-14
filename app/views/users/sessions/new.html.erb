@@ -14,6 +14,13 @@
               <a href="javascript:void(0);" class="btn btn-sm btn-primary btn-avanzar">Avançar</a>
               <img src="https://s3.amazonaws.com/predios/right.png" class="btn-right">
             </div>
+            <div style="margin-top:10px" class="form-group">
+              <div class="col-md-12 control lateral-clean">
+                <div style="border-top: 1px solid#ddd; padding-top:15px;" >
+                  <p>Não está cadastrado? <%= link_to "Crie sua conta aqui", new_registration_path(resource_name) %></p>
+                </div>
+              </div>
+            </div>
           </div>
 
           <div class="block-pass hide">
@@ -26,8 +33,7 @@
             </div>
             <div style="margin-top:10px" class="form-group">
               <div class="col-md-12 control lateral-clean">
-                <div style="border-top: 1px solid#ddd; padding-top:15px;" >
-                  <p>Não está cadastrado? <%= link_to "Crie sua conta aqui", new_registration_path(resource_name) %></p>
+                <div style="border-top: 1px solid#ddd; padding-top:15px;" >                  
                   <p>Esqueceu a sua senha? <%= link_to "Clique aqui", new_password_path(resource_name) %></p>
                 </div>
               </div>

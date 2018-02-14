@@ -5,7 +5,19 @@ class OrdersController < ApplicationController
 	# GET /orders
 	# GET /orders.json
 	def index
-		@orders = Order.all
+
+	end
+
+	def to_shops
+		@orders = Order.my_orders(current_user)
+
+		render 'orders/client/index'
+	end
+
+	def from_clients
+		@orders = Order.clients_orders(current_user)
+
+		render 'orders/seller/index'
 	end
 
 	# GET /orders/1

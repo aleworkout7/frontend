@@ -1,0 +1,19 @@
+<div class="row">
+	<div class="modal-header">
+		<h4 class="modal-title" id="small-modal-label">Pedidos feitos como cliente</h4>
+	</div>
+
+	<div class="modal-body">
+		<div style="display: flex; flex-wrap: wrap; justify-content: space-between;padding: 30px;">
+			<% OrderStatus.constants.each do |status| %>
+			<span class="btn btn-success btn-status" data-status="<%= status %>">
+				<%= status %> ( <%= orders_amount_by_status(@orders, status) %> )
+			</span>
+			<% end %>
+		</div>
+
+		<% OrderStatus.constants.each do |status| %>
+			<%= render partial: "orders/client/#{status.downcase}.html.erb", locals: { status: status, orders: @orders } %>
+		<% end %>
+	</div>
+</div>

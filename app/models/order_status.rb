@@ -6,4 +6,14 @@ class OrderStatus < ActiveRecord::Base
 	ACEPTADOS = 'ACEPTADOS'
 	CANCELADOS = 'CANCELADOS'
 	FINALIZADOS = 'FINALIZADOS'
+
+	def self.constants
+        [
+			EN_CURSO,
+			ACEPTADOS,
+			CANCELADOS,
+			FINALIZADOS
+        ]
+    end
+
 end

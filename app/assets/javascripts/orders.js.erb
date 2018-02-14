@@ -1,0 +1,7 @@
+$(".btn-status").click(function() {
+	let status = $(this).data("status");
+	let $table = $(".table-orders");
+
+	$table.hide();
+	$table.parent().find(`table[data-status=${status}]`).fadeIn();
+});

@@ -8,14 +8,16 @@ class Order < ActiveRecord::Base
 	has_many :order_statuses
 	has_one :status, -> { order id: :desc }, class_name: "OrderStatus", foreign_key: :order_id
 
-	before_save :process_total_value
+	scope :my_orders, -> (user) { includes(:status).where(user_id: user.try(:id)) }
+	scope :clients_orders, -> (user) { includes(:status).joins(:shop).where("shops.user_id = :user_id", { user_id: user.try(:id) }) }
 
+	before_save :process_total_value
 	def process_total_value
 		total = 0
-		order_items.each do |i|
-			total += i.value
-		end
+
+		order_items.each { |i| total += i.value }
 
 		self.total = total
 	end
+
 end

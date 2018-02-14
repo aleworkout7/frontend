@@ -1,0 +1,27 @@
+<table class='table-orders table table-hover' style="display: none;" data-status="<%= status %>">
+	<thead>
+		<tr>
+			<th>#</th>
+			<th>Tienda</th>
+			<th>Status</th>
+			<th>Criado em</th>
+			<th>Total</th>
+			<th>Telefone do vendedor</th>
+			<th></th>
+		</tr>
+	</thead>
+	<tbody>
+		<% orders_by_status(orders, status).each do |order| %>
+			<tr>
+				<th>#<%= order.id %></th>
+				<td><%= order.shop.name %></td>
+				<td><%= order.status.status %></td>
+				<td><%= format_datetime order.status.created_at %></td>
+				<td><%= format_currency order.total %></td>
+				<td><%= order.shop.user.phone %></td>
+
+				<td><%= link_to 'Ver detalhes', order %></td>
+			</tr>
+		<% end %>
+	</tbody>
+</table>

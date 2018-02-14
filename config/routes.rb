@@ -18,7 +18,14 @@ Rails.application.routes.draw do
 	resources :predios
 	resources :categories
 	resources :products
-	resources :orders
+
+	resources :orders do
+		collection do
+			get 'shops' => "orders#to_shops", :as => :to_shops
+			get 'clients' => "orders#from_clients", :as => :from_clients
+		end
+	end
+
 	resources :shops do
 		member do
 			get 'cart' => "cart#index", :as => :cart

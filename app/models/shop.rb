@@ -2,11 +2,11 @@ class Shop < ActiveRecord::Base
 	require 'carrierwave/orm/activerecord'
 	mount_uploader :image, ImageUploader
 
-	has_many :products
 	belongs_to :user
-	belongs_to :category
 	belongs_to :predio
-
+	belongs_to :category
+	has_many :products
+	
 	validates :name, :predio_id, presence: true
 
 	def validate

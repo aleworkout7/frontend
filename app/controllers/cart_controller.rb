@@ -1,4 +1,5 @@
 class CartController < ApplicationController
+	before_action :check_if_user_is_logged_in
 	before_action :load_shop
 
 	def index
@@ -50,6 +51,10 @@ class CartController < ApplicationController
 	end
 
 	private
+
+	def check_if_user_is_logged_in
+		return redirect_to root_path unless user_signed_in?
+	end
 
 	def load_shop
 		@shop = Shop.find(params[:id])

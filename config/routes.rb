@@ -22,7 +22,10 @@ Rails.application.routes.draw do
 	resources :orders do
 		collection do
 			get 'shops' => "orders#to_shops", :as => :to_shops
+			get 'shops/:status/:id' => "orders#show_to_shops", :as => :show_to_shops
+
 			get 'clients' => "orders#from_clients", :as => :from_clients
+			get 'clients/:status/:id' => "orders#show_from_clients", :as => :show_from_clients
 		end
 	end
 

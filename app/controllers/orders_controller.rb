@@ -1,4 +1,5 @@
 class OrdersController < ApplicationController
+	before_action :check_if_user_is_logged_in
 	before_action :set_order, only: [:show, :edit, :update, :destroy]
 
 	# GET /orders
@@ -11,7 +12,7 @@ class OrdersController < ApplicationController
 	# GET /orders/1.json
 	def show
 	end
-	
+
 	# GET /orders/new
 	def new
 		@order = Order.new
@@ -25,6 +26,8 @@ class OrdersController < ApplicationController
 	# POST /orders.json
 	def create
 		@order = Order.new(order_params)
+		@order.user = current_user
+		@order.order_statuses << OrderStatus.new(user_id: current_user.id, status: OrderStatus::EN_CURSO)
 
 		respond_to do |format|
 			if @order.save
@@ -62,13 +65,15 @@ class OrdersController < ApplicationController
 	end
 
 	private
-	# Use callbacks to share common setup or constraints between actions.
+	def check_if_user_is_logged_in
+		return redirect_to root_path unless user_signed_in?
+	end
+
 	def set_order
 		@order = Order.find(params[:id])
 	end
 
-	# Never trust parameters from the scary internet, only allow the white list through.
 	def order_params
-		params.fetch(:order, {})
+		params.require(:order).permit(:shop_id, :observation, order_items_attributes: [ :product_id, :value, :amount ])
 	end
 end

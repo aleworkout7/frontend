@@ -20,34 +20,34 @@
 							</div>
 						</div>
 						<div align="center" class="col-sm-4">
-							<input value="2" type="hidden" name="order[order_products_attributes][0][product_id]" id="order_order_products_attributes_0_product_id">
 							<%= product.name %>
 						</div>
 						<div align="center" class="col-sm-2">
-							<input value="20" type="hidden" name="order[order_products_attributes][0][unit_price]" id="order_order_products_attributes_0_unit_price">
 							$ <%= product.price %>
 						</div>
 
 						<div align="center" class="col-sm-3">
 							<div class="center">
 								<div class="input-group">
-									<span class="input-group-btn">
-										<button type="button" class="btn btn-danger btn-number"  data-type="minus" data-field="order[<%= index %>][quantity]">
-											<span class="glyphicon glyphicon-minus"></span>
-										</button>
-									</span>
-
 									<%= f.fields_for :order_items, OrderItem.new do |ff| %>
+										<% amount_field_name = ff.number_field(:amount).match(/name=\"(.*?)"/)[1] %>
+
+										<span class="input-group-btn">
+											<button type="button" class="btn btn-danger btn-number"  data-type="minus" data-field="<%= amount_field_name %>">
+												<span class="glyphicon glyphicon-minus"></span>
+											</button>
+										</span>
+
 										<%= ff.hidden_field :product_id, value: product.id %>
 										<%= ff.hidden_field :value, value: product.price %>
 										<%= ff.number_field :amount, value: item[:amount], class: "form-control input-number", min: 1, max: 100, "data-id": product.id %>
-									<% end %>
 
-									<span class="input-group-btn">
-										<button type="button" class="btn btn-success btn-number" data-type="plus" data-field="order[<%= index %>][quantity]">
-											<span class="glyphicon glyphicon-plus"></span>
-										</button>
-									</span>
+										<span class="input-group-btn">
+											<button type="button" class="btn btn-success btn-number" data-type="plus" data-field="<%= amount_field_name %>">
+												<span class="glyphicon glyphicon-plus"></span>
+											</button>
+										</span>
+									<% end %>
 								</div>
 							</div>
 						</div>

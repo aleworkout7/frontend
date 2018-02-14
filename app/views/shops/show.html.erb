@@ -4,7 +4,7 @@
 	<div class="col-sm-12 text-right">
 		<h1 class="cart-text">
 			<div id="cart">
-				<%= link_to "Items in Cart (#{amount_items_in_cart})", cart_shop_path(@shop), class: "btn btn-link", "data-count": amount_items_in_cart %>
+				<%= link_to "Items in Cart (#{amount_items_in_cart})", cart_shop_path(@shop), class: "btn btn-link", "data-count": amount_items_in_cart, data: { turbolinks: false } %>
 			</div>
 		</h1>
 	</div>
@@ -99,3 +99,28 @@
 
 <%= link_to 'Volver', predio_shops_path(@shop.predio_id), role: 'button', class: 'btn btn-success btn-sm' %>
 <hr />
+
+<%= render partial: "/shops/modal_exit_shop" %>
+
+<script type="text/javascript">
+
+document.addEventListener('turbolinks:before-visit', (event) => {
+	if ( $("#cart a").data('count') > 0 ) {
+
+		let current = event.currentTarget.URL
+		let next = event.data.url
+		if (current != next) {
+			let $modal = $("#exit-shop-modal")
+			let $button = $modal.find("#exit-shop-button");
+			$modal.modal();
+
+			$button.unbind().click(() => {
+				window.location.href = next;
+			});
+
+			event.preventDefault();
+		}
+
+	}
+});
+</script>

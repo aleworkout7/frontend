@@ -12,8 +12,3 @@ $("#cart a").click ->
 		return false
 
 	true
-
-window.onbeforeunload = ->
-	if $('#cart a').data('count') > 0
-		event.returnValue = 'Write something clever here..'
-	return

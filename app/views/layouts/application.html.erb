@@ -68,7 +68,12 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 </head>
-<body style="height: 100%; background-color: #F8F8F9;">
+<% if current_page?('/users/sign_up') || current_page?('/users/password/new') || current_page?('/users/sign_in') %>
+  <body class="body-background">
+<% else %>
+  <body>
+<% end %>
+
   <!-- Menu Mobile -->
   <div class="menu-mobile hide">
     <div class="header-mob">
@@ -117,8 +122,9 @@
         <%= notice %>
       </div>
     <% end %>
-
-    <%= yield %>
   </div>
+
+  <%= yield %>
+
 </body>
 </html>

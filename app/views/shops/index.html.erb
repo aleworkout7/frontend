@@ -1,10 +1,10 @@
 <meta name="apple-mobile-web-app-capable" content="yes"> 
 <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Montserrat:400,700" rel="stylesheet" type="text/css">
 <!-- <p id="notice"><%#= notice %></p> -->
-<%= form_for("", url: shops_path, method:'get', remote: true, html: { id: 'shops_index', role: 'form'} ) do |f| %> 
+<%= form_for("", url: shops_path, method:'get', remote: true, html: { id: 'shops_index', role: 'form'} ) do |f| %>
   <h1 align="center">Edificios con tiendas disponibles</h1>
     <div class="col-md-12 pure-css-select-style theme-default">
-      <%= select_tag(:predio_id, options_for_select( @my_shops.collect {|p| [p.predio.name, p.predio_id] }), { prompt: 'Todas las Tiendas', class: ''})%> 
+      <%= select_tag(:predio_id, options_for_select( @my_shops.collect {|p| [p.predio.name, p.predio_id] }), { prompt: 'Todas las Tiendas', class: ''})%>
       <!-- <div class="pure-css-select-style theme-default">
         <select>
           <option value="volvo">Lorem ipsum dolor sit amet</option>
@@ -33,7 +33,7 @@
       <br /><br /><br />
     </div>
 <% end %>
-<% if user_signed_in? %>  
+<% if user_signed_in? %>
 <%= link_to 'Crear Nueva Tienda', new_shop_path, role: 'button', class: 'navbar-fixed-bottom button button3 btn-block' %>
 <% end %>
 

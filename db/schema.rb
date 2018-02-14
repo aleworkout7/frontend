@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180213121317) do
+ActiveRecord::Schema.define(version: 20180214041155) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -64,6 +64,42 @@ ActiveRecord::Schema.define(version: 20180213121317) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
+
+  create_table "order_items", force: :cascade do |t|
+    t.integer  "order_id"
+    t.integer  "product_id"
+    t.integer  "amount"
+    t.integer  "value"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "order_items", ["order_id"], name: "index_order_items_on_order_id", using: :btree
+  add_index "order_items", ["product_id"], name: "index_order_items_on_product_id", using: :btree
+
+  create_table "order_statuses", force: :cascade do |t|
+    t.integer  "order_id"
+    t.integer  "user_id"
+    t.text     "observation"
+    t.string   "status"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "order_statuses", ["order_id"], name: "index_order_statuses_on_order_id", using: :btree
+  add_index "order_statuses", ["user_id"], name: "index_order_statuses_on_user_id", using: :btree
+
+  create_table "orders", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "shop_id"
+    t.text     "observation"
+    t.integer  "total"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "orders", ["shop_id"], name: "index_orders_on_shop_id", using: :btree
+  add_index "orders", ["user_id"], name: "index_orders_on_user_id", using: :btree
 
   create_table "pagos", force: :cascade do |t|
     t.integer  "user_id"
@@ -151,4 +187,10 @@ ActiveRecord::Schema.define(version: 20180213121317) do
 
   add_foreign_key "addresses", "predios"
   add_foreign_key "addresses", "users"
+  add_foreign_key "order_items", "orders"
+  add_foreign_key "order_items", "products"
+  add_foreign_key "order_statuses", "orders"
+  add_foreign_key "order_statuses", "users"
+  add_foreign_key "orders", "shops"
+  add_foreign_key "orders", "users"
 end

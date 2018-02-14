@@ -5,7 +5,9 @@ module ApplicationHelper
 
 		cart = extract_cart_from_session
 
-		cart.include? product.id.to_s
+		product = cart.select { |c| c["product_id"].to_i == product.id }
+
+		product.present?
 	end
 
 	def amount_items_in_cart

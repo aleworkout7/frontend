@@ -8,8 +8,6 @@
 			</div>
 		</h1>
 	</div>
-
-	<%= render partial: "/cart/modal_empty_cart" %>
 </div>
 
 <%= image_tag(@shop.image_url, class: "img-responsive aspect") %>
@@ -72,7 +70,7 @@
 					<% if user_signed_in? %>
 						<p>
 							<% unless is_in_cart? product %>
-								<%= link_to 'Adicionar ao carrinho', add_to_cart_shop_path(@shop, product), role: 'button', class: 'btn btn-success btn-sm' %>
+								<%= link_to 'Adicionar ao carrinho', add_to_cart_shop_path(@shop, product), role: 'button', class: 'btn btn-success btn-sm', data: { turbolinks: false } %>
 							<% else %>
 								<span class="btn btn-sm">Já adicionado no carrinho</span>
 							<% end %>
@@ -101,6 +99,7 @@
 <hr />
 
 <%= render partial: "/shops/modal_exit_shop" %>
+<%= render partial: "/cart/modal_empty_cart" %>
 
 <script type="text/javascript">
 

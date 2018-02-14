@@ -18,12 +18,15 @@ Rails.application.routes.draw do
 	resources :predios
 	resources :categories
 	resources :products
+	resources :orders
 	resources :shops do
 		member do
 			get 'cart' => "cart#index", :as => :cart
 			get 'add_to_cart/:product_id' => "cart#add", :as => :add_to_cart
 			delete 'remove_from_cart/:product_id' => "cart#remove", :as => :remove_from_cart
 			delete 'clear_cart' => "cart#clear", :as => :clear_cart
+
+			get 'cart/update_amount/:product_id' => "cart#update_amount", :as => :update_amount
 		end
 	end
 

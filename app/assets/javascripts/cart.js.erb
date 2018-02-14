@@ -1,3 +1,5 @@
+let requests = [];
+
 $('.btn-number').click(function(e){
 	e.preventDefault();
 
@@ -35,24 +37,31 @@ $('.input-number').focusin(function(){
 });
 
 $('.input-number').change(function() {
-	minValue =  parseInt($(this).attr('min'));
-	maxValue =  parseInt($(this).attr('max'));
-	valueCurrent = parseInt($(this).val());
+	let minValue =  parseInt($(this).attr('min'));
+	let maxValue =  parseInt($(this).attr('max'));
+	let valueCurrent = parseInt($(this).val());
+	let oldValue = $(this).data('oldValue');
+	let name = $(this).attr('name');
+	let product_id = $(this).data("id");
+	let finalValue = valueCurrent;
 
-	name = $(this).attr('name');
-	if(valueCurrent >= minValue) {
+	if (valueCurrent >= minValue) {
 		$(".btn-number[data-type='minus'][data-field='"+name+"']").removeAttr('disabled')
 	} else {
 		alert('Sorry, the minimum value was reached');
-		$(this).val($(this).data('oldValue'));
+		$(this).val(oldValue);
+		finalValue = oldValue;
 	}
 
-	if(valueCurrent <= maxValue) {
+	if (valueCurrent <= maxValue) {
 		$(".btn-number[data-type='plus'][data-field='"+name+"']").removeAttr('disabled')
 	} else {
 		alert('Sorry, the maximum value was reached');
-		$(this).val($(this).data('oldValue'));
+		$(this).val(oldValue);
+		finalValue = oldValue;
 	}
+
+	makeRequest(product_id, finalValue);
 });
 
 $(".input-number").keydown(function (e) {
@@ -70,3 +79,14 @@ $(".input-number").keydown(function (e) {
 		e.preventDefault();
 	}
 });
+
+function makeRequest(product_id, value) {
+	for (let req of requests) {
+		req.abort();
+	}
+
+	let shop_id = $("#order_shop_id").val();
+	let request = $.get(`/shops/${shop_id}/cart/update_amount/${product_id}?amount=${value}`);
+
+	requests.push(request);
+}

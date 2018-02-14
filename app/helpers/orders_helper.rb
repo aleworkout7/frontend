@@ -1,7 +1,9 @@
 module OrdersHelper
 
 	def orders_by_status(orders, status)
-		orders.select { |o| o.status.status == status } if orders.present? && status.present?
+		result = orders.select { |o| o.status.status == status } if orders.present? && status.present?
+		
+		result || []
 	end
 
 	def orders_amount_by_status(orders, status)

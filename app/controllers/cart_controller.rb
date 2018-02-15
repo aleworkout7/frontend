@@ -54,7 +54,7 @@ class CartController < ApplicationController
 	private
 
 	def check_if_user_is_logged_in
-		return redirect_to root_path unless user_signed_in?
+		return redirect_to new_user_session_path unless user_signed_in?
 	end
 
 	def check_if_user_is_seller_of_this_shop

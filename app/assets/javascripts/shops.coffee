@@ -7,8 +7,9 @@ $('.selectpicker').selectpicker
     size: 5
 
 $("#cart a").click ->
-	if $(this).data('count') == 0
-		$('#empty-modal').modal()
-		return false
+	if $('#empty-modal').length > 0
+		if $(this).data('count') == 0
+			$('#empty-modal').modal()
+			return false
 
 	true

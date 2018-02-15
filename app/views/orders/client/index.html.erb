@@ -6,15 +6,13 @@
 	<div class="modal-body">
 		<div style="display: flex; flex-wrap: wrap; justify-content: space-between;padding: 30px;">
 			<% OrderStatus.constants.each do |status| %>
-			<span class="btn btn-success btn-status" data-status="<%= status %>">
-				<%= status %> ( <%= orders_amount_by_status(@orders, status) %> )
-			</span>
+				<%= link_to from_clients_orders_path(status: status.downcase), class: "btn btn-success" do %>
+					<%= status %> ( <%= orders_amount_by_status(@orders, status) %> )
+				<% end %>
 			<% end %>
 		</div>
 
-		<% OrderStatus.constants.each do |status| %>
-			<%= render partial: "orders/client/#{status.downcase}.html.erb", locals: { status: status, orders: @orders } %>
-		<% end %>
+		<%= render partial: "orders/client/#{@status}.html.erb", locals: { status: @status.upcase, orders: @orders } %>
 	</div>
 
 </div>

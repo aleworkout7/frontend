@@ -20,4 +20,12 @@ class Order < ActiveRecord::Base
 		self.total = total
 	end
 
+
+
+	def canceled_by
+		return "Cliente" if self.user.id == self.status.try(:user).try(:id)
+
+		"Lojista"
+	end
+
 end

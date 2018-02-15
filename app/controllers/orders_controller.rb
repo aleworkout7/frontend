@@ -6,8 +6,13 @@ class OrdersController < ApplicationController
 	end
 
 	def to_shops
+		if params[:status].blank? || !OrderStatus.constants.include?(params[:status].try(:upcase))
+			return redirect_to to_shops_orders_path(status: OrderStatus::EN_CURSO.downcase)
+		end
+
 		@orders = Order.my_orders(current_user)
-		render 'orders/shop/index'
+		@status = params[:status].downcase
+		render "orders/shop/index"
 	end
 
 	def show_to_shops
@@ -15,8 +20,13 @@ class OrdersController < ApplicationController
 	end
 
 	def from_clients
+		if params[:status].blank? || !OrderStatus.constants.include?(params[:status].try(:upcase))
+			return redirect_to from_clients_orders_path(status: OrderStatus::EN_CURSO.downcase)
+		end
+
 		@orders = Order.clients_orders(current_user)
-		render 'orders/client/index'
+		@status = params[:status].downcase
+		render "orders/client/index"
 	end
 
 	def show_from_clients
@@ -33,6 +43,7 @@ class OrdersController < ApplicationController
 
 		respond_to do |format|
 			if @order.save
+				session[:cart] = nil
 				format.html { redirect_to @order, notice: 'Order was successfully created.' }
 				format.json { render :show, status: :created, location: @order }
 			else

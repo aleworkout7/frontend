@@ -1,23 +1,22 @@
 <div class="header-store">
 	<div class="container">
 
-		<% if user_signed_in? %>
-			<% unless current_user.is_my_shop?(@shop) %>
-				<div class="row">
-					<div class="col-sm-12 text-right">
-						<h1 class="cart-text">
-							<div id="cart">
-								<%= link_to "Items in Cart (#{amount_items_in_cart})", cart_shop_path(@shop), class: "btn btn-link", "data-count": amount_items_in_cart, data: { turbolinks: false } %>
-							</div>
-						</h1>
-					</div>
+		<% unless current_user.try(:is_my_shop?, @shop) %>
+			<div class="row">
+				<div class="col-sm-12 text-right">
+					<h1 class="cart-text">
+						<div id="cart">
+							<%= link_to "Items in Cart (#{amount_items_in_cart})", cart_shop_path(@shop), class: "btn btn-link", "data-count": amount_items_in_cart, data: { turbolinks: false } %>
+						</div>
+					</h1>
 				</div>
-			<% end %>
+			</div>
 		<% end %>
 
 		<div class="col-md-6">
 			<%= image_tag(@shop.image_url, class: "img-responsive aspect logo-product") %>
 		</div>
+
 		<div class="col-md-6">
 			<h1 class="margin-top-0">
 				<%= @shop.name %>
@@ -65,26 +64,22 @@
 
 				<div class="caption" style="text-align: center;">
 					<h3><%= product.name %></h3>
-					<% if user_signed_in? %>
-						<% unless current_user.is_my_shop?(@shop) %>
-							<%= link_to 'Editar', edit_product_path(product), role: 'button', class: 'btn btn-success btn-sm' %>
-							<%= link_to 'Eliminar', product, method: :delete, data: { confirm: 'Are you sure?' }, role: 'button', class: 'btn btn-success btn-sm' %>
-						<% end %>
+					<% if user_signed_in? && current_user.is_my_shop?(@shop) %>
+						<%= link_to 'Editar', edit_product_path(product), role: 'button', class: 'btn btn-success btn-sm' %>
+						<%= link_to 'Eliminar', product, method: :delete, data: { confirm: 'Are you sure?' }, role: 'button', class: 'btn btn-success btn-sm' %>
 					<% end %>
 				</div>
 
-				<% if user_signed_in? %>
-					<% unless current_user.is_my_shop?(@shop) %>
+				<% unless current_user.try(:is_my_shop?, @shop) %>
 
-						<% unless is_in_cart? product %>
-							<%= link_to add_to_cart_shop_path(@shop, product), class: 'btn-plus', data: { turbolinks: false } do %>
-								<img src="https://s3.amazonaws.com/predios/plus.png" class="plus">
-							<% end %>
-						<% else %>
-							<span class="btn btn-sm">Já adicionado no carrinho</span>
+					<% unless is_in_cart? product %>
+						<%= link_to add_to_cart_shop_path(@shop, product), class: 'btn-plus', data: { turbolinks: false } do %>
+							<img src="https://s3.amazonaws.com/predios/plus.png" class="plus">
 						<% end %>
-
+					<% else %>
+						<span class="btn btn-sm">Já adicionado no carrinho</span>
 					<% end %>
+
 				<% end %>
 			</div>
 		</div>
@@ -105,9 +100,9 @@
 
 		<%= link_to 'Crear un producto', new_product_path, role: 'button', class: 'navbar-fixed-bottom button button3 btn-block' %>
 
-
 		<script type="text/javascript">
 			document.addEventListener('turbolinks:before-visit', (event) => {
+				// exists any item in cart
 				if ( $("#cart a").data('count') > 0 ) {
 
 					let current = event.currentTarget.URL

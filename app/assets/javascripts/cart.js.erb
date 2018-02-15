@@ -37,6 +37,8 @@ $('.input-number').focusin(function(){
 });
 
 $('.input-number').change(function() {
+	const $item = $(this).parents(".cart-item");
+
 	let minValue =  parseInt($(this).attr('min'));
 	let maxValue =  parseInt($(this).attr('max'));
 	let valueCurrent = parseInt($(this).val());
@@ -61,6 +63,8 @@ $('.input-number').change(function() {
 		finalValue = oldValue;
 	}
 
+	$item.data("amount", finalValue);
+	recalculateCart();
 	makeRequest(product_id, finalValue);
 });
 
@@ -89,4 +93,20 @@ function makeRequest(product_id, value) {
 	let request = $.get(`/shops/${shop_id}/cart/update_amount/${product_id}?amount=${value}`);
 
 	requests.push(request);
+}
+
+function recalculateCart() {
+	let total = 0;
+	$(".cart-item").each((k, v) => {
+		let $item = $(v);
+		let price = $item.data("price");
+		let amount = $item.data("amount");
+
+		total += (price * amount);
+	});
+
+	total = total.toFixed(2).toString();
+	total = total.replace(".", ",");
+	total = total.replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.");
+	$("#cart-total-price").html(total);
 }

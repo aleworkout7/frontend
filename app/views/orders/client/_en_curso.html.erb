@@ -2,12 +2,11 @@
 	<thead>
 		<tr>
 			<th>#</th>
-			<th>Predio</th>
-			<th>Tienda</th>
-			<th>Status</th>
+			<th>Cliente</th>
 			<th>Criado em</th>
 			<th>Valor</th>
-			<th>Telefone do vendedor</th>
+			<th>Status</th>
+			<th>Telefone do cliente</th>
 			<th></th>
 		</tr>
 	</thead>
@@ -15,15 +14,15 @@
 		<% orders_by_status(orders, status).each do |order| %>
 			<tr>
 				<th>#<%= order.id %></th>
-				<td><%= order.shop.predio.name %></td>
-				<td><%= order.shop.name %></td>
-				<td><%= status %></td>
+				<td><%= order.user.name %></td>
 				<td><%= format_datetime order.status.created_at %></td>
 				<td><%= format_currency order.total %></td>
-				<td><%= order.shop.user.phone %></td>
+				<td><%= status %></td>
+				<td><%= order.user.phone %></td>
 
 				<td>
-					<%= link_to 'Detalhes', order, class: "btn btn-xs" %>
+					<%= link_to 'Ver detalhes', show_from_clients_orders_path(status.try(:downcase), order), class: "btn btn-xs" %>
+					<%= link_to 'Aceitar pedido', order_accept_path(order), class: "btn btn-success btn-xs", "data-confirm": "Seguro desea aceitar el pedido" %>
 					<%= link_to 'Cancelar pedido', order_canceling_path(order), class: "btn btn-primary btn-xs" %>
 				</td>
 			</tr>

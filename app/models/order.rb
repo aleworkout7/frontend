@@ -15,7 +15,7 @@ class Order < ActiveRecord::Base
 	def process_total_value
 		total = 0
 
-		order_items.each { |i| total += i.value }
+		order_items.each { |i| total += (i.value * i.amount) }
 
 		self.total = total
 	end

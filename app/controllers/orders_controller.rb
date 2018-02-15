@@ -1,18 +1,26 @@
 class OrdersController < ApplicationController
 	before_action :check_if_user_is_logged_in
-	before_action :set_order, only: [:show, :edit, :update, :destroy]
+	before_action :set_order, only: [:show, :edit, :update, :destroy, :show_to_shops, :show_from_clients]
 
 	def index
 	end
 
 	def to_shops
 		@orders = Order.my_orders(current_user)
-		render 'orders/client/index'
+		render 'orders/shop/index'
+	end
+
+	def show_to_shops
+		render 'orders/shop/show'
 	end
 
 	def from_clients
 		@orders = Order.clients_orders(current_user)
-		render 'orders/seller/index'
+		render 'orders/client/index'
+	end
+
+	def show_from_clients
+		render 'orders/client/show'
 	end
 
 	def show

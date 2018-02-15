@@ -2,11 +2,12 @@
 	<thead>
 		<tr>
 			<th>#</th>
-			<th>Tienda</th>
+			<th>Cliente</th>
 			<th>Status</th>
-			<th>Criado em</th>
-			<th>Total</th>
-			<th>Telefone do vendedor</th>
+			<th>Valor</th>
+			<th>Motivo</th>
+			<th>Cancelado por</th>
+			<th>Cancelado em</th>
 			<th></th>
 		</tr>
 	</thead>
@@ -14,11 +15,12 @@
 		<% orders_by_status(orders, status).each do |order| %>
 			<tr>
 				<th>#<%= order.id %></th>
-				<td><%= order.shop.name %></td>
+				<td><%= order.user.name %></td>
 				<td><%= status %></td>
-				<td><%= format_datetime order.created_at %></td>
 				<td><%= format_currency order.total %></td>
-				<td><%= order.shop.user.phone %></td>
+				<td><%= order.status.observation %></td>
+				<td><%= order.status.user.name %></td>
+				<td><%= format_datetime order.status.created_at %></td>
 
 				<td><%= link_to 'Ver detalhes', order %></td>
 			</tr>

@@ -2,7 +2,10 @@
 	<thead>
 		<tr>
 			<th>#</th>
-			<th>Total</th>
+			<th>Tienda</th>
+			<th>Valor</th>
+			<th>Tempo total de duração do pedido</th>
+			<th>Finalizado em</th>
 			<th></th>
 		</tr>
 	</thead>
@@ -10,7 +13,10 @@
 		<% orders_by_status(orders, status).each do |order| %>
 			<tr>
 				<th>#<%= order.id %></th>
+				<td><%= link_to order.shop.name, shop_path(order.shop) %></td>
 				<td><%= format_currency order.total %></td>
+				<td><%= time_spent_between_last_status order %></td>
+				<td><%= format_datetime order.status.created_at %></td>
 
 				<td><%= link_to 'Ver detalhes', order %></td>
 			</tr>

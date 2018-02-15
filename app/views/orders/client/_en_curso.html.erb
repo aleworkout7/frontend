@@ -2,10 +2,11 @@
 	<thead>
 		<tr>
 			<th>#</th>
+			<th>Predio</th>
 			<th>Tienda</th>
 			<th>Status</th>
 			<th>Criado em</th>
-			<th>Total</th>
+			<th>Valor</th>
 			<th>Telefone do vendedor</th>
 			<th></th>
 		</tr>
@@ -14,6 +15,7 @@
 		<% orders_by_status(orders, status).each do |order| %>
 			<tr>
 				<th>#<%= order.id %></th>
+				<td><%= order.shop.predio.name %></td>
 				<td><%= order.shop.name %></td>
 				<td><%= status %></td>
 				<td><%= format_datetime order.status.created_at %></td>

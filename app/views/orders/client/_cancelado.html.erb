@@ -2,6 +2,7 @@
 	<thead>
 		<tr>
 			<th>#</th>
+			<th>Predio</th>
 			<th>Tienda</th>
 			<th>Status</th>
 			<th>Motivo</th>
@@ -14,6 +15,7 @@
 		<% orders_by_status(orders, status).each do |order| %>
 			<tr>
 				<th>#<%= order.id %></th>
+				<td><%= order.shop.predio.name %></td>
 				<td><%= order.shop.name %></td>
 				<td><%= status %></td>
 				<td><%= order.status.observation %></td>

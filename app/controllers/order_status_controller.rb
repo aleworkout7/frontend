@@ -41,5 +41,4 @@ class OrderStatusController < ApplicationController
 			end
 		end
 	end
-
 end

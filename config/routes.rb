@@ -20,6 +20,11 @@ Rails.application.routes.draw do
 	resources :products
 
 	resources :orders do
+		get 'accept' => "order_status#accept", :as => :accept
+		get 'finish' => "order_status#finish", :as => :finish
+		get 'canceling' => "order_status#canceling", :as => :canceling
+		post 'cancel' => "order_status#cancel", :as => :cancel
+
 		collection do
 			get 'shops' => "orders#to_shops", :as => :to_shops
 			get 'shops/:status/:id' => "orders#show_to_shops", :as => :show_to_shops

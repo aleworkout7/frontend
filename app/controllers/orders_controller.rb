@@ -2,40 +2,22 @@ class OrdersController < ApplicationController
 	before_action :check_if_user_is_logged_in
 	before_action :set_order, only: [:show, :edit, :update, :destroy]
 
-	# GET /orders
-	# GET /orders.json
 	def index
-
 	end
 
 	def to_shops
 		@orders = Order.my_orders(current_user)
-
 		render 'orders/client/index'
 	end
 
 	def from_clients
 		@orders = Order.clients_orders(current_user)
-
 		render 'orders/seller/index'
 	end
 
-	# GET /orders/1
-	# GET /orders/1.json
 	def show
 	end
 
-	# GET /orders/new
-	def new
-		@order = Order.new
-	end
-
-	# GET /orders/1/edit
-	def edit
-	end
-
-	# POST /orders
-	# POST /orders.json
 	def create
 		@order = Order.new(order_params)
 		@order.user = current_user
@@ -52,8 +34,6 @@ class OrdersController < ApplicationController
 		end
 	end
 
-	# PATCH/PUT /orders/1
-	# PATCH/PUT /orders/1.json
 	def update
 		respond_to do |format|
 			if @order.update(order_params)
@@ -66,8 +46,6 @@ class OrdersController < ApplicationController
 		end
 	end
 
-	# DELETE /orders/1
-	# DELETE /orders/1.json
 	def destroy
 		@order.destroy
 		respond_to do |format|

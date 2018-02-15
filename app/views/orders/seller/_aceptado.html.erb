@@ -4,8 +4,8 @@
 			<th>#</th>
 			<th>Tienda</th>
 			<th>Status</th>
-			<th>Valor</th>
 			<th>Criado em</th>
+			<th>Total</th>
 			<th>Telefone do vendedor</th>
 			<th></th>
 		</tr>
@@ -15,12 +15,16 @@
 			<tr>
 				<th>#<%= order.id %></th>
 				<td><%= order.shop.name %></td>
-				<td><%= order.status.status %></td>
+				<td><%= status %></td>
+				<td><%= format_datetime order.created_at %></td>
 				<td><%= format_currency order.total %></td>
-				<td><%= format_datetime order.status.created_at %></td>
 				<td><%= order.shop.user.phone %></td>
 
-				<td><%= link_to 'Ver detalhes', order %></td>
+				<td>
+					<%= link_to 'Ver detalhes', order, class: "btn btn-xs" %>
+					<%= link_to 'Finalizar pedido', order_finish_path(order), class: "btn btn-success btn-xs", "data-confirm": "Seguro desea finalizar el pedido" %>
+					<%= link_to 'Cancelar pedido', order_canceling_path(order), class: "btn btn-primary btn-xs" %>
+				</td>
 			</tr>
 		<% end %>
 	</tbody>

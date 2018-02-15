@@ -15,12 +15,15 @@
 			<tr>
 				<th>#<%= order.id %></th>
 				<td><%= order.shop.name %></td>
-				<td><%= order.status.status %></td>
+				<td><%= status %></td>
 				<td><%= format_datetime order.status.created_at %></td>
 				<td><%= format_currency order.total %></td>
 				<td><%= order.shop.user.phone %></td>
 
-				<td><%= link_to 'Ver detalhes', order %></td>
+				<td>
+					<%= link_to 'Detalhes', order, class: "btn btn-xs" %>
+					<%= link_to 'Cancelar pedido', order_canceling_path(order), class: "btn btn-primary btn-xs" %>
+				</td>
 			</tr>
 		<% end %>
 	</tbody>

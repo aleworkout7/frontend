@@ -17,10 +17,14 @@
 				<td><%= order.user.name %></td>
 				<td><%= format_datetime order.status.created_at %></td>
 				<td><%= format_currency order.total %></td>
-				<td><%= order.status.status %></td>
+				<td><%= status %></td>
 				<td><%= order.user.phone %></td>
 
-				<td><%= link_to 'Ver detalhes', order %></td>
+				<td>
+					<%= link_to 'Ver detalhes', order, class: "btn btn-xs" %>
+					<%= link_to 'Aceitar pedido', order_accept_path(order), class: "btn btn-success btn-xs", "data-confirm": "Seguro desea aceitar el pedido" %>
+					<%= link_to 'Cancelar pedido', order_canceling_path(order), class: "btn btn-primary btn-xs" %>
+				</td>
 			</tr>
 		<% end %>
 	</tbody>

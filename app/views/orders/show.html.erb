@@ -1,4 +1,36 @@
-<p id="notice"><%= notice %></p>
+<div class="row">
+	<div class="modal-header">
+		<h4 class="modal-title" id="small-modal-label">Detalhes do pedido (#<%= @order.id %>)</h4>
+	</div>
 
-<%= link_to 'Edit', edit_order_path(@order) %> |
-<%= link_to 'Back', orders_path %>
+	<div class="modal-body" align="center">
+		<table class='table table-hover'>
+			<tr>
+				<th>Tienda:</th>
+				<td><%= @order.shop.name %></td>
+			</tr>
+			<tr>
+				<th>Status:</th>
+				<td><%= @order.status.status %></td>
+			</tr>
+			<tr>
+				<th>Valor do pedido:</th>
+				<td><%= format_currency @order.total %></td>
+			</tr>
+			<tr>
+				<th>Criado em:</th>
+				<td><%= format_datetime @order.status.created_at %></td>
+			</tr>
+			<tr>
+				<th>Telefone do vendedor:</th>
+				<td><%= @order.shop.user.phone %></td>
+			</tr>
+			<tr>
+				<td>
+					<br/>
+					<%= link_to 'Voltar', to_shops_orders_path, class: "btn btn-success" %>
+				</td>
+			</tr>
+		</table>
+	</div>
+</div>

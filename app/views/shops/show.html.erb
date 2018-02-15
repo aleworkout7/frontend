@@ -1,15 +1,19 @@
 <div class="header-store">
 	<div class="container">
 
-		<div class="row">
-			<div class="col-sm-12 text-right">
-				<h1 class="cart-text">
-					<div id="cart">
-						<%= link_to "Items in Cart (#{amount_items_in_cart})", cart_shop_path(@shop), class: "btn btn-link", "data-count": amount_items_in_cart, data: { turbolinks: false } %>
+		<% if user_signed_in? %>
+			<% unless current_user.is_my_shop?(@shop) %>
+				<div class="row">
+					<div class="col-sm-12 text-right">
+						<h1 class="cart-text">
+							<div id="cart">
+								<%= link_to "Items in Cart (#{amount_items_in_cart})", cart_shop_path(@shop), class: "btn btn-link", "data-count": amount_items_in_cart, data: { turbolinks: false } %>
+							</div>
+						</h1>
 					</div>
-				</h1>
-			</div>
-		</div>
+				</div>
+			<% end %>
+		<% end %>
 
 		<div class="col-md-6">
 			<%= image_tag(@shop.image_url, class: "img-responsive aspect logo-product") %>
@@ -38,9 +42,8 @@
 	</div>
 </div>
 
-<p id="notice"><%= notice %></p>
 <% if user_signed_in? %>
-	<% if current_user.id == @shop.user_id %>
+	<% unless current_user.is_my_shop?(@shop) %>
 		<%= link_to 'Editar Tienda', edit_shop_path(@shop), role: 'button', class: 'btn btn-success btn-sm' %>
 	<% end %>
 <% end %>
@@ -63,19 +66,25 @@
 				<div class="caption" style="text-align: center;">
 					<h3><%= product.name %></h3>
 					<% if user_signed_in? %>
-						<% if current_user.id == product.shop.user_id %>
+						<% unless current_user.is_my_shop?(@shop) %>
 							<%= link_to 'Editar', edit_product_path(product), role: 'button', class: 'btn btn-success btn-sm' %>
 							<%= link_to 'Eliminar', product, method: :delete, data: { confirm: 'Are you sure?' }, role: 'button', class: 'btn btn-success btn-sm' %>
 						<% end %>
 					<% end %>
 				</div>
 
-				<% unless is_in_cart? product %>
-					<%= link_to add_to_cart_shop_path(@shop, product), class: 'btn-plus', data: { turbolinks: false } do %>
-						<img src="https://s3.amazonaws.com/predios/plus.png" class="plus">
+				<% if user_signed_in? %>
+					<% unless current_user.is_my_shop?(@shop) %>
+
+						<% unless is_in_cart? product %>
+							<%= link_to add_to_cart_shop_path(@shop, product), class: 'btn-plus', data: { turbolinks: false } do %>
+								<img src="https://s3.amazonaws.com/predios/plus.png" class="plus">
+							<% end %>
+						<% else %>
+							<span class="btn btn-sm">Já adicionado no carrinho</span>
+						<% end %>
+
 					<% end %>
-				<% else %>
-					<span class="btn btn-sm">Já adicionado no carrinho</span>
 				<% end %>
 			</div>
 		</div>
@@ -84,42 +93,42 @@
 
 <div class="push"></div>
 
-
 <% if user_signed_in? %>
-	<% if current_user.id == @shop.user_id %>
+	<% unless current_user.is_my_shop?(@shop) %>
+		<footer class="footer">
+			<div class="footer-cart">
+				<a href="#">
+					<img src="https://s3.amazonaws.com/predios/cart.png">
+				</a>
+			</div>
+		</footer>
+
 		<%= link_to 'Crear un producto', new_product_path, role: 'button', class: 'navbar-fixed-bottom button button3 btn-block' %>
+
+
+		<script type="text/javascript">
+			document.addEventListener('turbolinks:before-visit', (event) => {
+				if ( $("#cart a").data('count') > 0 ) {
+
+					let current = event.currentTarget.URL
+					let next = event.data.url
+					if (current != next) {
+						let $modal = $("#exit-shop-modal")
+						let $button = $modal.find("#exit-shop-button");
+						$modal.modal();
+
+						$button.unbind().click(() => {
+							window.location.href = next;
+						});
+
+						event.preventDefault();
+					}
+
+				}
+			});
+		</script>
+
+		<%= render partial: "/shops/modal_exit_shop" %>
+		<%= render partial: "/cart/modal_empty_cart" %>
 	<% end %>
 <% end %>
-
-<footer class="footer">
-	<div class="footer-cart">
-		<a href="#">
-			<img src="https://s3.amazonaws.com/predios/cart.png">
-		</a>
-	</div>
-</footer>
-
-<%= render partial: "/shops/modal_exit_shop" %>
-<%= render partial: "/cart/modal_empty_cart" %>
-
-<script type="text/javascript">
-document.addEventListener('turbolinks:before-visit', (event) => {
-	if ( $("#cart a").data('count') > 0 ) {
-
-		let current = event.currentTarget.URL
-		let next = event.data.url
-		if (current != next) {
-			let $modal = $("#exit-shop-modal")
-			let $button = $modal.find("#exit-shop-button");
-			$modal.modal();
-
-			$button.unbind().click(() => {
-				window.location.href = next;
-			});
-
-			event.preventDefault();
-		}
-
-	}
-});
-</script>

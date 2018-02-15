@@ -9,4 +9,11 @@ class User < ActiveRecord::Base
 	has_many :addresses
 	has_one :address, -> { order id: :desc }
 
+
+	def is_my_shop? shop
+		return false if shop.blank?
+
+		self.id == shop.user_id
+	end
+
 end

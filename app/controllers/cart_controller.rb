@@ -1,6 +1,7 @@
 class CartController < ApplicationController
 	before_action :check_if_user_is_logged_in
 	before_action :load_shop
+	before_action :check_if_user_is_seller_of_this_shop
 
 	def index
 		@cart = extract_cart_with_products_from_session
@@ -54,6 +55,14 @@ class CartController < ApplicationController
 
 	def check_if_user_is_logged_in
 		return redirect_to root_path unless user_signed_in?
+	end
+
+	def check_if_user_is_seller_of_this_shop
+		if user_signed_in?
+			if current_user.id == @shop.user_id
+				return redirect_to root_path
+			end
+		end
 	end
 
 	def load_shop

@@ -3,16 +3,16 @@ class OrderStatus < ActiveRecord::Base
 	belongs_to :user
 
 	EN_CURSO = 'EN_CURSO'
-	ACEPTADOS = 'ACEPTADOS'
-	CANCELADOS = 'CANCELADOS'
-	FINALIZADOS = 'FINALIZADOS'
+	ACEPTADO = 'ACEPTADO'
+	CANCELADO = 'CANCELADO'
+	FINALIZADO = 'FINALIZADO'
 
 	def self.constants
         [
 			EN_CURSO,
-			ACEPTADOS,
-			CANCELADOS,
-			FINALIZADOS
+			ACEPTADO,
+			CANCELADO,
+			FINALIZADO
         ]
     end
 

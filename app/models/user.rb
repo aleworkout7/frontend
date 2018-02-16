@@ -22,7 +22,7 @@ class User < ActiveRecord::Base
 
 	def start_date_for_subscription
 		start_date = Time.now
-		if self.had_subscription_before?
+		unless self.had_subscription_before?
 			start_date += 15.days
 		end
 

@@ -67,9 +67,11 @@
 <script type="text/javascript">
 $('.edificios').change((event) => {
 	let predio = event.target.value;
-	let url = "<%= predio_shops_path(id: 1) %>";
-	url = url.replace("/1/shops", `/${predio}/shops`);
+	if (predio != "") {
+		let url = "<%= predio_shops_path(id: 1) %>";
+		url = url.replace("/1/shops", `/${predio}/shops`);
 
-	window.location.href = url;
+		window.location.href = url;
+	}
 });
 </script>

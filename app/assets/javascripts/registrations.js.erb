@@ -1,0 +1,15 @@
+$(".predio-select").change(function(){
+	let must_be_predio_id = $(this).data("predio");
+	if (must_be_predio_id == "") {
+		return true;
+	}
+
+	let predio_id = $(this).val();
+	if (predio_id != must_be_predio_id) {
+		$("#predio-msg").fadeIn();
+		$(".user-submit").prop("disabled", "true");
+	} else {
+		$("#predio-msg").fadeOut();
+		$(".user-submit").removeProp("disabled");
+	}
+});

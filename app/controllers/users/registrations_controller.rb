@@ -16,7 +16,11 @@ class Users::RegistrationsController < Devise::RegistrationsController
 	def edit
 		super
 
-		
+		if params[:cart].present?
+			@predio = Shop.find(params[:cart]).predio
+			session[:predio_id] = @predio.id
+			session[:predio_name] = @predio.name
+		end
 	end
 
 	# PUT /resource
@@ -60,6 +64,12 @@ class Users::RegistrationsController < Devise::RegistrationsController
 	# def after_sign_up_path_for(resource)
 	#   super(resource)
 	# end
+
+	def after_update_path_for(resource)
+		if params[:cart].present?
+			cart_shop_path(id: params[:cart])
+		end
+	end
 
 	# The path used after sign up for inactive accounts.
 	# def after_inactive_sign_up_path_for(resource)

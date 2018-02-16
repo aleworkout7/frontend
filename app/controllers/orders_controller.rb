@@ -37,6 +37,11 @@ class OrdersController < ApplicationController
 	end
 
 	def create
+
+		if current_user.address.blank?
+			return redirect_to edit_user_registration_path(cart: order_params[:shop_id])
+		end
+
 		@order = Order.new(order_params)
 		@order.user = current_user
 		@order.order_statuses << OrderStatus.new(user_id: current_user.id, status: OrderStatus::EN_CURSO)

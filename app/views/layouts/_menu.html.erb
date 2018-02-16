@@ -16,7 +16,7 @@
 		<li><%= link_to "Consultas", queries_path %></li>
 
 		<% if user_signed_in? %>
-			<li><%= link_to "Crear nuevo producto", new_product_path %></li>
+			<li><%= link_to "Criar novo produto", new_product_path %></li>
 			<li><%= link_to "Ver pedidos", orders_path %></li>
 			<% if current_user.admin? %>
 				<li><%= link_to "Predios", predios_path %></li>

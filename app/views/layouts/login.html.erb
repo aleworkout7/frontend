@@ -2,18 +2,22 @@
 <html lang="en" style="height: 100%;">
 <head>
 	<title>PREDIOS APP</title>
+
 	<!-- Meta tags -->
 	<meta charset="utf-8">
 	<%= csrf_meta_tags %>
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
 	<!-- Stylesheets -->
 	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootswatch/3.0.2/united/bootstrap.min.css">
 	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.2/css/font-awesome.min.css">
 	<%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
 	<%= stylesheet_link_tag    controller_name %>
+
 	<!-- Javascripts -->
 	<%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
 	<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.2/js/bootstrap.min.js"></script>
+
 	<!-- Global site tag (gtag.js) - Google Analytics -->
 	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-109310748-2"></script>
 	<script>
@@ -23,25 +27,32 @@
 		gtag('config', 'UA-109310748-2');
 	</script>
 </head>
-<body>
+<body class="body-background">
 	<!-- Menu Mobile -->
 	<%= render partial: "/layouts/menu" %>
+
 	<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
 		<div class="container-fluid">
 			<% if current_page?('/users/sign_up') || current_page?('/users/password/new') %>
 				<%= link_to raw('<img src="https://s3.amazonaws.com/predios/left.png" class="left">'), new_user_session_path %>
 			<% end %>
+
 			<img src="https://s3.amazonaws.com/predios/burger.png" class="burger">
 			<%= link_to raw('<img src="https://s3.amazonaws.com/predios/logo.png" class="logo-header">'), root_path %>
 		</div>
 	</nav>
-	<% if notice.present? %>
-		<div class="alert alert-dismissable alert-success">
-			<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-			<%= notice %>
-		</div>
-	<% end %>
+
+	<div class="container">
+		<% if notice.present? %>
+			<div class="alert alert-dismissable alert-success">
+				<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+				<%= notice %>
+			</div>
+		<% end %>
+	</div>
+
 	<%= yield %>
+
 	<%= javascript_include_tag controller_name %>
 </body>
 </html>

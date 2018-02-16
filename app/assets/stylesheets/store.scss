@@ -1,9 +1,60 @@
+.predios-head {
+  display: -webkit-box;
+  margin-bottom: 25px;
+}
+.predios-head > img {
+  width: 100px
+}
+.predios-head > div {
+  margin-left: 25px;
+}
 .input-search {
   width: 100%;
   border-radius: 9px !important;
   border: 2px soliD #989898;
   font-size: 19px;
   padding-left: 11px;
+}
+.btnMeusPedidos {
+  background-color: #000000;
+  border-color: #000000;
+  color: #fff;
+  margin-bottom: 30px;
+  width: 100%;
+}
+.btnMeusPedidos:hover, .btnMeusPedidos:focus {
+	background-color: #212121;
+	border-color: #212121;
+}
+.iconCart {
+  width: 30px;
+  height: 30px;
+  background-color: #38b44a;
+  color: white;
+  font-size: 19px;
+  border-radius: 50%;
+  margin: 0 auto;
+  position: fixed;
+  left: 50%;
+  margin-top: 35px;
+  margin-left: 5px;
+}
+.iconCart > span {
+  padding-top: 2px;
+  display: block;
+}
+.alreadyCart {
+  text-align: center;
+  font-size: 16px;
+  margin-top: 5px;
+}
+.title-edit {
+  font-size: 25px;
+  line-height: 30px;
+  font-weight: bold;
+}
+.text-right {
+  text-align: right;
 }
 .margin-top-40 {
   margin-top: 40px;
@@ -24,7 +75,7 @@
 .text-found {
   font-size: 19px;
   border-bottom: 2px solid #2d2d2d;
-  width: 228px;
+  width: 270px;
   float: right;
   text-align: center;
   display: block;
@@ -45,9 +96,8 @@
 .footer-cart {
   background-color: #000;
   text-align: center;
-  padding: 60px;
-  margin-top: 70px;
-  position: sticky;
+  padding: 10px;
+  position: fixed;
   bottom: 0;
   width: 100%;
 }
@@ -89,16 +139,4 @@
   position: absolute;
   right: 0;
   bottom: -9px;
-}
-
-html, body {
-  height: 100%;
-  margin: 0;
-}
-.wrapper {
-  margin-bottom: -50px;
-  min-height: calc(100vh - 429px);
-}
-.footer, .push {
-  height: 50px;
 }

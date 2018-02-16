@@ -25,6 +25,7 @@ class ShopsController < ApplicationController
 	# GET /shops/new
 	def new
 		@shop = Shop.new
+		@categories = Category.all
 		@predios = Predio.all
 	end
 
@@ -42,7 +43,7 @@ class ShopsController < ApplicationController
 		@shop.predio_id = 1
 		respond_to do |format|
 			if @shop.save
-				format.html { redirect_to @shop, notice: 'Tienda creada exitosamente.' }
+				format.html { redirect_to new_shop_path, notice: 'Tienda creada exitosamente.' }
 				format.json { render :show, status: :created, location: @shop }
 			else
 				format.html { render :new }
@@ -70,7 +71,7 @@ class ShopsController < ApplicationController
 	def destroy
 		@shop.destroy
 		respond_to do |format|
-			format.html { redirect_to shops_url, notice: 'Tienda eliminada exitosamente.' }
+			format.html { redirect_to @shop, notice: 'Tienda eliminada exitosamente.' }
 			format.json { head :no_content }
 		end
 	end

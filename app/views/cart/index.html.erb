@@ -1,83 +1,77 @@
-<%= form_for(Order.new, url: orders_path, method: :post) do |f| %>
+<div class="container">
+	<%= form_for(Order.new, url: orders_path, method: :post) do |f| %>
+		<div style="margin: 5%;">
+			<div class="modal-header">
+				<h4 class="modal-title" id="small-modal-label">Carro de Compra</h4>
+			</div>
+			<div class="modal-body">
+				<div>
+					<div class="table table-striped table-hover">
+						<%= f.hidden_field :shop_id, value: @shop.id %>
+						<% @cart.each_with_index do |item, index| %>
+						<% product = item[:product] %>
 
-	<div style="margin: 5%;">
-		<div class="modal-header">
-			<h4 class="modal-title" id="small-modal-label">Carro de Compra</h4>
-		</div>
-
-		<div class="modal-body">
-			<div>
-				<div class="table table-striped table-hover">
-					<%= f.hidden_field :shop_id, value: @shop.id %>
-
-					<% @cart.each_with_index do |item, index| %>
-					<% product = item[:product] %>
-
-					<div class="row">
-						<div align="center" class="col-sm-2">
-							<div style="margin-bottom: 0px;">
-								<%= image_tag(product.image_url, width: 60, height: 60, class: "img-responsive aspect") if product.image? %>
-							</div>
-						</div>
-						<div align="center" class="col-sm-4">
-							<%= product.name %>
-						</div>
-						<div align="center" class="col-sm-2">
-							$ <%= product.price %>
-						</div>
-
-						<div align="center" class="col-sm-3">
-							<div class="center">
-								<div class="input-group">
-									<%= f.fields_for :order_items, OrderItem.new do |ff| %>
-										<% amount_field_name = ff.number_field(:amount).match(/name=\"(.*?)"/)[1] %>
-
-										<span class="input-group-btn">
-											<button type="button" class="btn btn-danger btn-number"  data-type="minus" data-field="<%= amount_field_name %>">
-												<span class="glyphicon glyphicon-minus"></span>
-											</button>
-										</span>
-
-										<%= ff.hidden_field :product_id, value: product.id %>
-										<%= ff.hidden_field :value, value: product.price %>
-										<%= ff.number_field :amount, value: item[:amount], class: "form-control input-number", min: 1, max: 100, "data-id": product.id %>
-
-										<span class="input-group-btn">
-											<button type="button" class="btn btn-success btn-number" data-type="plus" data-field="<%= amount_field_name %>">
-												<span class="glyphicon glyphicon-plus"></span>
-											</button>
-										</span>
-									<% end %>
+						<div class="row">
+							<div align="center" class="col-sm-2">
+								<div style="margin-bottom: 0px;">
+									<%= image_tag(product.image_url, width: 60, height: 60, class: "img-responsive aspect") if product.image? %>
 								</div>
 							</div>
-						</div>
+							<div align="center" class="col-sm-4">
+								<%= product.name %>
+							</div>
+							<div align="center" class="col-sm-2">
+								$ <%= product.price %>
+							</div>
+							<div align="center" class="col-sm-3">
+								<div class="center">
+									<div class="input-group">
+										<%= f.fields_for :order_items, OrderItem.new do |ff| %>
+											<% amount_field_name = ff.number_field(:amount).match(/name=\"(.*?)"/)[1] %>
 
-						<div align="center" class="col-sm-1">
-							<%= link_to "Remove", remove_from_cart_shop_path(@shop, product), "data-confirm": "Are you sure?", "data-method": "delete" %>
+											<span class="input-group-btn">
+												<button type="button" class="btn btn-danger btn-number"  data-type="minus" data-field="<%= amount_field_name %>">
+													<span class="glyphicon glyphicon-minus"></span>
+												</button>
+											</span>
+											<%= ff.hidden_field :product_id, value: product.id %>
+											<%= ff.hidden_field :value, value: product.price %>
+											<%= ff.number_field :amount, value: item[:amount], class: "form-control input-number", min: 1, max: 100, "data-id": product.id %>
+											<span class="input-group-btn">
+												<button type="button" class="btn btn-success btn-number" data-type="plus" data-field="<%= amount_field_name %>">
+													<span class="glyphicon glyphicon-plus"></span>
+												</button>
+											</span>
+										<% end %>
+									</div>
+								</div>
+							</div>
+							<div align="center" class="col-sm-1">
+								<%= link_to "Remove", remove_from_cart_shop_path(@shop, product), "data-confirm": "Are you sure?", "data-method": "delete" %>
+							</div>
+						</div>
+						<hr/>
+						<% end %>
+						<div class="row">
+							<div class="col-md-12">
+								<%= f.text_area :observation, class: "form-control", placeholder: "Insira aqui observações sobre seu pedido para o vendedor..." %>
+							</div>
 						</div>
 					</div>
-					<hr/>
-					<% end %>
-
-					<div class="row">
-						<div class="col-md-12">
-							<%= f.text_area :observation, class: "form-control", placeholder: "Insira aqui observações sobre seu pedido para o vendedor..." %>
-						</div>
+				</div>
+			</div>
+			<div  class="modal-footer">
+				<div class="row actions">
+					<div align="center" class="col-sm-12">
+						<%= link_to "Vaciar carro", clear_cart_shop_path(@shop), class: "btn btn-danger", "data-toggle": "modal", "data-target": "#vacia-modal" %>
+						<%= link_to "Continuar comprando", shop_path(@shop), class: "btn btn-success" %>
+						<%= submit_tag "Confirmar pedido", name: nil, class: "btn btn-primary", disable_with: "Confirmando...", "data-confirm": "Seguro desea confimar el pedido" %>
 					</div>
-
 				</div>
 			</div>
 		</div>
-		<div  class="modal-footer">
-			<div class="row actions">
-				<div align="center" class="col-sm-12">
-					<%= link_to "Vaciar carro", clear_cart_shop_path(@shop), class: "btn btn-primary", "data-toggle": "modal", "data-target": "#vacia-modal" %>
-					<%= link_to "Continuar comprando", shop_path(@shop), class: "btn" %>
-					<%= submit_tag "Confirmar pedido", name: nil, class: "btn btn-success", disable_with: "Confirmando...", "data-confirm": "Seguro desea confimar el pedido" %>
-				</div>
-			</div>
-		</div>
-	</div>
-<% end %>
+	<% end %>
 
-<%= render partial: "modal_clear_cart" %>
+	<%= render partial: "modal_clear_cart" %>
+
+</div>

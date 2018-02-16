@@ -23,7 +23,7 @@
             <% if current_user.id == shop.user_id %>
               <%= link_to 'Editar', edit_shop_path(shop), role: 'button', class: 'btn btn-primary' %>
               <%= link_to 'Destruir', shop, method: :delete, data: { confirm: 'Are you sure?' }, role: 'button', class: 'btn btn-primary' %>
-            <% end %>  
+            <% end %>
             </p>
           </div>
         </div>
@@ -33,4 +33,4 @@
 
 <br>
 
-<%= link_to 'Nueva Tienda', new_shop_path, role: 'button', class: 'btn btn-warning btn-block' %>
+<%= link_to 'Nova Loja', new_shop_path, role: 'button', class: 'btn btn-warning btn-block' %>

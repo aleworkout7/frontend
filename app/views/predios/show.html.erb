@@ -1,19 +1,30 @@
-<p id="notice"><%= notice %></p>
-
-<p>
-  <strong>Name:</strong>
-  <%= @predio.name %>
-</p>
-
-<p>
-  <strong>Address:</strong>
-  <%= @predio.address %>
-</p>
-
-<p>
-  <strong>Details:</strong>
-  <%= @predio.details %>
-</p>
-
-<%= link_to 'Edit', edit_predio_path(@predio) %> |
-<%= link_to 'Back', predios_path %>
+<div class="container" style="margin-top:25px">
+  <div class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+    <div class="panel panel-default">
+      <div class="row">
+        <div class="col-md-5">
+          <p class="title-edit">Predio</p>
+        </div>
+        <div class="col-md-7 text-right">
+          <%= link_to 'Voltar', predios_path, class: "btn btn-success btn-sm" %>
+          <%= link_to 'Editar', edit_predio_path(@predio), class: "btn btn-success btn-sm" %>
+        </div>
+      </div>
+      <hr>
+      <div class="panel-body">
+        <div class="form-group">
+          <%= label_tag 'Nome da predio' %><br>
+          <%= text_field_tag @predio.name, @predio.name, class:"form-control black-border", placeholder:"Nome da loja" %>
+        </div>
+        <div class="form-group">
+          <%= label_tag 'Endereço' %><br>
+          <%= text_field_tag @predio.address, @predio.address, class:"form-control black-border", placeholder:"Endereço" %>
+        </div>
+        <div class="form-group">
+          <%= label_tag 'Detalhes' %><br>
+          <%= text_field_tag @predio.details, @predio.address,  class:"form-control black-border", placeholder:"Detalhes" %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -9,7 +9,7 @@ Rails.application.routes.draw do
 		confirmations: 'users/confirmations',
 	}
 
-	get 'mp/notifications' => "pagos#mp_notification", :as => :mp_notifications
+	post 'mp/notifications' => "pagos#mp_notification", :as => :mp_notifications
 
 	resources :queries
 	resources :accounts

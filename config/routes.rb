@@ -47,6 +47,7 @@ Rails.application.routes.draw do
 	end
 
 	post 'mp/notifications' => "pagos#mp_notification", :as => :mp_notifications
+	get 'cancel_subscription' => "pagos#cancel_subscription", :as => :cancel_subscription
 	get 'users/:id/shops' => 'users#shops', :as => :user_shops
 	get 'predio/:id/shops' => 'shops#predio', :as => :predio_shops
 

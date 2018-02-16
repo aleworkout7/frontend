@@ -11,7 +11,7 @@
 	<%= link_to "Assinar", @preapproval['response']['init_point'], name: "MP-Checkout", class: "blue-rn-m" %>
 	<script type="text/javascript" src="https://www.mercadopago.com/org-img/jsapi/mptools/buttons/render.js"></script>
 <% else %>
-	Já possui assinatura
+	<%= link_to "Cancelar Assinatura", cancel_subscription_path, class: "btn btn-primary" %>
 <% end %>
 
 <hr />

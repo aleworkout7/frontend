@@ -7,29 +7,35 @@ class PagosController < ApplicationController
 	def index
 		return redirect_to shops_path unless user_signed_in?
 
-		alejandro = Alejandro.where(email: current_user.email).first
-		if alejandro.blank?
+		unless current_user.has_subscription?
 			@preapproval = MercadoPagoClient.create_preapproval_payment({
 				payer_email: current_user.email,
 				back_url: "https://secure-shore-15467.herokuapp.com/",
 				reason: "Assinatura mensal para ter lojas no Predios",
 				external_reference: current_user.id,
-				auto_recurring: {
-					frequency: 1,
-					frequency_type: "months",
-					transaction_amount: 1,
-					currency_id: "BRL",
-					free_trial: {
-						frequency: 15,
-						frequency_type: 'days'
-					}
-				}
+				preapproval_plan_id: "ac72a95ad96141c5b9dbf64e744fd240"
 			});
 		end
 
 		@user = User.all
 		@pagos = Pago.where(:user_id => current_user.id)
 		@todos_pagos = Pago.all
+	end
+
+	def cancel_subscription
+		subscription = SubscriptionNotification.where(external_reference: current_user.id).last
+		if subscription.present?
+			tid = subscription.transaction_id
+			MercadoPagoClient.cancel_preapproval_payment(tid)
+		end
+
+		if current_user.has_subscription?
+			Alejandro.where(email: current_user.email).first.try(:delete)
+		end
+
+		respond_to do |format|
+			format.html { redirect_to action: :index, notice: 'Assinatura cancelada' }
+		end
 	end
 
 	def mp_notification

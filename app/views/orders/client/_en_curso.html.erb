@@ -1,24 +1,24 @@
 <table class='table table-hover'>
 	<thead>
 		<tr>
-			<th>#</th>
+			<th>Prédio</th>
+			<th>Loja</th>
 			<th>Cliente</th>
 			<th>Criado em</th>
 			<th>Valor</th>
 			<th>Status</th>
-			<th>Telefone do cliente</th>
 			<th></th>
 		</tr>
 	</thead>
 	<tbody>
 		<% orders_by_status(orders, status).each do |order| %>
 			<tr>
-				<th>#<%= order.id %></th>
+				<th><%= order.shop.predio.name %></th>
+				<th><%= order.shop.name %></th>
 				<td><%= order.user.name %></td>
 				<td><%= format_datetime order.status.created_at %></td>
 				<td><%= format_currency order.total %></td>
 				<td><%= status %></td>
-				<td><%= order.user.phone %></td>
 
 				<td>
 					<%= link_to 'Ver detalhes', show_from_clients_orders_path(status.try(:downcase), order), class: "btn btn-xs" %>

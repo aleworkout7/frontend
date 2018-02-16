@@ -1,20 +1,19 @@
 <table class='table table-hover'>
 	<thead>
 		<tr>
-			<th>#</th>
-			<th>Predio</th>
-			<th>Tienda</th>
+			<th>Prédio</th>
+			<th>Loja</th>
 			<th>Status</th>
 			<th>Valor</th>
 			<th>Pedido aceito em</th>
 			<th>Telefone do vendedor</th>
+
 			<th></th>
 		</tr>
 	</thead>
 	<tbody>
 		<% orders_by_status(orders, status).each do |order| %>
 			<tr>
-				<th>#<%= order.id %></th>
 				<td><%= order.shop.predio.name %></td>
 				<td><%= order.shop.name %></td>
 				<td><%= status %></td>

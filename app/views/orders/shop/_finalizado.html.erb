@@ -1,8 +1,8 @@
 <table class='table table-hover'>
 	<thead>
 		<tr>
-			<th>#</th>
-			<th>Tienda</th>
+			<th>Prédio</th>
+			<th>Loja</th>
 			<th>Valor</th>
 			<th>Tempo total de duração do pedido</th>
 			<th>Finalizado em</th>
@@ -12,7 +12,7 @@
 	<tbody>
 		<% orders_by_status(orders, status).each do |order| %>
 			<tr>
-				<th>#<%= order.id %></th>
+				<th><%= order.shop.predio.name %></th>
 				<td><%= link_to order.shop.name, shop_path(order.shop) %></td>
 				<td><%= format_currency order.total %></td>
 				<td><%= time_spent_between_last_status order %></td>

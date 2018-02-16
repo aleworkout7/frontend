@@ -2,7 +2,7 @@
 <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Montserrat:400,700" rel="stylesheet" type="text/css">
 
 <%= form_for("", url: shops_path, method:'get', html: { role: 'form', id: "shops_index" } ) do |f| %>
-	<h1 align="center">Edificios con tiendas disponibles</h1>
+	<h1 align="center">Edificios con tiendas disponibles: <%= format_datetime Time.now %></h1>
 	<div class="col-md-12 pure-css-select-style theme-default">
 		<%= select_tag(:predio_id, options_for_select( @my_shops.collect {|p| [p.predio.name, p.predio_id] }), { prompt: 'Elige un edificio', class: 'edificios'})%>
 	</div>

@@ -41,10 +41,8 @@
 	</div>
 </div>
 
-<% if user_signed_in? %>
-	<% unless current_user.is_my_shop?(@shop) %>
-		<%= link_to 'Editar Tienda', edit_shop_path(@shop), role: 'button', class: 'btn btn-success btn-sm' %>
-	<% end %>
+<% if user_signed_in? && current_user.is_my_shop?(@shop) %>
+	<%= link_to 'Editar Tienda', edit_shop_path(@shop), role: 'button', class: 'btn btn-success btn-sm' %>
 <% end %>
 
 <div class="container wrapper">
@@ -89,17 +87,10 @@
 <div class="push"></div>
 
 <% if user_signed_in? %>
-	<% unless current_user.is_my_shop?(@shop) %>
-		<footer class="footer">
-			<div class="footer-cart">
-				<a href="#">
-					<img src="https://s3.amazonaws.com/predios/cart.png">
-				</a>
-			</div>
-		</footer>
 
+	<% if current_user.is_my_shop?(@shop) %>
 		<%= link_to 'Crear un producto', new_product_path, role: 'button', class: 'navbar-fixed-bottom button button3 btn-block' %>
-
+	<% else %>
 		<script type="text/javascript">
 			document.addEventListener('turbolinks:before-visit', (event) => {
 				// exists any item in cart
@@ -126,4 +117,5 @@
 		<%= render partial: "/shops/modal_exit_shop" %>
 		<%= render partial: "/cart/modal_empty_cart" %>
 	<% end %>
+
 <% end %>

@@ -6,7 +6,7 @@
 				<div class="col-sm-12 text-right">
 					<h1 class="cart-text">
 						<div id="cart">
-							<%= link_to "Items in Cart (#{amount_items_in_cart})", cart_shop_path(@shop), class: "btn btn-link", "data-count": amount_items_in_cart, data: { turbolinks: false } %>
+							<%= link_to "Items in Cart (#{amount_items_in_cart(@shop)})", cart_shop_path(@shop), class: "btn btn-link", "data-count": amount_items_in_cart(@shop), data: { turbolinks: false } %>
 						</div>
 					</h1>
 				</div>

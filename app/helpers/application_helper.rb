@@ -15,22 +15,26 @@ module ApplicationHelper
 	def is_in_cart? product
 		return false if product.blank?
 
-		cart = extract_cart_from_session
+		cart = extract_cart_from_session product.shop
 
 		product = cart.select { |c| c["product_id"].to_i == product.id }
 
 		product.present?
 	end
 
-	def amount_items_in_cart
-		cart = extract_cart_from_session
+	def amount_items_in_cart shop
+		cart = extract_cart_from_session shop
 
 		cart.count
 	end
 
 	private
 
-	def extract_cart_from_session
+	def extract_cart_from_session shop
+		shop_id = session[:cart_shop_id]
+		
+		session[:cart] = nil if shop_id != shop.id
+
 		cart = session[:cart]
 
 		cart = [] if cart.blank?

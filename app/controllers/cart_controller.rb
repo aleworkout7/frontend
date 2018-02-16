@@ -71,6 +71,9 @@ class CartController < ApplicationController
 
 	def update_cart(cart = nil)
 		session[:cart] = cart
+
+		session[:cart_shop_id] = @shop.try(:id)
+		session[:cart_shop_id] = nil if cart.blank?
 	end
 
 	def extract_cart_from_session

@@ -50,37 +50,43 @@ class PagosController < ApplicationController
 
 				payment_info = MercadoPagoClient.get_preapproval_payment(params[:id])
 				json = payment_info["response"]
+				if json.present?
 
-				SubscriptionNotification.create({
-					transaction_id: json["id"],
-					payer_id: json["payer_id"],
-					collector_id: json["collector_id"],
-					application_id: json["application_id"],
-					status: json["status"],
-					external_reference: json["external_reference"],
-					date_created: json["date_created"],
-					last_modified: json["last_modified"]
-				})
+					SubscriptionNotification.create({
+						transaction_id: json["id"],
+						payer_id: json["payer_id"],
+						collector_id: json["collector_id"],
+						application_id: json["application_id"],
+						status: json["status"],
+						external_reference: json["external_reference"],
+						date_created: json["date_created"],
+						last_modified: json["last_modified"]
+					})
+
+				end
 
 			else
 
 				payment_info = MercadoPagoClient.get_payment_info(params[:id])
 				json = payment_info["response"]["collection"]
+				if json.present?
 
-				PaymentNotification.create({
-					transaction_id: json["id"],
-					payer_id: json["payer"]["id"],
-					status: json["status"],
-					external_reference: json["external_reference"],
-					total_paid_amount: json["total_paid_amount"],
-					payment_type: json["payment_type"],
-					payment_method_id: json["payment_method_id"],
-					transaction_order_id: json["transaction_order_id"],
-					date_created: json["date_created"],
-					date_approved: json["date_approved"],
-					money_release_date: json["money_release_date"],
-					last_modified: json["last_modified"]
-				})
+					PaymentNotification.create({
+						transaction_id: json["id"],
+						payer_id: json["payer"]["id"],
+						status: json["status"],
+						external_reference: json["external_reference"],
+						total_paid_amount: json["total_paid_amount"],
+						payment_type: json["payment_type"],
+						payment_method_id: json["payment_method_id"],
+						transaction_order_id: json["transaction_order_id"],
+						date_created: json["date_created"],
+						date_approved: json["date_approved"],
+						money_release_date: json["money_release_date"],
+						last_modified: json["last_modified"]
+					})
+					
+				end
 
 			end
 		end

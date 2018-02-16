@@ -36,7 +36,7 @@ class PagosController < ApplicationController
 		payment_info = mp.get_payment_info(params[:id])
 
 		puts payment_info
-		asd
+		render :status => 200
 	end
 
 	# GET /pagos/1

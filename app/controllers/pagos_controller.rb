@@ -13,7 +13,13 @@ class PagosController < ApplicationController
 				back_url: "https://secure-shore-15467.herokuapp.com/",
 				reason: "Assinatura mensal para ter lojas no Predios",
 				external_reference: current_user.id,
-				preapproval_plan_id: "ac72a95ad96141c5b9dbf64e744fd240"
+				auto_recurring: {
+					frequency: 1,
+					frequency_type: "months",
+					transaction_amount: 1,
+					currency_id: "BRL",
+					start_date: Time.now + 15.days
+				}
 			});
 		end
 

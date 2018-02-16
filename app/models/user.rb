@@ -20,4 +20,13 @@ class User < ActiveRecord::Base
 		Alejandro.where(email: self.email).first.present?
 	end
 
+	def start_date_for_subscription
+		start_date = Time.now
+		if self.had_subscription_before?
+			start_date += 15.days
+		end
+
+		start_date
+	end
+
 end

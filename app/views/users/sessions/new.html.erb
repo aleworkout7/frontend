@@ -6,6 +6,8 @@
 <% end %>
 
 <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+<%= hidden_field_tag :do_subscription, params[:do_subscription] %>
+
 <div class="container" style="margin-top:25px">
 	<div class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
 		<div class="panel panel-default">

@@ -7,7 +7,7 @@ class ShopsController < ApplicationController
 	# GET /shops
 	# GET /shops.json
 	def index
-		@shops = Shop.search({ search: params[:search] }).published
+		redirect_to root_path
 	end
 
 	# GET /predio/:id/shops

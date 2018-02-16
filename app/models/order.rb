@@ -32,4 +32,16 @@ class Order < ActiveRecord::Base
 		self.status.try(:status) == OrderStatus::CANCELADO
 	end
 
+	def is_accepted?
+		self.status.try(:status) == OrderStatus::ACEPTADO
+	end
+
+	def is_finished?
+		self.status.try(:status) == OrderStatus::FINALIZADO
+	end
+
+	def is_client? user
+		self.user.id == user.try(:id)
+	end
+
 end

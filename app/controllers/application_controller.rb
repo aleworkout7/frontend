@@ -12,4 +12,14 @@ class ApplicationController < ActionController::Base
 			]
 		)
 	end
+
+	protected
+
+	def after_sign_in_path_for(resource)
+		if params[:do_subscription].present?
+			pagos_path
+		else
+			root_path
+		end
+	end
 end

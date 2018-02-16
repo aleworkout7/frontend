@@ -47,10 +47,14 @@ class OrderStatusController < ApplicationController
 			order_status.user = current_user
 			order_status.status = OrderStatus::CANCELADO
 			order = order_status.order
-			
+
 			if order.is_finished?
 				path = decide_what_path(order, OrderStatus::FINALIZADO)
 				format.html { redirect_to path, notice: "Pedido foi finalizado pelo Lojista." }
+
+			elsif order.is_accepted?
+				path = decide_what_path(order, OrderStatus::ACEPTADO)
+				format.html { redirect_to path, notice: "Pedido foi aceitado pelo Lojista." }
 
 			elsif order.is_canceled?
 				path = decide_what_path(order)
@@ -72,9 +76,11 @@ class OrderStatusController < ApplicationController
 
 	def decide_what_path(order, status = OrderStatus::CANCELADO)
 		path = to_shops_orders_path(status: status)
-		if order.canceled_by == "Lojista"
+		unless order.is_client? current_user
 			path = from_clients_orders_path(status: status)
 		end
+
+		path
 	end
 
 end

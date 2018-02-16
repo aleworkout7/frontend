@@ -36,10 +36,10 @@ class PagosController < ApplicationController
 		mp = MercadoPago.new('2694416963761658', 'a0TM3G6GlWjoSoA5E75wU7GWCc3TYNvp')
 
 		puts "---- mp_notification start ----"
-		
+
 		if params[:topic].present?
 			if params[:topic] == "preapproval"
-				payment_info = mp.get_preapproval_payment
+				payment_info = mp.get_preapproval_payment(params[:id])
 				puts "Payment Info (pa): #{payment_info}"
 			else
 				payment_info = mp.get_payment_info(params[:id])

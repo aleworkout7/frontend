@@ -18,10 +18,8 @@
 					</p>
 				</div>
 
-				<% if user_signed_in? %>
-					<% if current_user.email == "ale@ale.cl" %>
-						<h3><%= shop.user.email %></h3>
-					<% end %>
+				<% if current_user.try(:admin?) %>
+					<h3><%= shop.user.email %></h3>
 				<% end %>
 
 				<h4><%= shop.number %></h4>
@@ -40,7 +38,7 @@
 
 				<p>
 					<% if user_signed_in? %>
-						<% if current_user.id == shop.user_id or current_user.email == "ale@ale.cl" %>
+						<% if current_user.id == shop.user_id || current_user.admin? %>
 							<%= link_to 'Editar', edit_shop_path(shop), role: 'button', class: 'btn btn-success btn-sm' %>
 							<%= link_to 'Eliminar', shop, method: :delete, data: { confirm: 'Are you sure?' }, role: 'button', class: 'btn btn-success btn-sm' %>
 						<% end %>

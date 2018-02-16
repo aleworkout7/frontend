@@ -6,7 +6,7 @@ class Shop < ActiveRecord::Base
 	belongs_to :predio
 	belongs_to :category
 	has_many :products
-	
+
 	validates :name, :predio_id, presence: true
 
 	def validate
@@ -41,4 +41,9 @@ class Shop < ActiveRecord::Base
 
 		result
 	end
+
+	def is_published?
+		Alejandro.where(email: self.user.email).first.present?
+	end
+
 end

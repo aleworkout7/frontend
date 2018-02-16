@@ -1,5 +1,6 @@
 class ShopsController < ApplicationController
 	before_action :set_shop, only: [:show, :edit, :update, :destroy]
+	before_action :is_published?, only: [:show, :edit, :update, :destroy]
 	before_action :require_permission, only: :edit
 	before_action :require_permission_destroy, only: :destroy
 
@@ -9,6 +10,7 @@ class ShopsController < ApplicationController
 		@my_shops = Shop.select(:predio_id).order(:predio_id).distinct
 	end
 
+	# GET /predio/:id/shops
 	def predio
 		@predio = Predio.find(params[:id])
 		@shops = Shop.search({ predio_id: @predio.id, search: params[:search] }).published
@@ -76,14 +78,18 @@ class ShopsController < ApplicationController
 	end
 
 	private
-	# Use callbacks to share common setup or constraints between actions.
+
 	def set_shop
 		@shop = Shop.find(params[:id])
 	end
 
+	def is_published?
+		return root_path unless @shop.is_published?
+	end
+
 	def require_permission
-		if current_user.email != "ale@ale.cl"
-			if (current_user.id != Shop.find(params[:id]).user_id)
+		unless current_user.admin?
+			if (current_user.id != @shop.user_id)
 				redirect_to root_path
 				# Or do something else here
 			end
@@ -91,9 +97,9 @@ class ShopsController < ApplicationController
 	end
 
 	def require_permission_destroy
-		if current_user.email == "ale@ale.cl"
+		if current_user.admin?
 			@shop.destroy
-		elsif current_user.id != Shop.find(params[:id]).user_id
+		elsif current_user.id != @shop.user_id
 			redirect_to root_path
 			#Or do something else here
 		end

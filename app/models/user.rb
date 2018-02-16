@@ -1,7 +1,7 @@
 class User < ActiveRecord::Base
 	# Include default devise modules. Others available are:
-	# :confirmable, :lockable, :timeoutable and :omniauthable
-	devise :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable, :validatable
+	# :lockable, :timeoutable and :omniauthable
+	devise :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable, :validatable, :confirmable
 
 	has_many :shops
 	has_many :pagos
@@ -14,6 +14,10 @@ class User < ActiveRecord::Base
 		return false if shop.blank?
 
 		self.id == shop.user_id
+	end
+
+	def has_subscription?
+		Alejandro.where(email: self.email).first.present?
 	end
 
 end

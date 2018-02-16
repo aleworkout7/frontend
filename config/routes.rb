@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-	root 'shops#index'
+	root 'predios#home'
 
 	devise_for :users,
 	controllers: {
@@ -9,17 +9,27 @@ Rails.application.routes.draw do
 		confirmations: 'users/confirmations',
 	}
 
-	post 'mp/notifications' => "pagos#mp_notification", :as => :mp_notifications
+	resources :pagos
+	resources :alejandros
+	resources :products
 
 	resources :queries
 	resources :accounts
 	resources :bancos
-	resources :pagos
 	resources :members
-	resources :alejandros
-	resources :predios
 	resources :categories
-	resources :products
+
+	resources :predios
+	resources :shops do
+		member do
+			get 'cart' => "cart#index", :as => :cart
+			get 'add_to_cart/:product_id' => "cart#add", :as => :add_to_cart
+			delete 'remove_from_cart/:product_id' => "cart#remove", :as => :remove_from_cart
+			delete 'clear_cart' => "cart#clear", :as => :clear_cart
+
+			get 'cart/update_amount/:product_id' => "cart#update_amount", :as => :update_amount
+		end
+	end
 
 	resources :orders do
 		get 'accept' => "order_status#accept", :as => :accept
@@ -36,17 +46,7 @@ Rails.application.routes.draw do
 		end
 	end
 
-	resources :shops do
-		member do
-			get 'cart' => "cart#index", :as => :cart
-			get 'add_to_cart/:product_id' => "cart#add", :as => :add_to_cart
-			delete 'remove_from_cart/:product_id' => "cart#remove", :as => :remove_from_cart
-			delete 'clear_cart' => "cart#clear", :as => :clear_cart
-
-			get 'cart/update_amount/:product_id' => "cart#update_amount", :as => :update_amount
-		end
-	end
-
+	post 'mp/notifications' => "pagos#mp_notification", :as => :mp_notifications
 	get 'users/:id/shops' => 'users#shops', :as => :user_shops
 	get 'predio/:id/shops' => 'shops#predio', :as => :predio_shops
 

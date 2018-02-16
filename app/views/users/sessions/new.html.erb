@@ -1,47 +1,54 @@
+<% if flash[:alert].present? %>
+	<div class="alert alert-dismissable alert-danger">
+		<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+		<%= flash[:alert] %>
+	</div>
+<% end %>
+
 <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="container" style="margin-top:25px">
-    <div class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
-      <div class="panel panel-default">
-        <p style="font-size: 25px;line-height: 30px;font-weight: bold;">Realize seus sonhos agora.</p>
-        <p style="font-weight: normal;margin-top: 20px;font-size: 20px;margin-bottom: 35px;line-height: 26px;">Compre e venda nos Prédios.</p>
-        <div class="panel-body">
+<div class="container" style="margin-top:25px">
+	<div class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+		<div class="panel panel-default">
+			<p style="font-size: 25px;line-height: 30px;font-weight: bold;">Realize seus sonhos agora.</p>
+			<p style="font-weight: normal;margin-top: 20px;font-size: 20px;margin-bottom: 35px;line-height: 26px;">Compre e venda nos Prédios.</p>
+			<div class="panel-body">
 
-          <div class="block-mail">
-            <div class="form-group">
-              <%= f.email_field :email, autofocus: true, class:"form-control black-border", placeholder:"Insira o seu e-mail" %>
-            </div>
-            <div class="actions">
-              <a href="javascript:void(0);" class="btn btn-sm btn-primary btn-avanzar">Avançar</a>
-              <img src="https://s3.amazonaws.com/predios/right.png" class="btn-right">
-            </div>
-            <div style="margin-top:10px" class="form-group">
-              <div class="col-md-12 control lateral-clean">
-                <div style="border-top: 1px solid#ddd; padding-top:15px;" >
-                  <p>Não está cadastrado? <%= link_to "Crie sua conta aqui", new_registration_path(resource_name) %></p>
-                </div>
-              </div>
-            </div>
-          </div>
+				<div class="block-mail">
+					<div class="form-group">
+						<%= f.email_field :email, autofocus: true, class:"form-control black-border", placeholder:"Insira o seu e-mail" %>
+					</div>
+					<div class="actions">
+						<a href="javascript:void(0);" class="btn btn-sm btn-primary btn-avanzar">Avançar</a>
+						<img src="https://s3.amazonaws.com/predios/right.png" class="btn-right">
+					</div>
+					<div style="margin-top:10px" class="form-group">
+						<div class="col-md-12 control lateral-clean">
+							<div style="border-top: 1px solid#ddd; padding-top:15px;" >
+								<p>Não está cadastrado? <%= link_to "Crie sua conta aqui", new_registration_path(resource_name) %></p>
+							</div>
+						</div>
+					</div>
+				</div>
 
-          <div class="block-pass hide">
-            <div class="form-group">
-              <img src="https://s3.amazonaws.com/predios/left.png" class="backLogin">
-              <%= f.password_field :password, autocomplete: "off", class:"form-control black-border", placeholder:"Insira a sua senha"%>
-            </div>
-            <div class="actions">
-              <%= f.submit "Iniciar sessão", class:"btn btn-sm btn-primary btn-black" %>
-            </div>
-            <div style="margin-top:10px" class="form-group">
-              <div class="col-md-12 control lateral-clean">
-                <div style="border-top: 1px solid#ddd; padding-top:15px;" >                  
-                  <p>Esqueceu a sua senha? <%= link_to "Clique aqui", new_password_path(resource_name) %></p>
-                </div>
-              </div>
-            </div>
-          </div>
+				<div class="block-pass hide">
+					<div class="form-group">
+						<img src="https://s3.amazonaws.com/predios/left.png" class="backLogin">
+						<%= f.password_field :password, autocomplete: "off", class:"form-control black-border", placeholder:"Insira a sua senha"%>
+					</div>
+					<div class="actions">
+						<%= f.submit "Iniciar sessão", class:"btn btn-sm btn-primary btn-black" %>
+					</div>
+					<div style="margin-top:10px" class="form-group">
+						<div class="col-md-12 control lateral-clean">
+							<div style="border-top: 1px solid#ddd; padding-top:15px;" >
+								<p>Esqueceu a sua senha? <%= link_to "Clique aqui", new_password_path(resource_name) %></p>
+							</div>
+						</div>
+					</div>
+				</div>
 
-        </div>
-      </div>
-    </div>
-  </div>
+			</div>
+		</div>
+	</div>
+</div>
 <% end  %>

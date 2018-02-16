@@ -1,6 +1,24 @@
 class OrderStatusMailer < ApplicationMailer
 
-	def new_status(order_status, user)
+	def buy(order_status, user)
+		@user = user
+		@status = order_status
+		mail(to: @user.email, subject: 'Predios - Pedido criado')
+	end
+
+	def delivered(order_status, user)
+		@user = user
+		@status = order_status
+		mail(to: @user.email, subject: 'Predios - Pedido entregue')
+	end
+
+	def new_status_for_client(order_status, user)
+		@user = user
+		@status = order_status
+		mail(to: @user.email, subject: 'Predios - Pedido atualizado')
+	end
+
+	def new_status_for_seller(order_status, user)
 		@user = user
 		@status = order_status
 		mail(to: @user.email, subject: 'Predios - Pedido atualizado')

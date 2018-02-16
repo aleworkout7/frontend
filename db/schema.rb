@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180215234624) do
+ActiveRecord::Schema.define(version: 20180216054803) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -63,6 +63,19 @@ ActiveRecord::Schema.define(version: 20180215234624) do
     t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "mercado_pago_notifications", force: :cascade do |t|
+    t.string   "transaction_id"
+    t.integer  "payer_id"
+    t.integer  "collector_id"
+    t.integer  "application_id"
+    t.string   "status"
+    t.string   "external_reference"
+    t.datetime "date_created"
+    t.datetime "last_modified"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
   end
 
   create_table "order_items", force: :cascade do |t|
@@ -120,6 +133,23 @@ ActiveRecord::Schema.define(version: 20180215234624) do
     t.string   "image"
   end
 
+  create_table "payment_notifications", force: :cascade do |t|
+    t.string   "transaction_id"
+    t.integer  "payer_id"
+    t.string   "status"
+    t.string   "external_reference"
+    t.float    "total_paid_amount"
+    t.string   "payment_type"
+    t.string   "payment_method_id"
+    t.integer  "transaction_order_id"
+    t.datetime "date_created"
+    t.datetime "date_approved"
+    t.datetime "money_release_date"
+    t.datetime "last_modified"
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+  end
+
   create_table "predios", force: :cascade do |t|
     t.string   "name"
     t.text     "address"
@@ -157,6 +187,19 @@ ActiveRecord::Schema.define(version: 20180215234624) do
     t.boolean  "available",   default: true
     t.integer  "category_id"
     t.integer  "predio_id"
+  end
+
+  create_table "subscription_notifications", force: :cascade do |t|
+    t.string   "transaction_id"
+    t.integer  "payer_id"
+    t.integer  "collector_id"
+    t.integer  "application_id"
+    t.string   "status"
+    t.string   "external_reference"
+    t.datetime "date_created"
+    t.datetime "last_modified"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
   end
 
   create_table "users", force: :cascade do |t|

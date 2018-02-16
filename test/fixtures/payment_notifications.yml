@@ -1,0 +1,29 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  transaction_id: MyString
+  payer_id: 1
+  status: MyString
+  external_reference: MyString
+  total_paid_amount: 1.5
+  payment_type: MyString
+  payment_method_id: MyString
+  transaction_order_id: 1
+  date_created: 2018-02-16 02:48:03
+  date_approved: 2018-02-16 02:48:03
+  money_release_date: 2018-02-16 02:48:03
+  last_modified: 2018-02-16 02:48:03
+
+two:
+  transaction_id: MyString
+  payer_id: 1
+  status: MyString
+  external_reference: MyString
+  total_paid_amount: 1.5
+  payment_type: MyString
+  payment_method_id: MyString
+  transaction_order_id: 1
+  date_created: 2018-02-16 02:48:03
+  date_approved: 2018-02-16 02:48:03
+  money_release_date: 2018-02-16 02:48:03
+  last_modified: 2018-02-16 02:48:03

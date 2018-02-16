@@ -1,7 +1,5 @@
 class PagosController < ApplicationController
-	require 'mercadopago.rb'
-
- 	skip_before_filter :verify_authenticity_token, :only => [:mp_notification]
+	skip_before_filter :verify_authenticity_token, :only => [:mp_notification]
 	before_action :set_pago, only: [:show, :edit, :update, :destroy]
 
 	# GET /pagos
@@ -9,12 +7,11 @@ class PagosController < ApplicationController
 	def index
 		return redirect_to shops_path unless user_signed_in?
 
-		mp = MercadoPago.new('2694416963761658', 'a0TM3G6GlWjoSoA5E75wU7GWCc3TYNvp')
-		@preapproval = mp.create_preapproval_payment({
+		@preapproval = MercadoPagoClient.create_preapproval_payment({
 			payer_email: current_user.email,
 			back_url: "https://secure-shore-15467.herokuapp.com/",
 			reason: "Assinatura mensal para ter lojas no Predios",
-			external_reference: "Predios-#{current_user.id}",
+			external_reference: current_user.id,
 			auto_recurring: {
 				frequency: 1,
 				frequency_type: "months",
@@ -33,22 +30,46 @@ class PagosController < ApplicationController
 	end
 
 	def mp_notification
-		mp = MercadoPago.new('2694416963761658', 'a0TM3G6GlWjoSoA5E75wU7GWCc3TYNvp')
-
-		puts "---- mp_notification start ----"
-
 		if params[:topic].present?
 			if params[:topic] == "preapproval"
-				payment_info = mp.get_preapproval_payment(params[:id])
-				puts "Payment Info (pa): #{payment_info}"
+
+				payment_info = MercadoPagoClient.get_preapproval_payment(params[:id])
+				json = payment_info["response"]
+
+				SubscriptionNotification.create({
+					transaction_id: json["id"],
+					payer_id: json["payer_id"],
+					collector_id: json["collector_id"],
+					application_id: json["application_id"],
+					status: json["status"],
+					external_reference: json["external_reference"],
+					date_created: json["date_created"],
+					last_modified: json["last_modified"]
+				})
+
 			else
-				payment_info = mp.get_payment_info(params[:id])
-				puts "Payment Info (pi): #{payment_info}"
-				puts payment_info["response"]["collection"]["status"]
+
+				payment_info = MercadoPagoClient.get_payment_info(params[:id])
+				json = payment_info["response"]["collection"]
+
+				PaymentNotification.create({
+					transaction_id: json["id"],
+					payer_id: json["payer"]["id"],
+					status: json["status"],
+					external_reference: json["external_reference"],
+					total_paid_amount: json["total_paid_amount"],
+					payment_type: json["payment_type"],
+					payment_method_id: json["payment_method_id"],
+					transaction_order_id: json["transaction_order_id"]
+					date_created: json["date_created"],
+					date_approved: json["date_approved"],
+					money_release_date: json["money_release_date"],
+					last_modified: json["last_modified"]
+				})
+
 			end
 		end
 
-		puts "---- mp_notification end ----"
 		render nothing: true, status: 200
 	end
 

@@ -60,7 +60,7 @@ class PagosController < ApplicationController
 					total_paid_amount: json["total_paid_amount"],
 					payment_type: json["payment_type"],
 					payment_method_id: json["payment_method_id"],
-					transaction_order_id: json["transaction_order_id"]
+					transaction_order_id: json["transaction_order_id"],
 					date_created: json["date_created"],
 					date_approved: json["date_approved"],
 					money_release_date: json["money_release_date"],

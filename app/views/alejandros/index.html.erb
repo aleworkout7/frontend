@@ -1,36 +1,27 @@
-<p id="notice"><%= notice %></p>
-
 <h1>Listing Alejandros</h1>
 <p>Es decir, Usuarios activos</p>
 <hr />
-<% if user_signed_in? %>
-  <% if current_user.email == "ale@ale.cl" %>
-  
-    <% @alejandros.each do |alejandro| %>
 
-          <p>Email único: <b><%= alejandro.email %></b></p>
-          <p>Fecha activación</p>
-          <p><b><%= alejandro.payment_date %></b></p>
-          <p>Fecha vencimiento</p>
-          <p><b><%= alejandro.due_date %></b></p>
-          <p>Nota acerca del usuario:</p>
-          <p><b><%= alejandro.message %></b></p>
-          <p>Membresia: <b><%= alejandro.member.name %></b></p>
-          <p>Pago: <b><%= alejandro.payment %></b></p>
-        
-          <p>
-            <%= link_to 'Ver', alejandro, role: 'button', class: 'btn btn-success btn-xs' %>
-            <%= link_to 'Editar', edit_alejandro_path(alejandro), role: 'button', class: 'btn btn-success btn-xs' %>
-            <%= link_to 'Eliminar', alejandro, method: :delete, data: { confirm: 'Está usted segur@?' }, role: 'button', class: 'btn btn-success btn-xs' %>
-          </p>
-          
-          <hr />
-          
-    <% end %>
-    
-    <br /><br /><br />
-    
-    <%= link_to 'Ingresar Nuevo alejandro', new_alejandro_path, role: 'button', class: 'navbar-fixed-bottom button button3 btn-block' %>
+<% @alejandros.each do |alejandro| %>
 
-  <% end %>
+<div class="table">
+	<p>Email único: <b><%= alejandro.email %></b></p>
+	<p>Fecha activación: <b><%= alejandro.payment_date %></b></p>
+	<p>Fecha vencimiento: <b><%= alejandro.due_date %></b></p>
+	<p>Nota acerca del usuario: <b><%= alejandro.message %></b></p>
+	<p>Membresia: <b><%= alejandro.member.name %></b></p>
+	<p>Pago: <b><%= alejandro.payment %></b></p>
+
+	<p>
+		<%= link_to 'Ver', alejandro, role: 'button', class: 'btn btn-success btn-xs' %>
+		<%= link_to 'Editar', edit_alejandro_path(alejandro), role: 'button', class: 'btn btn-success btn-xs' %>
+		<%= link_to 'Eliminar', alejandro, method: :delete, data: { confirm: 'Está usted segur@?' }, role: 'button', class: 'btn btn-success btn-xs' %>
+	</p>
+</div>
+<hr />
+
 <% end %>
+
+<br /><br /><br />
+
+<%= link_to 'Ingresar Nuevo alejandro', new_alejandro_path, role: 'button', class: 'navbar-fixed-bottom button button3 btn-block' %>

@@ -1,5 +1,7 @@
 class PagosController < ApplicationController
 	require 'mercadopago.rb'
+
+ 	skip_before_filter :verify_authenticity_token, :only => [:mp_notification]
 	before_action :set_pago, only: [:show, :edit, :update, :destroy]
 
 	# GET /pagos

@@ -28,4 +28,8 @@ class Order < ActiveRecord::Base
 		"Lojista"
 	end
 
+	def is_canceled?
+		self.status.try(:status) == OrderStatus::CANCELADO
+	end
+
 end

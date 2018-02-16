@@ -84,7 +84,7 @@ class ShopsController < ApplicationController
 	end
 
 	def is_published?
-		return root_path unless @shop.is_published?
+		return redirect_to root_path unless @shop.is_published?
 	end
 
 	def require_permission

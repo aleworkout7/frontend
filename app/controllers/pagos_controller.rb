@@ -7,22 +7,25 @@ class PagosController < ApplicationController
 	def index
 		return redirect_to shops_path unless user_signed_in?
 
-		@preapproval = MercadoPagoClient.create_preapproval_payment({
-			payer_email: current_user.email,
-			back_url: "https://secure-shore-15467.herokuapp.com/",
-			reason: "Assinatura mensal para ter lojas no Predios",
-			external_reference: current_user.id,
-			auto_recurring: {
-				frequency: 1,
-				frequency_type: "months",
-				transaction_amount: 1,
-				currency_id: "BRL",
-				free_trial: {
-					frequency: 15,
-					frequency_type: 'days'
+		alejandro = Alejandro.where(email: current_user.email).first
+		if alejandro.blank?
+			@preapproval = MercadoPagoClient.create_preapproval_payment({
+				payer_email: current_user.email,
+				back_url: "https://secure-shore-15467.herokuapp.com/",
+				reason: "Assinatura mensal para ter lojas no Predios",
+				external_reference: current_user.id,
+				auto_recurring: {
+					frequency: 1,
+					frequency_type: "months",
+					transaction_amount: 1,
+					currency_id: "BRL",
+					free_trial: {
+						frequency: 15,
+						frequency_type: 'days'
+					}
 				}
-			}
-		});
+			});
+		end
 
 		@user = User.all
 		@pagos = Pago.where(:user_id => current_user.id)

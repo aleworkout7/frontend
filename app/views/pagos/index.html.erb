@@ -6,11 +6,18 @@
 <hr />
 <p>1 mes de membresía:</p><b>$6000.-</b><br/>
 <hr />
+
+<% if @preapproval.present? %>
+	<%= link_to "Assinar", @preapproval['response']['init_point'], name: "MP-Checkout", class: "blue-rn-m" %>
+	<script type="text/javascript" src="https://www.mercadopago.com/org-img/jsapi/mptools/buttons/render.js"></script>
+<% else %>
+	Já possui assinatura
+<% end %>
+
+<hr />
 <h1>Pagos registrados</h1>
 <br />
 
-<%= link_to "Assinar", @preapproval['response']['init_point'], name: "MP-Checkout", class: "blue-rn-m" %>
-<script type="text/javascript" src="https://www.mercadopago.com/org-img/jsapi/mptools/buttons/render.js"></script>
 
 <% if user_signed_in? %>
 		<% if current_user.admin? %>

@@ -1,5 +1,3 @@
-<p id="notice"><%= notice %></p>
-
 <b>Datos de cuenta bancaria</b><br/><br/>
 <p>CuentaRUT: <b>18329606</b></p>
 <p>RUT: <b>18329606-K</b></p>
@@ -10,78 +8,92 @@
 <hr />
 <h1>Pagos registrados</h1>
 <br />
+
+<%= link_to "Assinar", @preapproval['response']['sandbox_init_point'], name: "MP-Checkout", class: "blue-rn-m" %>
+<script type="text/javascript" src="https://www.mercadopago.com/org-img/jsapi/mptools/buttons/render.js"></script>
+
 <% if user_signed_in? %>
-  <% if current_user.email == "ale@ale.cl" %>
-  
-        <% @todos_pagos.each do |pago| %>
-        
-          <p>Email usuario: <b><%= pago.user.email %></b></p>
-          <p>Membresia: <b><%= pago.member.name %></b></p>
-          <p>Fecha de aviso de pago por parte del usuario:</p>
-          <p><b><%= pago.notice_date %></b></p>
-          <p>Fecha de pago indicada por parte del usuario:</p>
-          <p><b><%= pago.payment_date %></b></p>
-          <p>Banco del usuario</p>
-          <p><b><%= pago.banco.name %></b></p>
-          <p>Tipo de cuenta</p>
-          <p><b><%= pago.account.name %></b></p>
-          <p>N° de Cuenta</p>
-          <p><b><%= pago.account_number %></b></p>
-          <% if not pago.image_url.nil? %>
-          <%= link_to "Comprobante", "https://predioz.s3.amazonaws.com#{pago.image_url}"  %> 
-          <% else %>
-          <b>Sin comprobante</b>
-          <% end %>
-          <p>Estado del pago: 
-            <% if pago.checked %>
-            <b>Aceptado y validado</b>
-            <% else %>
-            <b>En revisión</b>
-            </p>
-            <% end %>
-        
-          <p>
-            <%= link_to 'Ver', pago, role: 'button', class: 'btn btn-success btn-xs' %>
-            <%= link_to 'Editar', edit_pago_path(pago), role: 'button', class: 'btn btn-success btn-xs' %>
-            <%= link_to 'Eliminar', pago, method: :delete, data: { confirm: 'Está usted segur@?' }, role: 'button', class: 'btn btn-success btn-xs' %>
-          </p>
-          
-          <hr />
-          
-        <% end %>
-    
-    <br>
-    
-    <%= link_to 'Ingresar Nuevo Pago', new_pago_path, role: 'button', class: 'navbar-fixed-bottom button button3 btn-block' %>
-  
-  
-  <% else %>
-        <% @pagos.each do |pago| %>
+		<% if current_user.admin? %>
 
-          <p>Membresia: <b><%= pago.member.name %></b></p>
-          <p>Fecha de aviso de pago por parte del usuario:</p>
-          <p><b><%= pago.notice_date %></b></p>
-          <p>Estado del pago: 
-          <% if pago.checked %>
-          <b>Aceptado y validado</b>
-          <% else %>
-          <b>En revisión</b>
-          </p>
-          <% end %>
-        
-          <p>
-            <%= link_to 'Ver', pago, role: 'button', class: 'btn btn-success btn-xs' %>
-            <%= link_to 'Editar', edit_pago_path(pago), role: 'button', class: 'btn btn-success btn-xs' %>
-            <%= link_to 'Eliminar', pago, method: :delete, data: { confirm: 'Está usted segur@?' }, role: 'button', class: 'btn btn-success btn-xs' %>
-          </p>
-          
-          <hr />
-          
-        <% end %>
-    
-    <br>
-    
-    <%= link_to 'Ingresar Nuevo Pago', new_pago_path, role: 'button', class: 'navbar-fixed-bottom button button3 btn-block' %>
+		<% @todos_pagos.each do |pago| %>
 
-  <% end %>
+			<p>Email usuario: <b><%= pago.user.email %></b></p>
+
+			<p>Membresia: <b><%= pago.member.name %></b></p>
+
+			<p>Fecha de aviso de pago por parte del usuario:</p>
+			<p><b><%= pago.notice_date %></b></p>
+
+			<p>Fecha de pago indicada por parte del usuario:</p>
+			<p><b><%= pago.payment_date %></b></p>
+
+			<p>Banco del usuario</p>
+			<p><b><%= pago.banco.name %></b></p>
+
+			<p>Tipo de cuenta</p>
+			<p><b><%= pago.account.name %></b></p>
+
+			<p>N° de Cuenta</p>
+			<p><b><%= pago.account_number %></b></p>
+
+			<% if not pago.image_url.nil? %>
+				<%= link_to "Comprobante", "https://predioz.s3.amazonaws.com#{pago.image_url}"  %>
+			<% else %>
+				<b>Sin comprobante</b>
+			<% end %>
+
+			<p>
+				Estado del pago:
+				<b>
+				<% if pago.checked %>
+					Aceptado y validado
+				<% else %>
+					En revisión
+				<% end %>
+				</b>
+			</p>
+
+			<p>
+				<%= link_to 'Ver', pago, role: 'button', class: 'btn btn-success btn-xs' %>
+				<%= link_to 'Editar', edit_pago_path(pago), role: 'button', class: 'btn btn-success btn-xs' %>
+				<%= link_to 'Eliminar', pago, method: :delete, data: { confirm: 'Está usted segur@?' }, role: 'button', class: 'btn btn-success btn-xs' %>
+			</p>
+
+			<hr />
+
+		<% end %>
+
+		<br>
+
+		<%= link_to 'Ingresar Nuevo Pago', new_pago_path, role: 'button', class: 'navbar-fixed-bottom button button3 btn-block' %>
+
+	<% else %>
+		<% @pagos.each do |pago| %>
+
+			<p>Membresia: <b><%= pago.member.name %></b></p>
+			<p>Fecha de aviso de pago por parte del usuario:</p>
+			<p><b><%= pago.notice_date %></b></p>
+			<p>Estado del pago:
+				<% if pago.checked %>
+					<b>Aceptado y validado</b>
+				<% else %>
+					<b>En revisión</b>
+				<% end %>
+			</p>
+
+			<p>
+				<%= link_to 'Ver', pago, role: 'button', class: 'btn btn-success btn-xs' %>
+				<%= link_to 'Editar', edit_pago_path(pago), role: 'button', class: 'btn btn-success btn-xs' %>
+				<%= link_to 'Eliminar', pago, method: :delete, data: { confirm: 'Está usted segur@?' }, role: 'button', class: 'btn btn-success btn-xs' %>
+			</p>
+
+			<hr />
+
+		<% end %>
+
+		<br>
+
+		<%= link_to 'Ingresar Nuevo Pago', new_pago_path, role: 'button', class: 'navbar-fixed-bottom button button3 btn-block' %>
+
+	<% end %>
 <% end %>

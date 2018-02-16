@@ -13,6 +13,7 @@ gem "mini_magick"
 
 gem 'figaro'
 gem 'puma',                             '~> 3.9'       # Use Puma as the app server
+gem 'mercadopago-sdk'
 
 gem 'rails', '4.2.5'
 gem 'sass-rails', '~> 5.0'

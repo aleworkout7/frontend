@@ -1,6 +1,6 @@
 class ShopsController < ApplicationController
 	before_action :set_shop, only: [:show, :edit, :update, :destroy]
-	before_action :is_published?, only: [:show, :edit, :update, :destroy]
+	before_action :is_published?, only: [:show]
 	before_action :require_permission, only: :edit
 	before_action :require_permission_destroy, only: :destroy
 

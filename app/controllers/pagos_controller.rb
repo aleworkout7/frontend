@@ -10,7 +10,6 @@ class PagosController < ApplicationController
 		return redirect_to shops_path unless user_signed_in?
 
 		mp = MercadoPago.new('2694416963761658', 'a0TM3G6GlWjoSoA5E75wU7GWCc3TYNvp')
-		mp.sandbox_mode(true)
 		@preapproval = mp.create_preapproval_payment({
 			payer_email: current_user.email,
 			back_url: "https://secure-shore-15467.herokuapp.com/",

@@ -104,7 +104,12 @@
 						$modal.modal();
 
 						$button.unbind().click(() => {
-							window.location.href = next;
+							$.ajax({
+								type: "POST",
+								url: "<%= clear_cart_shop_path %>",
+								data: {"_method":"delete"},
+								complete: () => window.location.href = next
+							});
 						});
 
 						event.preventDefault();

@@ -28,7 +28,7 @@ class SubscriptionNotification < ActiveRecord::Base
 		date_at = self.date_created
 		user = User.find(self.external_reference)
 		if user.present?
-			if user.had_subscription_before?
+			unless user.had_subscription_before?
 				date_at += 15.days
 			end
 		end

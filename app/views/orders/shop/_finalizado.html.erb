@@ -23,3 +23,11 @@
 		<% end %>
 	</tbody>
 </table>
+
+<% unless orders_by_status(orders, status).blank? %>
+<div class="row">
+	<div class="col-md-12">
+		<strong>Total:</strong> <i><%= format_currency orders_by_status(orders, status).sum(&:total) %></i>
+	</div>
+</div>
+<% end %>

@@ -31,7 +31,7 @@ class SubscriptionNotification < ActiveRecord::Base
 
 	end
 
-	def first_charge_at
+	def next_charge_at
 		date_at = self.date_created + 1.month
 		user = User.find(self.external_reference)
 		if user.present?

@@ -1,40 +1,67 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Montserrat:400,700" rel="stylesheet" type="text/css">
 
-<h1 align="center" style="padding: 10px;">Tiendas disponibles</h1>
-
-<div class="row">
-	<div class="col-md-12">
-		<%= link_to "Volver", root_path, role: 'button', class: 'btn btn-primary btn-xs' %>
-		<% if user_signed_in? %>
-			<%= link_to "Mis Tiendas", user_shops_path(current_user, @predio), role: 'button', class: 'btn btn-success btn-xs' %>
-		<% end %>
-	</div>
-</div>
-
-<div class="row" style="padding: 10px 0;">
-	<div class="col-md-12">
-
-		<%= form_tag(predio_shops_path(@predio), method:'get') do %>
-			<div class="form-group row">
-				<div class="col-sm-10">
-					<%= text_field_tag :search, params[:search], class: "form-control", placeholder: "Buscar por nombre de las tiendas o de los productos" %>
-				</div>
-				<div class="col-sm-2">
-					<%= submit_tag "Buscar", class: "btn btn-success", name: nil %>
+<div class="header-store">
+	<div class="container">
+		<div class="col-md-12">
+			<div class="predios-head">
+				<img src="https://s3.amazonaws.com/predios/loja.png">
+				<div>
+					<h2>Prédio: <%= @predio.name %></h2>
+					<h2 class="margin-top-0">Lojas: <%= @shops.count %></h2>
 				</div>
 			</div>
-		<% end %>
+		</div>
 
+		<div class="col-md-12">
+			<%= form_tag(predio_shops_path(@predio), method:'get') do %>
+				<div>
+					<%= text_field_tag :search, params[:search], class: "input-search", placeholder: "Estou a procura de..." %>
+					<%= submit_tag "Busque", class: "input-btn-search", name: nil %>
+				</div>
+			<% end %>
+		</div>
 	</div>
 </div>
 
-<div class="row" style="margin-top: 10px;">
-	<div id="stores">
-		<%= render 'stores' %>
+<div class="container" style="margin-bottom: 100px;">
+	<div class="col-md-12 row">
+		<div style="padding:10px;">
+			<% if user_signed_in? %>
+				<%= link_to 'Criar nova loja', new_shop_path, role: 'button', class: 'btn btn-success btn-sm' %>
+				<%= link_to "Minhas lojas", user_shops_path(current_user), role: 'button', class: 'btn btn-success btn-sm' %>
+			<% end %>
+
+			<p class="text-found">
+				<%= @shops.blank? ? "Nenhum producto encontrado" : "Lojas encontradas"  %>
+			</p>
+		</div>
 	</div>
+
+	<% @shops.each do |shop| %>
+		<div class="col-sm-6 col-md-4">
+			<div class="thumbnail margin-top-40">
+				<%= link_to image_tag(shop.image_url, class: "img-responsive", style:"width: 100%"), shop %>
+				<div style="padding: 9px;text-align: center;">
+					<h2 style="margin-top: 5px;margin-bottom: 15px;">
+						<%= shop.name.truncate(17) %>
+					</h2>
+					<div class="row">
+						<div class="col-md-12">
+							<%= link_to 'Entrar', shop, class: "btn btn-success btn-lg", style: "color: white;background-clip: border-box;width: 100%;" %>
+						</div>
+					</div>
+					<% if user_signed_in? %>
+						<% if current_user.is_my_shop? shop || current_user.admin? %>
+							<hr>
+							<%= link_to 'Editar', edit_shop_path(shop), role: 'button', class: 'btn btn-success btn-sm' %>
+							<%= link_to 'Eliminar', shop, method: :delete, data: { confirm: 'Are you sure?' }, role: 'button', class: 'btn btn-success btn-sm' %>
+						<% end %>
+					<% end %>
+				</div>
+			</div>
+		</div>
+	<% end %>
 </div>
 
-<% if user_signed_in? %>
-	<%= link_to 'Crear Nueva Tienda', new_shop_path, role: 'button', class: 'navbar-fixed-bottom button button3 btn-block' %>
-<% end %>
+<img src="https://s3.amazonaws.com/predios/arboles.jpg" style="width: 100%;">

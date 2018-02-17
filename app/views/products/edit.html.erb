@@ -1,10 +1,19 @@
-<h1>Editar Producto</h1>
-
-<hr />
-
-<%= render 'form_edit' %>
-
-<br /> 
-
-<%= link_to 'Vista Previa Producto', @product, role: 'button', class: 'btn btn-success btn-sm' %>
-
+<div class="container" style="margin-top:25px">
+  <div class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+    <div class="panel panel-default">
+      <div class="row">
+        <div class="col-md-5">
+          <p class="title-edit">Editar Produto</p>
+        </div>
+        <div class="col-md-7 text-right">
+          <%= link_to 'Ver tiendas', products_path, class: 'btn btn-success btn-sm' %>
+          <%= link_to 'Crea tienda', new_shop_path, class: 'btn btn-success btn-sm' %>
+        </div>
+      </div>
+      <hr>
+      <div class="panel-body">
+        <%= render 'form' %>
+      </div>
+    </div>
+  </div>
+</div>

@@ -32,7 +32,7 @@ module ApplicationHelper
 
 	def extract_cart_from_session shop
 		shop_id = session[:cart_shop_id]
-		
+
 		session[:cart] = nil if shop_id != shop.id
 
 		cart = session[:cart]

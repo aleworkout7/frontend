@@ -2,7 +2,6 @@
   <% if @predio.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@predio.errors.count, "error") %> prohibited this predio from being saved:</h2>
-
       <ul>
       <% @predio.errors.full_messages.each do |message| %>
         <li><%= message %></li>
@@ -10,20 +9,20 @@
       </ul>
     </div>
   <% end %>
-
-  <div class="field">
-    <%= f.label :name %><br>
-    <%= f.text_field :name %>
+  <div class="form-group">
+    <%= f.label 'Nome da predio' %><br>
+    <%= f.text_field :name, autofocus: true, class:"form-control black-border", placeholder:"Nome da loja" %>
   </div>
-  <div class="field">
-    <%= f.label :address %><br>
-    <%= f.text_area :address %>
+  <div class="form-group">
+    <%= f.label 'Endereço' %><br>
+    <%= f.text_field :address, autofocus: true, class:"form-control black-border", placeholder:"Endereço" %>
   </div>
-  <div class="field">
-    <%= f.label :details %><br>
-    <%= f.text_area :details %>
+  <div class="form-group">
+    <%= f.label 'Detalhes' %><br>
+    <%= f.text_field :details, autofocus: true, class:"form-control black-border", placeholder:"Detalhes" %>
   </div>
   <div class="actions">
-    <%= f.submit %>
+    <hr>
+    <%= f.submit "Listo", class:"btn btn-sm btn-primary btn-black", style:'text-align: center' %>
   </div>
 <% end %>

@@ -1,80 +1,69 @@
 <div class="header-store">
 	<div class="container">
-
-		<% unless current_user.try(:is_my_shop?, @shop) %>
-			<div class="row">
-				<div class="col-sm-12 text-right">
-					<h1 class="cart-text">
-						<div id="cart">
-							<%= link_to "Items in Cart (#{amount_items_in_cart(@shop)})", cart_shop_path(@shop), class: "btn btn-link", "data-count": amount_items_in_cart(@shop), data: { turbolinks: false } %>
-						</div>
-					</h1>
+		<div class="row">
+			<div class="col-md-12">
+				<div class="col-md-6">
+					<%= image_tag(@shop.image_url, class: "img-responsive aspect logo-product") %>
 				</div>
-			</div>
-		<% end %>
-
-		<div class="col-md-6">
-			<%= image_tag(@shop.image_url, class: "img-responsive aspect logo-product") %>
-		</div>
-
-		<div class="col-md-6">
-			<h1 class="margin-top-0">
-				<%= @shop.name %>
-			</h1>
-			<div class="inline">
-				<img src="https://s3.amazonaws.com/predios/build.png" class="build">
-				<h1 class="build-name">
-					<%= @shop.predio.name %>
-				</h1>
-			</div>
-		</div>
-
-		<div class="col-md-12">
-			<%= form_tag(shop_path(@shop), method: "get") do %>
-				<div class="col-md-10">
-					<%= text_field_tag :q, params[:q], class: "input-search", placeholder: 'Estou a procura de...' %>
+				<div class="col-md-4">
+					<h1 class="margin-top-0">
+						<%= @shop.name %>
+					</h1>
+					<div class="inline">
+						<img src="https://s3.amazonaws.com/predios/build.png" class="build">
+						<h1 class="build-name">
+							<%= @shop.predio.name %>
+						</h1>
+					</div>
 				</div>
 				<div class="col-md-2">
-					<%= submit_tag "Busque", class: "input-btn-search", name: nil %>
+					<%= link_to "Meus pedidos", orders_path, class: "btn btnMeusPedidos btn-md" %>
 				</div>
+			</div>
+		</div>
+		<div class="col-md-12">
+			<%= form_tag(shop_path(@shop), method: "get") do %>
+			<div class="">
+				<%= text_field_tag :q, params[:q], class: "input-search", placeholder: 'Estou a procura de...' %>
+				<%= submit_tag "Busque", class: "input-btn-search", name: nil %>
+			</div>
 			<% end %>
 		</div>
 	</div>
 </div>
 
-<div class="row">
-	<div class="col-md-12">
-		<hr>
-
-		<%= link_to "Volver", predio_shops_path(@shop.predio), role: 'button', class: 'btn btn-primary btn-xs' %>
-		<% if user_signed_in? %>
-			<% if current_user.is_my_shop?(@shop) %>
-				<%= link_to 'Editar Tienda', edit_shop_path(@shop), role: 'button', class: 'btn btn-success btn-sm' %>
-			<% end %>
-			<%= link_to "Mis Tiendas", user_shops_path(current_user), role: 'button', class: 'btn btn-success btn-xs' %>
-		<% end %>
-
-		<hr>
-	</div>
-</div>
-
-<div class="container wrapper">
+<div class="container" style="margin-bottom: 150px">
 	<div class="col-md-12 row">
-		<p class="text-found">
-			<%= @products.blank? ? "Nenhum producto encontrado" : "Productos encontrados"  %>
-		</p>
+		<div style="padding: 10px;">
+			<%= link_to "Voltar", predio_shops_path(@shop.predio), role: 'button', class: 'btn btn-success btn-sm' %>
+
+			<% if user_signed_in? %>
+				<% if current_user.is_my_shop?(@shop) %>
+					<%= link_to 'Crie um produto', new_product_path, role: 'button', class: 'btn btn-success btn-sm' %>
+					<%= link_to 'Editar loja', edit_shop_path(@shop), role: 'button', class: 'btn btn-success btn-sm' %>
+				<% end %>
+
+				<%= link_to 'Criar loja', new_shop_path, class: 'btn btn-success btn-sm' %>
+			<% end %>
+
+			<p class="text-found">
+				<%= @products.blank? ? "Nenhum producto encontrado" : "Produtos encontrados"  %>
+			</p>
+		</div>
 	</div>
+
 	<% @products.each do |product| %>
 		<div class="col-sm-6 col-md-4">
 			<div class="thumbnail margin-top-40">
 				<div class="price-product">
-					<span>R$<%= product.price %></span>
+					<span><%= format_currency product.price %></span>
 				</div>
 
 				<%= image_tag(product.image_url, class: "img-responsive aspect", style:"padding-top: 35px;") %>
 
 				<div class="caption" style="text-align: center;">
-					<h3><%= product.name %></h3>
+					<h3><%= product.name.truncate(17) %></h3>
+
 					<% if user_signed_in? && current_user.is_my_shop?(@shop) %>
 						<%= link_to 'Editar', edit_product_path(product), role: 'button', class: 'btn btn-success btn-sm' %>
 						<%= link_to 'Eliminar', product, method: :delete, data: { confirm: 'Are you sure?' }, role: 'button', class: 'btn btn-success btn-sm' %>
@@ -82,58 +71,57 @@
 				</div>
 
 				<% unless current_user.try(:is_my_shop?, @shop) %>
-
 					<% unless is_in_cart? product %>
 						<%= link_to add_to_cart_shop_path(@shop, product), class: 'btn-plus', data: { turbolinks: false } do %>
 							<img src="https://s3.amazonaws.com/predios/plus.png" class="plus">
 						<% end %>
 					<% else %>
-						<span class="btn btn-sm">Já adicionado no carrinho</span>
+						<p class="alreadyCart">Já adicionado no carrinho</p>
 					<% end %>
-
 				<% end %>
 			</div>
 		</div>
 	<% end %>
 </div>
 
-<div class="push"></div>
+<% unless current_user.try(:is_my_shop?, @shop) %>
+	<div class="footer-cart">
+		<div id="cart">
+			<div class="iconCart">
+				<span><%= amount_items_in_cart @shop %></span>
+			</div>
+			<%= link_to raw('<img src="https://s3.amazonaws.com/predios/cart.png">') , cart_shop_path(@shop), class: "btn-link", "data-count": amount_items_in_cart(@shop), data: { turbolinks: false } %>
+		</div>
+	</div>
 
-<% if user_signed_in? %>
+	<script type="text/javascript">
+		document.addEventListener('turbolinks:before-visit', (event) => {
+			// exists any item in cart
+			if ( $("#cart a").data('count') > 0 ) {
 
-	<% if current_user.is_my_shop?(@shop) %>
-		<%= link_to 'Crear un producto', new_product_path, role: 'button', class: 'navbar-fixed-bottom button button3 btn-block' %>
-	<% else %>
-		<script type="text/javascript">
-			document.addEventListener('turbolinks:before-visit', (event) => {
-				// exists any item in cart
-				if ( $("#cart a").data('count') > 0 ) {
+				let current = event.currentTarget.URL
+				let next = event.data.url
+				if (current != next) {
+					let $modal = $("#exit-shop-modal")
+					let $button = $modal.find("#exit-shop-button");
+					$modal.modal();
 
-					let current = event.currentTarget.URL
-					let next = event.data.url
-					if (current != next) {
-						let $modal = $("#exit-shop-modal")
-						let $button = $modal.find("#exit-shop-button");
-						$modal.modal();
-
-						$button.unbind().click(() => {
-							$.ajax({
-								type: "POST",
-								url: "<%= clear_cart_shop_path %>",
-								data: {"_method":"delete"},
-								complete: () => window.location.href = next
-							});
+					$button.unbind().click(() => {
+						$.ajax({
+							type: "POST",
+							url: "<%= clear_cart_shop_path %>",
+							data: {"_method":"delete"},
+							complete: () => window.location.href = next
 						});
+					});
 
-						event.preventDefault();
-					}
-
+					event.preventDefault();
 				}
-			});
-		</script>
 
-		<%= render partial: "/shops/modal_exit_shop" %>
-		<%= render partial: "/cart/modal_empty_cart" %>
-	<% end %>
+			}
+		});
+	</script>
 
+	<%= render partial: "/shops/modal_exit_shop" %>
+	<%= render partial: "/cart/modal_empty_cart" %>
 <% end %>

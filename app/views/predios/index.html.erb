@@ -1,31 +1,38 @@
-<p id="notice"><%= notice %></p>
-
-<h1>Listing Predios</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Address</th>
-      <th>Details</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @predios.each do |predio| %>
-      <tr>
-        <td><%= predio.name %></td>
-        <td><%= predio.address %></td>
-        <td><%= predio.details %></td>
-        <td><%= link_to 'Show', predio %></td>
-        <td><%= link_to 'Edit', edit_predio_path(predio) %></td>
-        <td><%= link_to 'Destroy', predio, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Predio', new_predio_path %>
+<div class="container" style="margin-top:25px">
+  <div class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+    <div class="panel panel-default">
+      <div class="row">
+        <div class="col-md-5">
+          <p class="title-edit">Predios</p>
+        </div>
+      </div>
+      <hr>
+      <div class="panel-body">
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th>Nome</th>
+              <th>Endereço</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @predios.each do |predio| %>
+              <tr>
+                <td><%= predio.name %></td>
+                <td><%= predio.address %></td>
+                <td>
+                  <%= link_to 'Show', predio, class: "btn btn-success btn-sm" %>
+                  <%= link_to 'Edit', edit_predio_path(predio), class: "btn btn-warning btn-sm" %>
+                  <%= link_to 'Destroy', predio, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger btn-sm" %>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+        <hr>
+          <%= link_to 'Novo predio', new_predio_path, class: "btn btn-success btn-sm" %>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,6 +1,6 @@
 class ProductsController < ApplicationController
   before_action :set_product, only: [:show, :edit, :update, :destroy]
-  
+
   def index
     redirect_to shops_path
     @q = Product.ransack(params[:q])
@@ -8,7 +8,7 @@ class ProductsController < ApplicationController
   end
 
   def show
-  
+
   end
 
 
@@ -26,7 +26,7 @@ class ProductsController < ApplicationController
     @product.user_id = current_user.id if current_user
     respond_to do |format|
       if @product.save
-        format.html { redirect_to @product, notice: 'Producto creado exitosamente.' }
+        format.html { redirect_to new_product_path, notice: 'Producto creado exitosamente.' }
         format.json { render :show, status: :created, location: @product }
       else
         format.html { render :new }
@@ -38,7 +38,7 @@ class ProductsController < ApplicationController
   def update
     respond_to do |format|
       if @product.update(product_params)
-        format.html { redirect_to @product, notice: 'Producto actualizado exitosamente.' }
+        format.html { redirect_to edit_product_path, notice: 'Producto actualizado exitosamente.' }
         format.json { render :show, status: :ok, location: @product }
       else
         format.html { render :edit }

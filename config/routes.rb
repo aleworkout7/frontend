@@ -57,7 +57,4 @@ Rails.application.routes.draw do
 			get :shops
 		end
 	end
-
-
-
 end

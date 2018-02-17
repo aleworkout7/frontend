@@ -63,13 +63,14 @@
 						</div>
 						<div class="col-md-6" style="padding:12px;">
 							<%= f.select :money_exchange, [
+								["-- selecione seu troco --", 0]
 								["R$ 100,00", 100],
 								["R$ 50,00", 50],
 								["R$ 20,00", 20],
 								["R$ 10,00", 10],
 								["R$ 5,00", 5],
 								["R$ 2,00", 2]
-							], { prompt: "-- selecione seu troco --" }, class: "form-control", placeholder: "Insira aqui observações sobre seu pedido para o vendedor..." %>
+							], { prompt: "-- selecione seu troco --" }, class: "form-control" %>
 						</div>
 						<div class="col-md-6" style="padding:12px;text-align: right;">
 							<strong>Total: <span id="cart-total-price"><%= calculate_total_cart @cart %></span></strong>

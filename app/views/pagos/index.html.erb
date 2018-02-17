@@ -24,7 +24,7 @@
 				<tr>
 					<th>Status:</th>
 					<td>
-						<% if is_free_subscription? %>
+						<% if is_free_subscription %>
 							Você está experimentando o teste gratis de PrediosApp. Pode cancelar quando quiser.
 						<% else %>
 							Pagamento ao dia.
@@ -32,7 +32,7 @@
 					</td>
 				</tr>
 
-				<% if is_free_subscription? %>
+				<% if is_free_subscription %>
 					<tr>
 						<th>Assinatura aprovada em:</th>
 						<td><%= format_datetime @subscription.created_at %></td>

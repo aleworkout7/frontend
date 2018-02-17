@@ -27,6 +27,10 @@ class PagosController < ApplicationController
 			}
 		});
 
+		puts "\n\npreapproval: "
+		puts @preapproval
+		puts "\n"
+
 		respond_to do |format|
 			if @preapproval['response'].present?
 				format.html { redirect_to @preapproval['response']['init_point'] }

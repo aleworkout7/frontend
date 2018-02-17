@@ -6,11 +6,11 @@ class StatusWorker
 		client = User.find(client_id)
 		seller = User.find(seller_id)
 
-		if order_status.status == EN_CURSO
+		if order_status.status == OrderStatus::EN_CURSO
 			# Client create an order
 			OrderStatusMailer.buy(order_status, client).deliver_later
 
-		elsif order_status.status == FINALIZADO
+		elsif order_status.status == OrderStatus::FINALIZADO
 			# Seller finish an order
 			OrderStatusMailer.delivered(order_status, seller).deliver_later
 

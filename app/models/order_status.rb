@@ -22,6 +22,7 @@ class OrderStatus < ActiveRecord::Base
 		order_status = self
 		order = order_status.order
 		client = order.user
+		seller = order.shop.user
 		
 		StatusWorker.perform_async(self, client, seller)
 

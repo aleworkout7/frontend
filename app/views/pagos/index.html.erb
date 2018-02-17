@@ -21,17 +21,19 @@
 			</tr>
 			<tr>
 				<th>Assinatura aprovada em:</th>
-				<td><%= @subscription.try(:created_at) %></td>
+				<td><%= format_datetime @subscription.try(:created_at) %></td>
 			</tr>
 			<tr>
 				<th>Valor:</th>
-				<td><%= format_currency 1000 %></td>
+				<td><%= format_currency 1 %></td>
 			</tr>
 			<tr>
 				<th>Primeira cobrança em:</th>
-				<td><%= @subscription.try(:due_date) %></td>
+				<td><%= format_date @subscription.try(:first_charge_at) %></td>
 			</tr>
 		</table>
+
+		<hr>
 
 		<%= link_to "Cancelar Assinatura", cancel_subscription_path, class: "btn btn-primary", "data-confirm": "Seguro desea cancelar el pedido" %>
 	<% end %>

@@ -12,9 +12,6 @@ class PaymentNotification < ActiveRecord::Base
 				alejandro.update_attributes(payment: self.total_paid_amount, payment_date: self.date_created, due_date: nil, message: nil, member_id: nil)
 			end
 	
-			user.had_subscription_before = true
-			user.save
-
 		else
 			user_id = self.external_reference.to_i
 			user = User.find(user_id)

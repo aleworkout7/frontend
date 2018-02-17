@@ -6,6 +6,7 @@
 	<div class="modal-body">
 		<%= form_for(OrderStatus.new, url: order_cancel_path, method: :post) do |f| %>
 			<%= f.hidden_field :order_id, value: @order.id %>
+			<%= hidden_field_tag :from_status, params[:status] %>
 
 			<%= f.text_area :observation, class: "form-control", placeholder: "Insira aqui observações sobre o porque quer cancelar seu pedido...", rows: 5 %>
 

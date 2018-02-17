@@ -23,7 +23,7 @@
 
 				<td>
 					<%= link_to 'Ver detalhes', show_to_shops_orders_path(status.try(:downcase), order), class: "btn btn-xs" %>
-					<%= link_to 'Cancelar pedido', order_canceling_path(order), class: "btn btn-primary btn-xs" %>
+					<%= link_to 'Cancelar pedido', order_canceling_path(order, status: OrderStatus::ACEPTADO), class: "btn btn-primary btn-xs" %>
 				</td>
 			</tr>
 		<% end %>

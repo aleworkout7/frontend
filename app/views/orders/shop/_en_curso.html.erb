@@ -18,10 +18,10 @@
 				<td><%= status %></td>
 				<td><%= format_datetime order.status.created_at %></td>
 				<td><%= format_currency order.total %></td>
-				
+
 				<td>
 					<%= link_to 'Ver detalhes', show_to_shops_orders_path(status.try(:downcase), order), class: "btn btn-xs" %>
-					<%= link_to 'Cancelar pedido', order_canceling_path(order), class: "btn btn-primary btn-xs" %>
+					<%= link_to 'Cancelar pedido', order_canceling_path(order, status: OrderStatus::EN_CURSO), class: "btn btn-primary btn-xs" %>
 				</td>
 			</tr>
 		<% end %>

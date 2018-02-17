@@ -1,5 +1,6 @@
 class ShopsController < ApplicationController
 	before_action :set_shop, only: [:show, :edit, :update, :destroy]
+	before_action :is_user_authorized?, only: [:new, :edit, :create, :update]
 	before_action :is_published?, only: [:show]
 	before_action :require_permission, only: :edit
 	before_action :require_permission_destroy, only: :destroy
@@ -80,6 +81,10 @@ class ShopsController < ApplicationController
 
 	def set_shop
 		@shop = Shop.find(params[:id])
+	end
+
+	def is_user_authorized?
+		return redirect_to pagos_path unless current_user.has_subscription?
 	end
 
 	def is_published?

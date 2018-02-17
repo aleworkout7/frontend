@@ -74,7 +74,7 @@
 				<div align="center" class="col-sm-12">
 					<%= link_to "Vaciar carro", clear_cart_shop_path(@shop), class: "btn btn-primary", "data-toggle": "modal", "data-target": "#vacia-modal" %>
 					<%= link_to "Continuar comprando", shop_path(@shop), class: "btn" %>
-					<% if current_user.address.blank? %>
+					<% if current_user.address.blank? || @shop.predio.id != current_user.address.predio.id %>
 						<%= submit_tag "Confirmar pedido", name: nil, class: "btn btn-success btn-cart-submit" %>
 					<% else %>
 						<%= submit_tag "Confirmar pedido", name: nil, class: "btn btn-success", disable_with: "Confirmando...", "data-confirm": "Seguro desea confimar el pedido" %>

@@ -3,8 +3,12 @@
 
 <%= form_for("", url: shops_path, method:'get', html: { role: 'form', id: "shops_index" } ) do |f| %>
 	<h1 align="center">Edificios con tiendas disponibles:</h1>
+
 	<div class="col-md-12 pure-css-select-style theme-default">
-		<%= select_tag(:predio_id, options_for_select( @predios.collect {|p| [p.name, p.id] }), { prompt: 'Elige un edificio', class: 'edificios'})%>
+		<%= f.select :predio_id, @predios.collect {|p| [p.name, p.id] }, { prompt: 'Elige un edificio' }, class: 'edificios' %>
+	</div>
+	<div class="col-md-12" align="center" style="padding: 10px;">
+		<%= f.submit "Entrar", class: "btn btn-success btn-edificios" %>
 	</div>
 <% end %>
 
@@ -65,13 +69,24 @@
 </style>
 
 <script type="text/javascript">
-$('.edificios').change((event) => {
-	let predio = event.target.value;
+
+const redirectToShop = (predio) => {
 	if (predio != "") {
 		let url = "<%= predio_shops_path(id: 1) %>";
 		url = url.replace("/1/shops", `/${predio}/shops`);
 
 		window.location.href = url;
 	}
+};
+
+$(".btn-edificios").click(function(e) {
+	e.preventDefault();
+	redirectToShop( $('.edificios').val() );
 });
+
+$('.edificios').change((event) => {
+	redirectToShop(event.target.value);
+});
+
+
 </script>

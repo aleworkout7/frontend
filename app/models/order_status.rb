@@ -19,7 +19,8 @@ class OrderStatus < ActiveRecord::Base
     end
 
 	def notify_users
-		order = self.order
+		order_status = self
+		order = order_status.order
 		client = order.user
 		seller = order.shop.user
 

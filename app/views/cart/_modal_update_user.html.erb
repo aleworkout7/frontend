@@ -1,0 +1,20 @@
+<div class="modal fade in" id="update-user-modal" tabindex="-1" role="dialog" aria-labelledby="update-user-modal-label" aria-hidden="false" data-backdrop="static">
+	<div class="modal-dialog" style="display: flex;justify-content: center;flex-wrap: wrap;">
+		<div class="modal-content" data-border-top="multi">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+				<h4 class="modal-title" id="small-modal-label">Mensaje de Avertencia</h4>
+			</div>
+
+			<div class="modal-body">
+				<%= render partial: "/users/registrations/edit", locals: { resource: current_user, resource_name: :user }  %>
+			</div>
+
+			<div class="modal-footer">
+				<div class="actions">
+					<a href="#" data-dismiss="modal" class="btn btn-default"><span style="color:#000">Cancelar</span></a>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

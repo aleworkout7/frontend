@@ -11,6 +11,9 @@ class PagosController < ApplicationController
 	end
 
 	def do_subscription
+		if current_user.has_subscription?
+			return redirect_to pagos_path
+		end
 
 		data = {
 			payer_email: current_user.email,
@@ -36,7 +39,7 @@ class PagosController < ApplicationController
 		puts "\n"
 
 		respond_to do |format|
-			if @preapproval['response'].present?
+			if @preapproval['response'].present? && @preapproval['response']['init_point'].present?
 				format.html { redirect_to @preapproval['response']['init_point'] }
 			else
 				format.html { redirect_to pagos_path, notice: 'Não foi possível gerar sua assinatura. Tente novamente por favor.' }

@@ -1,0 +1,84 @@
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, id: "update-user-form" }) do |f| %>
+<%= hidden_field_tag :cart, params[:cart] %>
+
+<div class="container" style="margin-top:50px">
+	<div class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h3 class="panel-title"><strong>Editar cuenta </strong></h3>
+			</div>
+			<div class="panel-body">
+				<div class="form-group">
+					<%= f.label "Nombre" %><br />
+					<%= f.text_field :name, autofocus: true, class:"form-control", placeholder:"Ingrese nombre" %>
+				</div>
+				<div class="form-group">
+					<%= f.label "Email" %><br />
+					<%= f.email_field :email, class:"form-control", placeholder:"Ingrese email" %>
+				</div>
+				<div class="form-group">
+					<%= f.label "Telefono" %><br />
+					<%= f.text_field :phone, class:"form-control phone", placeholder:"Ingrese telefono" %>
+				</div>
+
+				<%= fields_for :addresses, f.object.address do |ff| %>
+					<hr>
+
+					<div class="form-group">
+						<%= ff.label "Predio" %><br />
+						<%= ff.select :predio_id, Predio.all.collect { |p| [ p.name, p.id ] }, { prompt: "Elige un predio" }, { class: "predio-select form-control", data: { predio: session[:predio_id] }} %>
+						<span style="display:none;color: red;" id="predio-msg">O prédio deve ser o mesmo prédio da loja que está sendo feito o pedido (<%= session[:predio_name] %>)</span>
+					</div>
+					<div class="form-group">
+						<%= ff.label "Numero apartamento" %><br />
+						<%= ff.text_field :number, class:"form-control", placeholder:"Ingrese numero apartamento" %>
+					</div>
+					<div class="form-group">
+						<%= ff.label "Bloco" %><br />
+						<%= ff.text_field :block, class:"form-control", placeholder:"Ingrese bloco" %>
+					</div>
+					<div class="form-group">
+						<%= ff.label "Numero de piso" %><br />
+						<%= ff.number_field :floor, class:"form-control", placeholder:"Ingrese numero piso" %>
+					</div>
+					<div class="form-group">
+						<%= ff.label "Complement" %><br />
+						<%= ff.text_field :complement, class:"form-control", placeholder:"Ingrese complement" %>
+					</div>
+				<% end %>
+
+				<hr>
+
+				<div class="form-group">
+					<%= f.label "Contraseña" %>
+					<% if @minimum_password_length %>
+						<em>(<%= @minimum_password_length %> caracteres mínimos)</em>
+					<% end %><br />
+					<%= f.password_field :password, autocomplete: "off", class:"form-control", placeholder:"Ingrese contraseña" %>
+				</div>
+				<div class="form-group">
+					<%= f.label "Confirmar Contraseña" %><br/>
+					<%= f.password_field :password_confirmation, autocomplete: "off", class:"form-control", placeholder:"Ingrese confirmación de contraseña" %>
+				</div>
+
+				<hr>
+
+				<div class="form-group">
+					<%= f.label "Contraseña Actual *" %>
+					<br/><small><i>(Necesitamos su contraseña actual para confirmar sus cambios)</i></small><br />
+					<%= f.password_field :current_password, autocomplete: "off", class: "form-control", placeholder: "Ingrese contraseña actual", required: true %>
+				</div>
+
+				<hr>
+
+				<div class="row actions">
+					<div class="col-md-6">
+						<%= f.submit "Editar cuenta", class:"btn btn-sm btn-primary user-submit" %>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<% end %>

@@ -52,14 +52,14 @@ class OrderStatusController < ApplicationController
 				path = decide_what_path(order, OrderStatus::FINALIZADO)
 				format.html { redirect_to path, notice: "Pedido foi finalizado pelo Lojista." }
 
-			elsif order.is_accepted?
-				path = decide_what_path(order, OrderStatus::ACEPTADO)
-				format.html { redirect_to path, notice: "Pedido foi aceitado pelo Lojista." }
-
 			elsif order.is_canceled?
 				path = decide_what_path(order)
 				format.html { redirect_to path, notice: "Pedido foi cancelado pelo #{order_status.order.canceled_by}." }
 
+			elsif order.is_accepted?
+				path = decide_what_path(order, OrderStatus::ACEPTADO)
+				format.html { redirect_to path, notice: "Pedido foi aceitado pelo Lojista." }
+				
 			else
 				if order_status.save
 					path = decide_what_path(order)

@@ -1,5 +1,10 @@
 let requests = [];
 
+$(".btn-cart-submit").click((e) => {
+	e.preventDefault();
+	$("#update-user-modal").modal();
+});
+
 $('.btn-number').click(function(e){
 	e.preventDefault();
 

@@ -1,7 +1,10 @@
 class StatusWorker
 	include Sidekiq::Worker
 
-	def perform(order_status, client, seller)
+	def perform(order_status_id, client_id, seller_id)
+		order_status = OrderStatus.find(order_status_id)
+		client = User.find(client_id)
+		seller = User.find(seller_id)
 
 		if order_status.status == EN_CURSO
 			# Client create an order

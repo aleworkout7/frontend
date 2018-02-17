@@ -19,12 +19,11 @@ class OrderStatus < ActiveRecord::Base
     end
 
 	def notify_users
-		order_status = self
-		order = order_status.order
-		client = order.user
-		seller = order.shop.user
-		
-		StatusWorker.perform_async(self, client, seller)
+		order = self.order
+		client_id = order.user_id
+		seller_id = order.shop.user_id
+
+		StatusWorker.perform_async(self.id, client_id, seller_id)
 
 		return true
 	end

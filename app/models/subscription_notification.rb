@@ -17,7 +17,7 @@ class SubscriptionNotification < ActiveRecord::Base
 				moment = Time.now + 15.days
 			end
 
-			SubscriptionWorker.perform_at(moment - 3.days, user)
+			SubscriptionWorker.perform_at(moment - 3.days, user.id)
 
 		elsif self.status == "cancelled"
 			user_id = self.external_reference.to_i

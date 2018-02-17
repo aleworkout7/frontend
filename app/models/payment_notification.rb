@@ -13,7 +13,7 @@ class PaymentNotification < ActiveRecord::Base
 			end
 
 			moment = Time.now + 1.month - 3.days
-			SubscriptionWorker.perform_at(moment, user)
+			SubscriptionWorker.perform_at(moment, user.id)
 
 		else
 			user_id = self.external_reference.to_i

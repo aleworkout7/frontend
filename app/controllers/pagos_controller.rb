@@ -15,6 +15,7 @@ class PagosController < ApplicationController
 			return redirect_to pagos_path
 		end
 
+		@price = 1
 		data = {
 			payer_email: current_user.email,
 			back_url: "https://secure-shore-15467.herokuapp.com/pagos",
@@ -23,7 +24,7 @@ class PagosController < ApplicationController
 			auto_recurring: {
 				frequency: 1,
 				frequency_type: "months",
-				transaction_amount: 1,
+				transaction_amount: @price,
 				currency_id: "BRL"
 			}
 		}

@@ -9,19 +9,20 @@
 
 <% if user_signed_in? %>
 
-	<% if @preapproval.present? %>
-		<%= link_to "Assinar", @preapproval['response']['init_point'], name: "MP-Checkout", class: "blue-rn-m" %>
-		<script type="text/javascript" src="https://www.mercadopago.com/org-img/jsapi/mptools/buttons/render.js"></script>
+	<% unless @subscription.present? %>
+
+		<%= link_to "Assinar", do_subscription_path, class: "btn btn-success" %>
+
 	<% else %>
 
 		<table class="table table-hover">
 			<tr>
 				<th>Status:</th>
-				<td><%= @subscription.try(:status) %></td>
+				<td><%= @subscription.status %></td>
 			</tr>
 			<tr>
 				<th>Assinatura aprovada em:</th>
-				<td><%= format_datetime @subscription.try(:created_at) %></td>
+				<td><%= format_datetime @subscription.created_at %></td>
 			</tr>
 			<tr>
 				<th>Valor:</th>
@@ -29,7 +30,7 @@
 			</tr>
 			<tr>
 				<th>Primeira cobrança em:</th>
-				<td><%= format_date @subscription.try(:first_charge_at) %></td>
+				<td><%= format_date @subscription.first_charge_at %></td>
 			</tr>
 		</table>
 

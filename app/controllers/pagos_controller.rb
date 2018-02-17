@@ -5,28 +5,34 @@ class PagosController < ApplicationController
 	# GET /pagos
 	# GET /pagos.json
 	def index
-		if user_signed_in?
+		if current_user.try(:has_subscription?)
+			@subscription = SubscriptionNotification.where(external_reference: current_user.id).last
+		end
+	end
 
-			unless current_user.has_subscription?
-				start_date = current_user.start_date_for_subscription
+	def do_subscription
+		start_date = current_user.start_date_for_subscription
 
-				@preapproval = MercadoPagoClient.create_preapproval_payment({
-					payer_email: current_user.email,
-					back_url: "https://secure-shore-15467.herokuapp.com/",
-					reason: "Assinatura mensal para ter lojas no PrediosApp",
-					external_reference: current_user.id,
-					auto_recurring: {
-						frequency: 1,
-						frequency_type: "months",
-						transaction_amount: 1,
-						currency_id: "BRL",
-						start_date: start_date
-					}
-				});
+		@preapproval = MercadoPagoClient.create_preapproval_payment({
+			payer_email: current_user.email,
+			back_url: "https://secure-shore-15467.herokuapp.com/pagos",
+			reason: "Assinatura mensal para ter lojas no PrediosApp",
+			external_reference: current_user.id,
+			auto_recurring: {
+				frequency: 1,
+				frequency_type: "months",
+				transaction_amount: 1,
+				currency_id: "BRL",
+				start_date: start_date
+			}
+		});
+
+		respond_to do |format|
+			if @preapproval['response'].present?
+				format.html { redirect_to @preapproval['response']['init_point'] }
 			else
-				@subscription = SubscriptionNotification.where(external_reference: current_user.id).last
+				format.html { redirect_to pagos_path, notice: 'Não foi possível gerar sua assinatura. Tente novamente por favor.' }
 			end
-
 		end
 	end
 

@@ -12,6 +12,13 @@ class SubscriptionNotification < ActiveRecord::Base
 				alejandro.update_attributes(payment_date: self.date_created)
 			end
 
+			moment = Time.now + 1.month
+			unless user.had_subscription_before?
+				moment = Time.now + 15.days
+			end
+
+			SubscriptionWorker.perform_at(moment - 3.days, user)
+
 		elsif self.status == "cancelled"
 			user_id = self.external_reference.to_i
 			user = User.find(user_id)

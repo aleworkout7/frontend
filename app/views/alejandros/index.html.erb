@@ -9,7 +9,7 @@
 	<p>Fecha activación: <b><%= alejandro.payment_date %></b></p>
 	<p>Fecha vencimiento: <b><%= alejandro.due_date %></b></p>
 	<p>Nota acerca del usuario: <b><%= alejandro.message %></b></p>
-	<p>Membresia: <b><%= alejandro.member.name %></b></p>
+	<p>Membresia: <b><%= alejandro.member.try(:name) %></b></p>
 	<p>Pago: <b><%= alejandro.payment %></b></p>
 
 	<p>

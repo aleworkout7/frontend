@@ -11,4 +11,4 @@
 	<div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
 <% end %>
 
-<%= render partial: "/users/registrations/edit" %>
+<%= render partial: "/users/registrations/edit", locals: { cart: params[:cart], predio: nil } %>

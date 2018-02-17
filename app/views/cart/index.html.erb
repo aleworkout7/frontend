@@ -86,4 +86,4 @@
 <% end %>
 
 <%= render partial: "modal_clear_cart" %>
-<%= render partial: "modal_update_user" %>
+<%= render partial: "modal_update_user", locals: { cart: @shop.id, predio: @shop.predio } %>

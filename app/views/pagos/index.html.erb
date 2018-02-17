@@ -18,7 +18,7 @@
 		<% if @subscription.present? %>
 
 			<!-- Tem assinatura agora, mas nunca teve antes && primeira cobrança ainda vai chegar -->
-			<% is_free_subscription = current_user.had_subscription_before? && @subscription.first_charge_at > Time.now %>
+			<% is_free_subscription = !current_user.had_subscription_before? && @subscription.first_charge_at > Time.now %>
 
 			<table class="table table-hover">
 				<tr>

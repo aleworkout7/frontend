@@ -11,9 +11,8 @@ class PagosController < ApplicationController
 	end
 
 	def do_subscription
-		start_date = current_user.start_date_for_subscription
 
-		@preapproval = MercadoPagoClient.create_preapproval_payment({
+		data = {
 			payer_email: current_user.email,
 			back_url: "https://secure-shore-15467.herokuapp.com/pagos",
 			reason: "Assinatura mensal para ter lojas no PrediosApp",
@@ -22,10 +21,15 @@ class PagosController < ApplicationController
 				frequency: 1,
 				frequency_type: "months",
 				transaction_amount: 1,
-				currency_id: "BRL",
-				start_date: start_date
+				currency_id: "BRL"
 			}
-		});
+		}
+
+		unless current_user.had_subscription_before?
+			 data[:auto_recurring][:start_date] = Time.now + 15.days
+		end
+
+		@preapproval = MercadoPagoClient.create_preapproval_payment(data);
 
 		puts "\n\npreapproval: "
 		puts @preapproval

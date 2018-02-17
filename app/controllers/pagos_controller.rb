@@ -23,8 +23,10 @@ class PagosController < ApplicationController
 						start_date: start_date
 					}
 				});
+			else
+				@subscription = SubscriptionNotification.where(external_reference: current_user.id).last
 			end
-			
+
 		end
 	end
 

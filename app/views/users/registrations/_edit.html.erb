@@ -9,16 +9,16 @@
 			</div>
 			<div class="panel-body">
 				<div class="form-group">
-					<%= f.label "Nombre" %><br />
-					<%= f.text_field :name, autofocus: true, class:"form-control", placeholder:"Ingrese nombre" %>
+					<%= f.label "Nombre *" %><br />
+					<%= f.text_field :name, autofocus: true, class:"form-control", placeholder:"Ingrese nombre", required: true %>
 				</div>
 				<div class="form-group">
-					<%= f.label "Email" %><br />
-					<%= f.email_field :email, class:"form-control", placeholder:"Ingrese email" %>
+					<%= f.label "Email *" %><br />
+					<%= f.email_field :email, class:"form-control", placeholder:"Ingrese email", required: true %>
 				</div>
 				<div class="form-group">
-					<%= f.label "Telefono" %><br />
-					<%= f.text_field :phone, class:"form-control phone", placeholder:"Ingrese telefono" %>
+					<%= f.label "Telefono *" %><br />
+					<%= f.text_field :phone, class:"form-control phone", placeholder:"Ingrese telefono", required: true %>
 				</div>
 
 				<%= fields_for :addresses, f.object.address do |ff| %>

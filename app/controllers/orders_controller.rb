@@ -88,6 +88,6 @@ class OrdersController < ApplicationController
 	end
 
 	def order_params
-		params.require(:order).permit(:shop_id, :observation, order_items_attributes: [ :product_id, :value, :amount ])
+		params.require(:order).permit(:shop_id, :observation, :money_exchange, order_items_attributes: [ :product_id, :value, :amount ])
 	end
 end

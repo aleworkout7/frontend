@@ -86,7 +86,7 @@
 <script type="text/javascript">
 $(".predio-select").change(function(){
 	let must_be_predio_id = $(this).data("predio");
-	if (must_be_predio_id == "") {
+	if (must_be_predio_id == "" || must_be_predio_id == null || must_be_predio_id == undefined) {
 		return true;
 	}
 

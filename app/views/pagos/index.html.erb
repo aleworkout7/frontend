@@ -32,12 +32,12 @@
 					</td>
 				</tr>
 
-				<% if is_free_subscription %>
-					<tr>
-						<th>Assinatura aprovada em:</th>
-						<td><%= format_datetime @subscription.created_at %></td>
-					</tr>
-				<% else %>
+				<tr>
+					<th>Assinatura aprovada em:</th>
+					<td><%= format_datetime @subscription.created_at %></td>
+				</tr>
+
+				<% unless is_free_subscription %>
 					<tr>
 						<th>Próxima cobrança em:</th>
 						<td><%= format_date @subscription.first_charge_at %></td>

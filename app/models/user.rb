@@ -26,7 +26,7 @@ class User < ActiveRecord::Base
 			start_date += 15.days
 		end
 
-		start_date
+		start_date.strftime("%Y-%m-%d")
 	end
 
 end

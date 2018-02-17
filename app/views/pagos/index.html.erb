@@ -9,26 +9,51 @@
 
 <% if user_signed_in? %>
 
-	<% if @subscription.blank? %>
+	<% unless current_user.has_subscription? %>
 
 		<%= link_to "Assinar", do_subscription_path, class: "btn btn-success" %>
 
 	<% else %>
 
-		<table class="table table-hover">
-			<tr>
-				<th>Status:</th>
-				<td><%= @subscription.status %></td>
-			</tr>
-			<tr>
-				<th>Assinatura aprovada em:</th>
-				<td><%= format_datetime @subscription.created_at %></td>
-			</tr>
-			<tr>
-				<th>Primeira cobrança em:</th>
-				<td><%= format_date @subscription.first_charge_at %></td>
-			</tr>
-		</table>
+		<% if @subscription.present? %>
+
+			<!-- Tem assinatura agora, mas nunca teve antes && primeira cobrança ainda vai chegar -->
+			<% is_free_subscription = current_user.had_subscription_before? && @subscription.first_charge_at > Time.now %>
+
+			<table class="table table-hover">
+				<tr>
+					<th>Status:</th>
+					<td>
+						<% if is_free_subscription? %>
+							Você está experimentando o teste gratis de PrediosApp. Pode cancelar quando quiser.
+						<% else %>
+							Pagamento ao dia.
+						<% end %>
+					</td>
+				</tr>
+
+				<% if is_free_subscription? %>
+					<tr>
+						<th>Assinatura aprovada em:</th>
+						<td><%= format_datetime @subscription.created_at %></td>
+					</tr>
+				<% end %>
+
+				<tr>
+					<th>Primeira cobrança em:</th>
+					<td><%= format_date @subscription.first_charge_at %></td>
+				</tr>
+			</table>
+
+		<% else %>
+
+			<table class="table table-hover">
+				<tr>
+					<th>Você possui uma assinatura em PrediosApp</th>
+				</tr>
+			</table>
+
+		<% end %>
 
 		<hr>
 

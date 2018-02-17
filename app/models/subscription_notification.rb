@@ -32,11 +32,11 @@ class SubscriptionNotification < ActiveRecord::Base
 	end
 
 	def first_charge_at
-		date_at = self.date_created
+		date_at = self.date_created + 30.days
 		user = User.find(self.external_reference)
 		if user.present?
 			unless user.had_subscription_before?
-				date_at += 15.days
+				date_at -= 15.days
 			end
 		end
 

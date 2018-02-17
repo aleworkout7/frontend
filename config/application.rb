@@ -8,8 +8,6 @@ Bundler.require(*Rails.groups)
 
 module Workspace
 	class Application < Rails::Application
-		# heroku config:set REDIS_PROVIDER=REDISTOGO_URL
-		
 		# Settings in config/environments/* take precedence over those specified here.
 		# Application configuration should go into files in config/initializers
 		# -- all .rb files in that directory are automatically loaded.
@@ -37,8 +35,8 @@ module Workspace
 			address:              'smtp.gmail.com',
 			port:                 587,
 			domain:               'gmail.com',
-			user_name:            'prediosaplicativo@gmail.com',
-			password:             'tudoeatitude;:6970',
+			user_name:            ENV['SMTP_EMAIL'],
+			password:             ENV['SMTP_PASSWORD'],
 			authentication:       'plain',
 			enable_starttls_auto: true
 		}

@@ -3,14 +3,25 @@
 
 <div class="row">
 	<div class="col-md-12">
-
-		<% if @shops.blank? %>
-		<p>Você não possui nenhuma loja.</p>
 		<hr>
+
+		<% if params[:predio_id].present? %>
+			<%= link_to "Volver", predio_shops_path(params[:predio_id]), role: 'button', class: 'btn btn-primary btn-xs' %>
+		<% else %>
+			<%= link_to "Volver", root_path, role: 'button', class: 'btn btn-primary btn-xs' %>
 		<% end %>
 
-		<%= link_to "Volver", root_path, role: 'button', class: 'btn btn-primary btn-xs' %>
+		<hr>
 	</div>
 </div>
 
-<%= render partial: "/shops/stores" %>
+<div class="row">
+
+	<% if @shops.blank? %>
+		<br/>
+		<p>Você não possui nenhuma loja.</p>
+		<br/>
+	<% end %>
+
+	<%= render partial: "/shops/stores" %>
+</div>

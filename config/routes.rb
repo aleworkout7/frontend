@@ -49,7 +49,7 @@ Rails.application.routes.draw do
 	post 'mp/notifications' => "pagos#mp_notification", :as => :mp_notifications
 	get 'do_subscription' => "pagos#do_subscription", :as => :do_subscription
 	get 'cancel_subscription' => "pagos#cancel_subscription", :as => :cancel_subscription
-	get 'users/:id/shops' => 'users#shops', :as => :user_shops
+	get 'users/:id/shops(/:predio_id)' => 'users#shops', :as => :user_shops
 	get 'predio/:id/shops' => 'shops#predio', :as => :predio_shops
 
 	resources :users do

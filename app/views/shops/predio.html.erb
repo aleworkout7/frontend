@@ -7,7 +7,7 @@
 	<div class="col-md-12">
 		<%= link_to "Volver", root_path, role: 'button', class: 'btn btn-primary btn-xs' %>
 		<% if user_signed_in? %>
-			<%= link_to "Mis Tiendas", user_shops_path(current_user), role: 'button', class: 'btn btn-success btn-xs' %>
+			<%= link_to "Mis Tiendas", user_shops_path(current_user, @predio), role: 'button', class: 'btn btn-success btn-xs' %>
 		<% end %>
 	</div>
 </div>

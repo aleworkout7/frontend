@@ -28,6 +28,7 @@
 				</h1>
 			</div>
 		</div>
+
 		<div class="col-md-12">
 			<%= form_tag(shop_path(@shop), method: "get") do %>
 				<div class="col-md-10">
@@ -41,9 +42,21 @@
 	</div>
 </div>
 
-<% if user_signed_in? && current_user.is_my_shop?(@shop) %>
-	<%= link_to 'Editar Tienda', edit_shop_path(@shop), role: 'button', class: 'btn btn-success btn-sm' %>
-<% end %>
+<div class="row">
+	<div class="col-md-12">
+		<hr>
+
+		<%= link_to "Volver", predio_shops_path(@shop.predio), role: 'button', class: 'btn btn-primary btn-xs' %>
+		<% if user_signed_in? %>
+			<% if current_user.is_my_shop?(@shop) %>
+				<%= link_to 'Editar Tienda', edit_shop_path(@shop), role: 'button', class: 'btn btn-success btn-sm' %>
+			<% end %>
+			<%= link_to "Mis Tiendas", user_shops_path(current_user), role: 'button', class: 'btn btn-success btn-xs' %>
+		<% end %>
+
+		<hr>
+	</div>
+</div>
 
 <div class="container wrapper">
 	<div class="col-md-12 row">

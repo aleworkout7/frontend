@@ -70,7 +70,7 @@
 								["R$ 10,00", 10],
 								["R$ 5,00", 5],
 								["R$ 2,00", 2]
-							], { prompt: "-- selecione seu troco --" }, class: "form-control" %>
+							], {}, class: "form-control" %>
 						</div>
 						<div class="col-md-6" style="padding:12px;text-align: right;">
 							<strong>Total: <span id="cart-total-price"><%= calculate_total_cart @cart %></span></strong>
@@ -85,7 +85,7 @@
 				<div align="center" class="col-sm-12">
 					<%= link_to "Vaciar carro", clear_cart_shop_path(@shop), class: "btn btn-primary", "data-toggle": "modal", "data-target": "#vacia-modal" %>
 					<%= link_to "Continuar comprando", shop_path(@shop), class: "btn" %>
-					<% if current_user.address.blank? || @shop.predio.id != current_user.address.predio.id %>
+					<% if current_user.address.blank? || @shop.predio.id != current_user.address.try(:predio).try(:id) %>
 						<%= submit_tag "Confirmar pedido", name: nil, class: "btn btn-success btn-cart-submit" %>
 					<% else %>
 						<%= submit_tag "Confirmar pedido", name: nil, class: "btn btn-success", disable_with: "Confirmando...", "data-confirm": "Seguro desea confimar el pedido" %>
@@ -97,4 +97,10 @@
 <% end %>
 
 <%= render partial: "modal_clear_cart" %>
-<%= render partial: "modal_update_user", locals: { cart: @shop.id, predio: @shop.predio } %>
+<%
+	modal_title = "Necessita cambiar predio"
+	if current_user.address.blank?
+		modal_title = "Necessita preencher seus dados"
+	end
+%>
+<%= render partial: "modal_update_user", locals: { cart: @shop.id, predio: @shop.predio, title: modal_title } %>

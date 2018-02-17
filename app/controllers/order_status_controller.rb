@@ -51,7 +51,20 @@ class OrderStatusController < ApplicationController
 
 			if params[:from_status] != order.status.status
 				path = decide_what_path(order, params[:from_status])
-				format.html { redirect_to path, notice: "O status do pedido foi alterado antes de cancelar." }
+				msg = "O status do pedido foi alterado antes de cancelar."
+
+				if order.is_client? current_user
+					if order.status.status == OrderStatus::FINALIZADO
+						msg = "O pedido ja foi entregue pelo vendedor"
+					elsif order.status.status == OrderStatus::CANCELADO
+						msg = "O pedido foi cancelado pelo vendedor"
+					else
+						msg = "O pedido ja foi aceitado pelo vendedor"
+					end
+				end
+
+				format.html { redirect_to path, notice: msg }
+
 			else
 				if order_status.save
 					path = decide_what_path(order)

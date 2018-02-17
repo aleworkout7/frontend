@@ -2,7 +2,7 @@ class OrderStatus < ActiveRecord::Base
 	belongs_to :order
 	belongs_to :user
 
-	after_save :notify_users
+	# after_save :notify_users
 
 	EN_CURSO = 'EN_CURSO'
 	ACEPTADO = 'ACEPTADO'

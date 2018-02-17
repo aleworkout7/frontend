@@ -21,6 +21,6 @@
 	</div>
 
 	<div class="modal-footer">
-		<%= link_to 'Voltar', to_shops_orders_path, class: "btn btn-success" %>
+		<%= link_to 'Voltar', to_shops_orders_path(@order.status.status.downcase), class: "btn btn-success" %>
 	</div>
 </div>

@@ -1,41 +1,44 @@
+<hr>
 <%= form_for(@alejandro) do |f| %>
-<% if @alejandro.errors.any? %>
-<div id="error_explanation">
-	<h2><%= pluralize(@alejandro.errors.count, "error") %> prohibited this alejandro from being saved:</h2>
+	<% if @alejandro.errors.any? %>
+		<div id="error_explanation">
+			<h2><%= pluralize(@alejandro.errors.count, "error") %> prohibited this alejandro from being saved:</h2>
 
-	<ul>
-		<% @alejandro.errors.full_messages.each do |message| %>
-		<li><%= message %></li>
-		<% end %>
-	</ul>
-</div>
+			<ul>
+				<% @alejandro.errors.full_messages.each do |message| %>
+					<li><%= message %></li>
+				<% end %>
+			</ul>
+		</div>
+	<% end %>
+
+	<div class="form-group">
+		<%= f.label 'Email único *' %><br>
+		<%= f.text_field :email, class:"form-control black-border", required: true %>
+	</div>
+	<div class="form-group">
+		<%= f.label 'Pago' %><br>
+		<%= f.number_field :payment, class:"form-control black-border" %>
+	</div>
+	<div class="form-group">
+		<%= f.label 'Fecha activación (determinada por alejandro)' %><br>
+		<%= f.date_select :payment_date, class:"form-control black-border" %>
+	</div>
+	<div class="form-group">
+		<%= f.label 'Fecha vencimiento' %><br>
+		<%= f.date_select :due_date, class:"form-control black-border" %>
+	</div>
+	<div class="form-group">
+		<%= f.label 'Mensaje (uso interno)' %><br>
+		<%= f.text_area :message, class:"form-control black-border" %>
+	</div>
+	<div class="form-group">
+		<%= f.label 'Membresia' %><br>
+		<%= f.collection_select :member_id, @members, :id, :name %>
+	</div>
+	<div class="actions">
+		<%= f.submit "Listo", class:"btn btn-sm btn-primary btn-black", style:'text-align: center' %>
+	</div>
 <% end %>
 
-<div class="field">
-	<%= f.label 'Email único' %><br>
-	<%= f.text_field :email %>
-</div>
-<div class="field">
-	<%= f.label 'Pago' %><br>
-	<%= f.number_field :payment %>
-</div>
-<div class="field">
-	<%= f.label 'Fecha activación (determinada por alejandro)' %><br>
-	<%= f.date_select :payment_date %>
-</div>
-<div class="field">
-	<%= f.label 'Fecha vencimiento' %><br>
-	<%= f.date_select :due_date %>
-</div>
-<div class="field">
-	<%= f.label 'Mensaje (uso interno)' %><br>
-	<%= f.text_area :message %>
-</div>
-<div class="field">
-	<%= f.label 'Membresia' %><br>
-	<%= f.collection_select :member_id, @members, :id, :name %>
-</div>
-<div class="actions">
-	<%= f.submit "Listo", class: 'button button3 btn-block', role: 'button' %>
-</div>
-<% end %>
+<br/>

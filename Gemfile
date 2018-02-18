@@ -34,6 +34,7 @@ group :development do
 	gem 'web-console', '~> 2.0'
 	gem 'spring'
 	gem 'sqlite3'
+	gem 'rails-erd', require: false
 	#Capistrano
 	gem 'capistrano', '3.6.1'
 	gem 'capistrano-figaro-yml', '~> 1.0.2'

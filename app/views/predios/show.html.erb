@@ -26,7 +26,7 @@
 				</div>
 				<div class="form-group">
 					<%= label_tag 'Conjunto' %><br>
-					<%= text_field_tag @predio.housing_set.name, @predio.housing_set.name,  class:"form-control black-border", placeholder:"Conjunto" %>
+					<%= text_field_tag @predio.housing_set.try(:name), @predio.housing_set.try(:name),  class:"form-control black-border", placeholder:"Conjunto" %>
 				</div>
 				<div class="form-group">
 					<%= label_tag 'Predio destaque?' %><br>

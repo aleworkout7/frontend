@@ -10,6 +10,7 @@
 				<div>
 					<div class="table table-striped table-hover">
 						<%= f.hidden_field :shop_id, value: @shop.id %>
+						<%= f.hidden_field :predio_id, value: @predio.id, id: "order_predio_id" %>
 
 						<% @cart.each_with_index do |item, index| %>
 						<% product = item[:product] %>

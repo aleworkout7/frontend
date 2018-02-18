@@ -4,7 +4,9 @@
 			<span><%= format_currency product.price %></span>
 		</div>
 
-		<%= image_tag(product.image_url, class: "img-responsive aspect", style:"padding-top: 35px;") %>
+		<%= link_to add_to_cart_predio_shop_path(@predio, @shop, product), data: { turbolinks: false } do %>
+			<%= image_tag(product.image_url, class: "img-responsive aspect", style:"padding-top: 35px;") %>
+		<% end %>
 
 		<div class="caption" style="text-align: center;">
 			<h3><%= product.name.truncate(17) %></h3>

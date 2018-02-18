@@ -94,8 +94,9 @@ function makeRequest(product_id, value) {
 		req.abort();
 	}
 
+	let predio_id = $("#order_predio_id").val();
 	let shop_id = $("#order_shop_id").val();
-	let request = $.get(`/shops/${shop_id}/cart/update_amount/${product_id}?amount=${value}`);
+	let request = $.get(`/predios/${predio_id}/shops/${shop_id}/cart/update_amount/${product_id}?amount=${value}`);
 
 	requests.push(request);
 }

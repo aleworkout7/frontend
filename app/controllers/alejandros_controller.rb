@@ -31,7 +31,7 @@ class AlejandrosController < ApplicationController
 
 		respond_to do |format|
 			if @alejandro.save
-				format.html { redirect_to @alejandro, notice: 'Alejandro was successfully created.' }
+				format.html { redirect_to alejandros_path, notice: 'Alejandro was successfully created.' }
 				format.json { render :show, status: :created, location: @alejandro }
 			else
 				format.html { render :new }
@@ -45,7 +45,7 @@ class AlejandrosController < ApplicationController
 	def update
 		respond_to do |format|
 			if @alejandro.update(alejandro_params)
-				format.html { redirect_to @alejandro, notice: 'Alejandro was successfully updated.' }
+				format.html { redirect_to alejandros_path, notice: 'Alejandro was successfully updated.' }
 				format.json { render :show, status: :ok, location: @alejandro }
 			else
 				format.html { render :edit }

@@ -4,8 +4,12 @@
 			<span><%= format_currency product.price %></span>
 		</div>
 
-		<%= link_to add_to_cart_predio_shop_path(@predio, @shop, product), data: { turbolinks: false } do %>
+		<% if current_user.try(:is_my_shop?, @shop) %>
 			<%= image_tag(product.image_url, class: "img-responsive aspect", style:"padding-top: 35px;") %>
+		<% else %>
+			<%= link_to add_to_cart_predio_shop_path(@predio, @shop, product), data: { turbolinks: false } do %>
+				<%= image_tag(product.image_url, class: "img-responsive aspect", style:"padding-top: 35px;") %>
+			<% end %>
 		<% end %>
 
 		<div class="caption" style="text-align: center;">

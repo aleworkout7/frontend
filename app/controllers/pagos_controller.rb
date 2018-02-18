@@ -17,6 +17,13 @@ class PagosController < ApplicationController
 		end
 
 		@price = 29.90
+		begin
+			@price = ENV["MP_PRICE"].try(:to_f)
+		rescue => ex
+			@price = 29.90
+			puts ex.try(:message)
+		end
+
 		data = {
 			payer_email: current_user.email,
 			back_url: "https://www.prediosapp.com.br/pagos",

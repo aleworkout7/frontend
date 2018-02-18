@@ -18,6 +18,9 @@ class ApplicationController < ActionController::Base
 	def after_sign_in_path_for(resource)
 		if params[:do_subscription].present?
 			pagos_path
+		elsif params[:go_back_to_cart].present?
+			product = Product.find(params[:go_back_to_cart])
+			add_to_cart_predio_shop_path(product.shop.predio.id, product.shop.id, product.id)
 		else
 			root_path
 		end

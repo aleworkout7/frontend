@@ -1,16 +1,31 @@
-<h2>Resend confirmation instructions</h2>
-
 <%= form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post }) do |f| %>
-  <%= devise_error_messages! %>
+<%= devise_error_messages! %>
 
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, value: (resource.pending_reconfirmation? ? resource.unconfirmed_email : resource.email) %>
-  </div>
+<div class="container" style="margin-top:25px">
+	<div class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+		<div class="panel panel-default">
+			<p style="font-size: 25px;line-height: 30px;font-weight: bold;">Reenvie a confirmação de email</p>
+			<div class="panel-body">
 
-  <div class="actions">
-    <%= f.submit "Resend confirmation instructions" %>
-  </div>
-<% end %>
+				<div class="block-mail">
+					<div class="form-group">
+						<%= f.email_field :email, autofocus: true, class:"form-control black-border", placeholder:"Insira o seu e-mail",
+						value: (resource.pending_reconfirmation? ? resource.unconfirmed_email : resource.email) %>
+					</div>
+					<div class="actions">
+						<%= f.submit "Enviar", class:"btn btn-sm btn-primary btn-black" %>
+					</div>
+					<div style="margin-top:10px" class="form-group">
+						<div class="col-md-12 control lateral-clean">
+							<div style="border-top: 1px solid#ddd; padding-top:15px;" >
+								<p>Já confirmou? <%= link_to "Faça o login aqui", new_user_session_path %></p>
+							</div>
+						</div>
+					</div>
+				</div>
 
-<%= render "users/shared/links" %>
+			</div>
+		</div>
+	</div>
+</div>
+<% end  %>

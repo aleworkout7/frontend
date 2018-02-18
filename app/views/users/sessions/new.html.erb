@@ -1,7 +1,10 @@
 <% if flash[:alert].present? %>
-	<div class="alert alert-dismissable alert-danger">
+	<div class="alert alert-dismissable alert-danger text-center">
 		<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
 		<%= flash[:alert] %>
+		<% if t('devise.failure.unconfirmed') == flash[:alert] %>
+			<p class="text-center"><%= link_to "Reenviar confirmação", new_user_confirmation_path %></p>
+		<% end %>
 	</div>
 <% end %>
 

@@ -63,14 +63,6 @@
 
 				<hr>
 
-				<div class="form-group">
-					<%= f.label "Contraseña Actual *" %>
-					<br/><small><i>(Necesitamos su contraseña actual para confirmar sus cambios)</i></small><br />
-					<%= f.password_field :current_password, autocomplete: "off", class: "form-control", placeholder: "Ingrese contraseña actual", required: true %>
-				</div>
-
-				<hr>
-
 				<div class="row actions">
 					<div class="col-md-6">
 						<%= f.submit "Editar cuenta", class:"btn btn-sm btn-primary user-submit" %>

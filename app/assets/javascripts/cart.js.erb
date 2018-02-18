@@ -5,6 +5,22 @@ $(".btn-cart-submit").click((e) => {
 	$("#update-user-modal").modal();
 });
 
+$(".user-submit").click(function(e) {
+	e.preventDefault();
+
+	let $form = $(this).parents("form");
+	let action = $form.attr("action");
+	$.ajax({
+		url: action,
+		type: "PUT",
+		data: $form.serialize(),
+		success: () => {
+			$("#update-user-modal").modal('toggle');
+			$(".btn-cart-submit").parents("form").submit();
+		}
+	});
+});
+
 $('.btn-number').click(function(e){
 	e.preventDefault();
 

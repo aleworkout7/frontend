@@ -4,6 +4,9 @@ class PrediosController < ApplicationController
 
 	# GET /
 	def home
+		unless user_signed_in?
+			return redirect_to new_user_registration_path
+		end
 		@predios = Predio.highlighteds
 	end
 

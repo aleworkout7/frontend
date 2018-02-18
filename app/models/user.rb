@@ -5,8 +5,8 @@ class User < ActiveRecord::Base
 
 	has_many :shops
 	has_many :pagos
-
-	has_many :addresses
+	has_many :orders
+	has_many :addresses, :dependent => :destroy
 	has_one :address, -> { order id: :desc }
 
 
@@ -18,6 +18,18 @@ class User < ActiveRecord::Base
 
 	def has_subscription?
 		Alejandro.where(email: self.email).first.present?
+	end
+
+	def valid_register?
+		address = self.address
+
+		if address.blank?
+			return false
+		elsif address.number.blank? || address.block.blank? || address.floor.blank? || self.name.blank? || self.phone.blank?
+			return false
+		end
+
+		true
 	end
 
 end

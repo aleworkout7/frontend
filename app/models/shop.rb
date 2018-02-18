@@ -5,7 +5,7 @@ class Shop < ActiveRecord::Base
 	belongs_to :user
 	belongs_to :predio
 	belongs_to :category
-	has_many :products
+	has_many :products, :dependent => :destroy
 
 	validates :name, :predio_id, presence: true
 

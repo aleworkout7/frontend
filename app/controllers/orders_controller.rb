@@ -80,7 +80,7 @@ class OrdersController < ApplicationController
 
 	private
 	def check_if_user_is_logged_in
-		return redirect_to root_path unless user_signed_in?
+		return redirect_to new_user_registration_path unless user_signed_in?
 	end
 
 	def set_order

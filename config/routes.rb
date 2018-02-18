@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+
 	root 'predios#home'
 
 	devise_for :users,

@@ -1,5 +1,5 @@
 class Predio < ActiveRecord::Base
-	has_many :shops
+	has_many :shops, :dependent => :destroy
 	belongs_to :housing_set
 
 	scope :highlighteds, -> { where(is_highlight: true).distinct }

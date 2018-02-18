@@ -77,6 +77,6 @@ Rails.application.configure do
 	# Do not dump schema after migrations.
 	config.active_record.dump_schema_after_migration = false
 
-	Rails.application.routes.default_url_options[:host] = 'https://secure-shore-15467.herokuapp.com'
+	Rails.application.routes.default_url_options[:host] = 'https://www.prediosapp.com.br'
 
 end

@@ -19,7 +19,7 @@ class PagosController < ApplicationController
 		@price = 29.90
 		data = {
 			payer_email: current_user.email,
-			back_url: "https://secure-shore-15467.herokuapp.com/pagos",
+			back_url: "https://www.prediosapp.com.br/pagos",
 			reason: "Assinatura mensal para ter lojas no PrediosApp",
 			external_reference: current_user.id,
 			auto_recurring: {

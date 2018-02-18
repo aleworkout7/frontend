@@ -1,30 +1,41 @@
 <div class="container" style="margin-top:25px">
-  <div class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
-    <div class="panel panel-default">
-      <div class="row">
-        <div class="col-md-5">
-          <p class="title-edit">Predio</p>
-        </div>
-        <div class="col-md-7 text-right">
-          <%= link_to 'Voltar', predios_path, class: "btn btn-success btn-sm" %>
-          <%= link_to 'Editar', edit_predio_path(@predio), class: "btn btn-success btn-sm" %>
-        </div>
-      </div>
-      <hr>
-      <div class="panel-body">
-        <div class="form-group">
-          <%= label_tag 'Nome da predio' %><br>
-          <%= text_field_tag @predio.name, @predio.name, class:"form-control black-border", placeholder:"Nome da loja" %>
-        </div>
-        <div class="form-group">
-          <%= label_tag 'Endereço' %><br>
-          <%= text_field_tag @predio.address, @predio.address, class:"form-control black-border", placeholder:"Endereço" %>
-        </div>
-        <div class="form-group">
-          <%= label_tag 'Detalhes' %><br>
-          <%= text_field_tag @predio.details, @predio.address,  class:"form-control black-border", placeholder:"Detalhes" %>
-        </div>
-      </div>
-    </div>
-  </div>
+	<div class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+		<div class="panel panel-default">
+			<div class="row">
+				<div class="col-md-5">
+					<p class="title-edit">Predio</p>
+				</div>
+				<div class="col-md-7 text-right">
+					<%= link_to 'Voltar', predios_path, class: "btn btn-success btn-sm" %>
+					<%= link_to 'Editar', edit_predio_path(@predio), class: "btn btn-success btn-sm" %>
+				</div>
+			</div>
+			<hr>
+			<div class="panel-body">
+				<div class="form-group">
+					<%= label_tag 'Nome do predio' %><br>
+					<%= text_field_tag @predio.name, @predio.name, class:"form-control black-border", placeholder:"Nome da loja" %>
+				</div>
+				<div class="form-group">
+					<%= label_tag 'Endereço' %><br>
+					<%= text_field_tag @predio.address, @predio.address, class:"form-control black-border", placeholder:"Endereço" %>
+				</div>
+				<div class="form-group">
+					<%= label_tag 'Detalhes' %><br>
+					<%= text_field_tag @predio.details, @predio.address,  class:"form-control black-border", placeholder:"Detalhes" %>
+				</div>
+				<div class="form-group">
+					<%= label_tag 'Conjunto' %><br>
+					<%= text_field_tag @predio.housing_set.name, @predio.housing_set.name,  class:"form-control black-border", placeholder:"Conjunto" %>
+				</div>
+				<div class="form-group">
+					<%= label_tag 'Predio destaque?' %><br>
+					<strong><%= @predio.is_highlight ? "Sim" : "Não" %></strong>
+				</div>
+				<div class="form-group text-center">
+					<%= image_tag(@predio.image_url, class: "img-responsive aspect", style:"padding-top: 35px;") %>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>

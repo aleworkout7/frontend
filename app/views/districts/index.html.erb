@@ -1,0 +1,31 @@
+<div class="container">
+	<h1>Bairros</h1>
+	<hr>
+
+	<table class="table table-hover table-striped">
+		<thead>
+			<tr>
+				<th>Nome</th>
+				<th>Municipio</th>
+				<th colspan="3"></th>
+			</tr>
+		</thead>
+
+		<tbody>
+			<% @districts.each do |district| %>
+			<tr>
+				<td><%= district.name %></td>
+				<td><%= district.city.name %></td>
+				<td>
+					<%= link_to 'Editar', edit_district_path(district), class: "btn btn-success btn-sm" %>
+					<%= link_to 'Eliminar', district, method: :delete, class: "btn btn-primary btn-sm", data: { confirm: 'Tem certeza que deseja excluir?' } %>
+				</td>
+			</tr>
+			<% end %>
+		</tbody>
+	</table>
+
+	<br>
+
+	<%= link_to 'Novo Bairro', new_district_path, role: 'button', class: 'navbar-fixed-bottom button button3 btn-block' %>
+</div>

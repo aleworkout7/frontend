@@ -10,18 +10,24 @@
 			<li><%= link_to 'Iniciar sesión', new_user_session_path %></li>
 		<% end %>
 
-		<li><%= link_to "Tiendas", root_path %></li>
+		<hr>
+
+		<li><%= link_to "Inicio", root_path %></li>
 		<li><%= link_to "Pagos", pagos_path %></li>
 		<li><%= link_to "Consultas", queries_path %></li>
 
 		<% if user_signed_in? %>
 			<li><%= link_to "Minhas lojas", user_shops_path(current_user) %></li>
 			<li><%= link_to "Ver pedidos", orders_path %></li>
-
+			<hr>
 			<% if current_user.admin? %>
-				<li><%= link_to "Predios", predios_path %></li>
-				<li><%= link_to "Categories", categories_path %></li>
 				<li><%= link_to "Alejandros", alejandros_path %></li>
+				<li><%= link_to "Predios", predios_path %></li>
+				<li><%= link_to "Conjuntos", housing_sets_path %></li>
+				<li><%= link_to "Bairros", districts_path %></li>
+				<li><%= link_to "Municipios", cities_path %></li>
+
+				<li><%= link_to "Categories", categories_path %></li>
 				<li><%= link_to "Bancos", bancos_path %></li>
 				<li><%= link_to "Tipos de cuenta", accounts_path %></li>
 			<% end %>

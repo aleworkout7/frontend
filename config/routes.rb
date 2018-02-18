@@ -11,6 +11,9 @@ Rails.application.routes.draw do
 
 	resources :pagos
 	resources :alejandros
+	resources :housing_sets
+	resources :districts
+	resources :cities
 
 
 	resources :queries
@@ -53,4 +56,5 @@ Rails.application.routes.draw do
 	get 'do_subscription' => "pagos#do_subscription", :as => :do_subscription
 	get 'cancel_subscription' => "pagos#cancel_subscription", :as => :cancel_subscription
 	get 'users/:id/shops(/:predio_id)' => 'users#shops', :as => :user_shops
+	get '/search' => "predios#search", :as => :search_predios
 end

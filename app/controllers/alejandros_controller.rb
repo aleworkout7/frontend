@@ -66,11 +66,6 @@ class AlejandrosController < ApplicationController
 
 	private
 
-	def check_if_user_is_logged_in
-		return redirect_to new_user_session_path unless user_signed_in?
-		return redirect_to root_path unless current_user.admin?
-	end
-
 	def set_alejandro
 		@alejandro = Alejandro.find(params[:id])
 	end

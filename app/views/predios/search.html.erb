@@ -1,0 +1,10 @@
+<% @predios.each do |predio| %>
+	<div class="col-md-4 text-center" style="display: flex; flex-wrap: wrap; justify-content: center;">
+
+		<%= link_to predio_shops_path(predio) do %>
+			<%= image_tag(predio.image_url, class: "img-responsive aspect", style:"padding-top: 35px;", width: 250) %>
+			<%= predio.name %>
+		<% end %>
+
+	</div>
+<% end %>

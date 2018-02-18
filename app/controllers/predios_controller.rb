@@ -4,7 +4,18 @@ class PrediosController < ApplicationController
 
 	# GET /
 	def home
-		@predios = Predio.joins(:shops).distinct
+		@predios = Predio.highlighteds
+	end
+
+	# GET /search
+	def search
+		if params[:search].present?
+			@predios = Predio.search(params[:search])
+		else
+			@predios = Predio.highlighteds
+		end
+
+		render layout: false
 	end
 
 	# GET /predios
@@ -20,11 +31,13 @@ class PrediosController < ApplicationController
 
 	# GET /predios/new
 	def new
+		@housings = HousingSet.all
 		@predio = Predio.new
 	end
 
 	# GET /predios/1/edit
 	def edit
+		@housings = HousingSet.all
 		@predios = Predio.all
 	end
 
@@ -70,17 +83,12 @@ class PrediosController < ApplicationController
 
 	private
 
-	def check_if_user_is_logged_in
-		return redirect_to new_user_session_path unless user_signed_in?
-		return redirect_to root_path unless current_user.admin?
-	end
-
 	def set_predio
 		@predio = Predio.find(params[:id])
 	end
 
 	# Never trust parameters from the scary internet, only allow the white list through.
 	def predio_params
-		params.require(:predio).permit(:name, :address, :details)
+		params.require(:predio).permit(:name, :address, :details, :is_highlight, :image, :housing_set_id)
 	end
 end

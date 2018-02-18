@@ -1,3 +1,6 @@
+/**
+*	SELECT
+*/
 function redirectToShop(predio) {
 	if (predio) {
 		window.location.href = predio;
@@ -14,4 +17,19 @@ $(".btn-edificios").unbind().click(function(e) {
 $('.edificios').unbind().change((event) => {
 	let path = $(event.target).find("option[data-path]:selected").data("path");
 	redirectToShop(path);
+});
+
+/**
+*	SEARCH
+*/
+$(".search-predios").keyup(function() {
+	let search = $(this).val();
+	console.log(search);
+	$.get("/search", { search }, (data) => $("#predios").html(data));
+});
+
+$("#link-help").unbind().click((e) => {
+	e.preventDefault();
+
+	$("#link-help-box").fadeToggle();
 });

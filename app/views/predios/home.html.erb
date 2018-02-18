@@ -3,15 +3,34 @@
 
 <div class="container">
 
-	<%= form_for("", url: root_path, method:'get', html: { role: 'form', id: "shops_index" } ) do |f| %>
-		<h1 align="center">Edificios con tiendas disponibles:</h1>
+	<div class="row" id="predios">
+		<% @predios.each do |predio| %>
+			<div class="col-md-4 text-center" style="display: flex; flex-wrap: wrap; justify-content: center;">
 
-		<div class="col-md-12 pure-css-select-style theme-default">
-			<%= f.select :predio_id, @predios.collect {|p| [p.name, p.id, { data: { path: predio_shops_path(p) } }] }, { prompt: 'Elige un edificio' }, class: 'edificios' %>
-		</div>
-		<div class="col-md-12" align="center" style="padding: 10px;">
-			<%= f.submit "Entrar", class: "btn btn-success btn-edificios" %>
-		</div>
-	<% end %>
+				<%= link_to predio_shops_path(predio) do %>
+					<%= image_tag(predio.image_url, class: "img-responsive aspect", style:"padding-top: 35px;", width: 250) %>
+					<%= predio.name %>
+				<% end %>
 
+			</div>
+		<% end %>
+	</div>
+
+	<div class="row">
+		<div class="col-md-12">
+			<br><br>
+			<%= text_field_tag :search, nil, class: "form-control search-predios", placeholder: "Procure seu prédio" %>
+		</div>
+	</div>
+
+	<hr>
+
+	<div class="row">
+		<div class="col-md-12 text-center">
+			<%= link_to "Como cadastrar meu predio?", "javascript:void(0);", id: "link-help" %>
+		</div>
+		<div class="col-md-12 text-center" id="link-help-box" style="display: none;padding: 20px;">
+			Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+		</div>
+	</div>
 </div>

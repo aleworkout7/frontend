@@ -1,28 +1,44 @@
 <%= form_for(@predio) do |f| %>
-  <% if @predio.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@predio.errors.count, "error") %> prohibited this predio from being saved:</h2>
-      <ul>
-      <% @predio.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-  <div class="form-group">
-    <%= f.label 'Nome da predio' %><br>
-    <%= f.text_field :name, autofocus: true, class:"form-control black-border", placeholder:"Nome da loja" %>
-  </div>
-  <div class="form-group">
-    <%= f.label 'Endereço' %><br>
-    <%= f.text_field :address, autofocus: true, class:"form-control black-border", placeholder:"Endereço" %>
-  </div>
-  <div class="form-group">
-    <%= f.label 'Detalhes' %><br>
-    <%= f.text_field :details, autofocus: true, class:"form-control black-border", placeholder:"Detalhes" %>
-  </div>
-  <div class="actions">
-    <hr>
-    <%= f.submit "Listo", class:"btn btn-sm btn-primary btn-black", style:'text-align: center' %>
-  </div>
+	<% if @predio.errors.any? %>
+		<div id="error_explanation">
+			<h2><%= pluralize(@predio.errors.count, "error") %> prohibited this predio from being saved:</h2>
+
+			<ul>
+				<% @predio.errors.full_messages.each do |message| %>
+					<li><%= message %></li>
+				<% end %>
+			</ul>
+		</div>
+	<% end %>
+
+	<div class="form-group">
+		<label class="fileContainer">
+			Clique aqui para ativar o carregador de arquivos!
+			<%= f.file_field :image %>
+		</label>
+	</div>
+	<div class="form-group">
+		<%= f.label 'Prédio em destaque?' %> <br>
+		<%= f.check_box :is_highlight, style: 'width: 25px;' %>
+	</div>
+	<div class="form-group">
+		<%= f.label 'Nome do predio' %><br>
+		<%= f.text_field :name, autofocus: true, class:"form-control black-border", placeholder:"Nome da loja" %>
+	</div>
+	<div class="form-group">
+		<%= f.label 'Endereço' %><br>
+		<%= f.text_field :address, autofocus: true, class:"form-control black-border", placeholder:"Endereço" %>
+	</div>
+	<div class="form-group">
+		<%= f.label 'Detalhes' %><br>
+		<%= f.text_field :details, autofocus: true, class:"form-control black-border", placeholder:"Detalhes" %>
+	</div>
+	<div class="form-group">
+		<%= f.label 'Conjuntos' %><br>
+		<%= f.collection_select :housing_set_id, @housings, :id, :name, { prompt: "Selecione um Conjunto" }, { class: 'form-control black-border', required: true } %>
+	</div>
+	<div class="actions">
+		<hr>
+		<%= f.submit "Listo", class:"btn btn-sm btn-primary btn-black", style:'text-align: center' %>
+	</div>
 <% end %>

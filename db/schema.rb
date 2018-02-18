@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180217042016) do
+ActiveRecord::Schema.define(version: 20180218014654) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -58,6 +58,30 @@ ActiveRecord::Schema.define(version: 20180217042016) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
+
+  create_table "cities", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "districts", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "city_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "districts", ["city_id"], name: "index_districts_on_city_id", using: :btree
+
+  create_table "housing_sets", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "district_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "housing_sets", ["district_id"], name: "index_housing_sets_on_district_id", using: :btree
 
   create_table "members", force: :cascade do |t|
     t.string   "name"
@@ -155,9 +179,14 @@ ActiveRecord::Schema.define(version: 20180217042016) do
     t.string   "name"
     t.text     "address"
     t.text     "details"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
+    t.string   "image"
+    t.boolean  "is_highlight",   default: false
+    t.integer  "housing_set_id"
   end
+
+  add_index "predios", ["housing_set_id"], name: "index_predios_on_housing_set_id", using: :btree
 
   create_table "products", force: :cascade do |t|
     t.string   "name"
@@ -232,6 +261,8 @@ ActiveRecord::Schema.define(version: 20180217042016) do
 
   add_foreign_key "addresses", "predios"
   add_foreign_key "addresses", "users"
+  add_foreign_key "districts", "cities"
+  add_foreign_key "housing_sets", "districts"
   add_foreign_key "order_items", "orders"
   add_foreign_key "order_items", "products"
   add_foreign_key "order_statuses", "orders"

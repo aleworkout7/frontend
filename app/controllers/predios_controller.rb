@@ -1,5 +1,5 @@
 class PrediosController < ApplicationController
-	before_action :check_if_user_is_logged_in, except: [ :home, :shops ]
+	before_action :check_if_user_is_logged_in, except: [ :home, :shops, :search ]
 	before_action :set_predio, only: [:shops, :show, :edit, :update, :destroy]
 
 	# GET /

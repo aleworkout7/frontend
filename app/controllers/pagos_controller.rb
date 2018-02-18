@@ -16,7 +16,7 @@ class PagosController < ApplicationController
 			return redirect_to pagos_path
 		end
 
-		@price = 1
+		@price = 29.90
 		data = {
 			payer_email: current_user.email,
 			back_url: "https://secure-shore-15467.herokuapp.com/pagos",

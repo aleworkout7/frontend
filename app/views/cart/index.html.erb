@@ -1,106 +1,108 @@
-<%= form_for(Order.new, url: orders_path, method: :post) do |f| %>
+<div class="container">
+	<%= form_for(Order.new, url: orders_path, method: :post) do |f| %>
 
-	<div style="margin: 5%;">
-		<div class="modal-header">
-			<h4 class="modal-title" id="small-modal-label">Carro de Compra</h4>
-		</div>
+		<div style="margin: 5%;">
+			<div class="modal-header">
+				<h4 class="modal-title" id="small-modal-label">Carro de Compra</h4>
+			</div>
 
-		<div class="modal-body">
-			<div>
-				<div class="table table-striped table-hover">
-					<%= f.hidden_field :shop_id, value: @shop.id %>
+			<div class="modal-body">
+				<div>
+					<div class="table table-striped table-hover">
+						<%= f.hidden_field :shop_id, value: @shop.id %>
 
-					<% @cart.each_with_index do |item, index| %>
-					<% product = item[:product] %>
+						<% @cart.each_with_index do |item, index| %>
+						<% product = item[:product] %>
 
-					<div class="row cart-item" data-price="<%= product.price %>" data-amount="<%= item[:amount] %>">
+						<div class="row cart-item" data-price="<%= product.price %>" data-amount="<%= item[:amount] %>">
 
-						<div align="center" class="col-sm-2">
-							<div style="margin-bottom: 0px;">
-								<%= image_tag(product.image_url, width: 60, height: 60, class: "img-responsive aspect") if product.image? %>
-							</div>
-						</div>
-
-						<div align="center" class="col-sm-4"><%= product.name %></div>
-						<div align="center" class="col-sm-2"><%= format_currency product.price %></div>
-
-						<div align="center" class="col-sm-3">
-							<div class="center">
-								<div class="input-group">
-									<%= f.fields_for :order_items, OrderItem.new do |ff| %>
-										<% amount_field_name = ff.number_field(:amount).match(/name=\"(.*?)"/)[1] %>
-
-										<span class="input-group-btn">
-											<button type="button" class="btn btn-danger btn-number"  data-type="minus" data-field="<%= amount_field_name %>">
-												<span class="glyphicon glyphicon-minus"></span>
-											</button>
-										</span>
-
-										<%= ff.hidden_field :product_id, value: product.id %>
-										<%= ff.hidden_field :value, value: product.price %>
-										<%= ff.number_field :amount, value: item[:amount], class: "form-control input-number", min: 1, max: 100, "data-id": product.id %>
-
-										<span class="input-group-btn">
-											<button type="button" class="btn btn-success btn-number" data-type="plus" data-field="<%= amount_field_name %>">
-												<span class="glyphicon glyphicon-plus"></span>
-											</button>
-										</span>
-									<% end %>
+							<div align="center" class="col-sm-2">
+								<div style="margin-bottom: 0px;">
+									<%= image_tag(product.image_url, width: 60, height: 60, class: "img-responsive aspect") if product.image? %>
 								</div>
 							</div>
+
+							<div align="center" class="col-sm-4"><%= product.name %></div>
+							<div align="center" class="col-sm-2"><%= format_currency product.price %></div>
+
+							<div align="center" class="col-sm-3">
+								<div class="center">
+									<div class="input-group">
+										<%= f.fields_for :order_items, OrderItem.new do |ff| %>
+											<% amount_field_name = ff.number_field(:amount).match(/name=\"(.*?)"/)[1] %>
+
+											<span class="input-group-btn">
+												<button type="button" class="btn btn-danger btn-number"  data-type="minus" data-field="<%= amount_field_name %>">
+													<span class="glyphicon glyphicon-minus"></span>
+												</button>
+											</span>
+
+											<%= ff.hidden_field :product_id, value: product.id %>
+											<%= ff.hidden_field :value, value: product.price %>
+											<%= ff.number_field :amount, value: item[:amount], class: "form-control input-number", min: 1, max: 100, "data-id": product.id %>
+
+											<span class="input-group-btn">
+												<button type="button" class="btn btn-success btn-number" data-type="plus" data-field="<%= amount_field_name %>">
+													<span class="glyphicon glyphicon-plus"></span>
+												</button>
+											</span>
+										<% end %>
+									</div>
+								</div>
+							</div>
+
+							<div align="center" class="col-sm-1">
+								<%= link_to "Remove", remove_from_cart_predio_shop_path(@predio, @shop, product), "data-confirm": "Are you sure?", "data-method": "delete" %>
+							</div>
+						</div>
+						<hr/>
+						<% end %>
+
+						<div class="row">
+							<div class="col-md-12">
+								<%= f.text_area :observation, class: "form-control", placeholder: "Insira aqui observações sobre seu pedido para o vendedor..." %>
+							</div>
+							<div class="col-md-6" style="padding:12px;">
+								<%= f.select :money_exchange, [
+									["-- selecione seu troco --", 0],
+									["R$ 100,00", 100],
+									["R$ 50,00", 50],
+									["R$ 20,00", 20],
+									["R$ 10,00", 10],
+									["R$ 5,00", 5],
+									["R$ 2,00", 2]
+								], {}, class: "form-control" %>
+							</div>
+							<div class="col-md-6" style="padding:12px;text-align: right;">
+								<strong>Total: <span id="cart-total-price"><%= calculate_total_cart @cart %></span></strong>
+							</div>
 						</div>
 
-						<div align="center" class="col-sm-1">
-							<%= link_to "Remove", remove_from_cart_shop_path(@shop, product), "data-confirm": "Are you sure?", "data-method": "delete" %>
-						</div>
 					</div>
-					<hr/>
-					<% end %>
-
-					<div class="row">
-						<div class="col-md-12">
-							<%= f.text_area :observation, class: "form-control", placeholder: "Insira aqui observações sobre seu pedido para o vendedor..." %>
-						</div>
-						<div class="col-md-6" style="padding:12px;">
-							<%= f.select :money_exchange, [
-								["-- selecione seu troco --", 0],
-								["R$ 100,00", 100],
-								["R$ 50,00", 50],
-								["R$ 20,00", 20],
-								["R$ 10,00", 10],
-								["R$ 5,00", 5],
-								["R$ 2,00", 2]
-							], {}, class: "form-control" %>
-						</div>
-						<div class="col-md-6" style="padding:12px;text-align: right;">
-							<strong>Total: <span id="cart-total-price"><%= calculate_total_cart @cart %></span></strong>
-						</div>
+				</div>
+			</div>
+			<div  class="modal-footer">
+				<div class="row actions">
+					<div align="center" class="col-sm-12">
+						<%= link_to "Vaciar carro", clear_cart_predio_shop_path(@predio, @shop), class: "btn btn-primary", "data-toggle": "modal", "data-target": "#vacia-modal" %>
+						<%= link_to "Continuar comprando", predio_shop_path(@predio, @shop), class: "btn" %>
+						<% if current_user.address.blank? || @shop.predio.id != current_user.address.try(:predio).try(:id) %>
+							<%= submit_tag "Confirmar pedido", name: nil, class: "btn btn-success btn-cart-submit" %>
+						<% else %>
+							<%= submit_tag "Confirmar pedido", name: nil, class: "btn btn-success", disable_with: "Confirmando...", "data-confirm": "Seguro desea confimar el pedido" %>
+						<% end %>
 					</div>
-
 				</div>
 			</div>
 		</div>
-		<div  class="modal-footer">
-			<div class="row actions">
-				<div align="center" class="col-sm-12">
-					<%= link_to "Vaciar carro", clear_cart_shop_path(@shop), class: "btn btn-primary", "data-toggle": "modal", "data-target": "#vacia-modal" %>
-					<%= link_to "Continuar comprando", shop_path(@shop), class: "btn" %>
-					<% if current_user.address.blank? || @shop.predio.id != current_user.address.try(:predio).try(:id) %>
-						<%= submit_tag "Confirmar pedido", name: nil, class: "btn btn-success btn-cart-submit" %>
-					<% else %>
-						<%= submit_tag "Confirmar pedido", name: nil, class: "btn btn-success", disable_with: "Confirmando...", "data-confirm": "Seguro desea confimar el pedido" %>
-					<% end %>
-				</div>
-			</div>
-		</div>
-	</div>
-<% end %>
+	<% end %>
 
-<%= render partial: "modal_clear_cart" %>
-<%
-	modal_title = "Necessita cambiar predio"
-	if current_user.address.blank?
-		modal_title = "Necessita preencher seus dados"
-	end
-%>
-<%= render partial: "modal_update_user", locals: { cart: @shop.id, predio: @shop.predio, title: modal_title } %>
+	<%= render partial: "modal_clear_cart" %>
+	<%
+		modal_title = "Necessita cambiar predio"
+		if current_user.address.blank?
+			modal_title = "Necessita preencher seus dados"
+		end
+	%>
+	<%= render partial: "modal_update_user", locals: { cart: @shop.id, predio: @predio, title: modal_title } %>
+</div>

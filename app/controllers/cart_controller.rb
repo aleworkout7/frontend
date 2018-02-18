@@ -1,12 +1,13 @@
 class CartController < ApplicationController
 	before_action :check_if_user_is_logged_in
-	before_action :load_shop
+	before_action :set_predio
+	before_action :set_shop
 	before_action :check_if_user_is_seller_of_this_shop
 
 	def index
 		@cart = extract_cart_with_products_from_session
 
-		redirect_to shop_path(@shop) if @cart.blank?
+		redirect_to predio_shop_path(@predio, @shop) if @cart.blank?
 	end
 
 	def add
@@ -34,7 +35,7 @@ class CartController < ApplicationController
 	def clear
 		update_cart
 
-		redirect_to shop_path(@shop)
+		redirect_to predio_shop_path(@predio, @shop)
 	end
 
 	def update_amount
@@ -58,14 +59,14 @@ class CartController < ApplicationController
 	end
 
 	def check_if_user_is_seller_of_this_shop
-		if user_signed_in?
-			if current_user.id == @shop.user_id
-				return redirect_to root_path
-			end
-		end
+		return redirect_to root_path if current_user.try(:is_my_shop?, @shop)
 	end
 
-	def load_shop
+	def set_predio
+		@predio = Predio.find(params[:predio_id])
+	end
+
+	def set_shop
 		@shop = Shop.find(params[:id])
 	end
 

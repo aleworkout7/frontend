@@ -1,19 +1,18 @@
 <div class="container" style="margin-top:25px">
-  <div class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
-    <div class="panel panel-default">
-      <div class="row">
-        <div class="col-md-5">
-          <p class="title-edit">Novo produto</p>
-        </div>
-        <div class="col-md-7 text-right">
-          <%= link_to 'Novo Produto', products_path, class: 'btn btn-success btn-sm' %>
-          <%= link_to 'Criar loja', new_shop_path, class: 'btn btn-success btn-sm' %>
-        </div>
-      </div>
-      <hr>
-      <div class="panel-body">
-        <%= render 'form' %>
-      </div>
-    </div>
-  </div>
+	<div class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+		<div class="panel panel-default">
+			<div class="row">
+				<div class="col-md-5">
+					<p class="title-edit">Novo produto</p>
+				</div>
+				<div class="col-md-7 text-right">
+					<%= link_to 'Ver Loja', predio_shop_path(@predio, @shop), class: 'btn btn-success btn-sm' %>
+				</div>
+			</div>
+			<hr>
+			<div class="panel-body">
+				<%= render 'form' %>
+			</div>
+		</div>
+	</div>
 </div>

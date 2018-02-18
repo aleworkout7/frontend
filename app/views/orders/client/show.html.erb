@@ -1,77 +1,79 @@
-<div class="row">
-	<div class="modal-header">
-		<h3 class="modal-title" id="small-modal-label">Pedido (#<%= @order.id %>)</h3>
-	</div>
-
-	<div class="modal-body">
-
-		<% if [ OrderStatus::EN_CURSO, OrderStatus::ACEPTADO ].include?(@order.status.status) %>
-			<div class="row">
-				<div class="col-md-12">
-					<h4>Detalhe:</h4>
-					<table class='table table-hover'>
-						<tr>
-							<th>Observações da compra:</th>
-							<td><%= @order.observation %></td>
-						</tr>
-						<tr>
-							<th>Troco de:</th>
-							<td><%= format_currency @order.money_exchange %></td>
-						</tr>
-					</table>
-				</div>
-			</div>
-		<% end %>
-
-		<div class="row">
-			<div class="col-md-12">
-				<h4>Produtos:</h4>
-				<table class='table table-hover'>
-					<% @order.order_items.each do |item| %>
-						<tr>
-							<td><%= item.product.name %></td>
-							<td><%= item.amount %> x </td>
-							<td><%= format_currency item.value %></td>
-						</tr>
-					<% end %>
-				</table>
-			</div>
+<div class="container">
+	<div class="row">
+		<div class="modal-header">
+			<h3 class="modal-title" id="small-modal-label">Pedido (#<%= @order.id %>)</h3>
 		</div>
 
-		<% if [ OrderStatus::EN_CURSO, OrderStatus::ACEPTADO ].include?(@order.status.status) %>
+		<div class="modal-body">
+
+			<% if [ OrderStatus::EN_CURSO, OrderStatus::ACEPTADO ].include?(@order.status.status) %>
+				<div class="row">
+					<div class="col-md-12">
+						<h4>Detalhe:</h4>
+						<table class='table table-hover'>
+							<tr>
+								<th>Observações da compra:</th>
+								<td><%= @order.observation %></td>
+							</tr>
+							<tr>
+								<th>Troco de:</th>
+								<td><%= format_currency @order.money_exchange %></td>
+							</tr>
+						</table>
+					</div>
+				</div>
+			<% end %>
+
 			<div class="row">
 				<div class="col-md-12">
-					<h4>Localização do cliente:</h4>
+					<h4>Produtos:</h4>
 					<table class='table table-hover'>
-						<% address = @order.user.address %>
-						<tr>
-							<th>Prédio:</th>
-							<td><%= address.predio.name %></td>
-						</tr>
-						<tr>
-							<th>Bloco:</th>
-							<td><%= address.block %></td>
-						</tr>
-						<tr>
-							<th>Apartamento:</th>
-							<td><%= address.number %></td>
-						</tr>
-						<tr>
-							<th>Andar:</th>
-							<td><%= address.floor %></td>
-						</tr>
-						<tr>
-							<th>Complemento:</th>
-							<td><%= address.complement %></td>
-						</tr>
+						<% @order.order_items.each do |item| %>
+							<tr>
+								<td><%= item.product.name %></td>
+								<td><%= item.amount %> x </td>
+								<td><%= format_currency item.value %></td>
+							</tr>
+						<% end %>
 					</table>
 				</div>
 			</div>
-		<% end %>
 
-	</div>
+			<% if [ OrderStatus::EN_CURSO, OrderStatus::ACEPTADO ].include?(@order.status.status) %>
+				<div class="row">
+					<div class="col-md-12">
+						<h4>Localização do cliente:</h4>
+						<table class='table table-hover'>
+							<% address = @order.user.address %>
+							<tr>
+								<th>Prédio:</th>
+								<td><%= address.predio.name %></td>
+							</tr>
+							<tr>
+								<th>Bloco:</th>
+								<td><%= address.block %></td>
+							</tr>
+							<tr>
+								<th>Apartamento:</th>
+								<td><%= address.number %></td>
+							</tr>
+							<tr>
+								<th>Andar:</th>
+								<td><%= address.floor %></td>
+							</tr>
+							<tr>
+								<th>Complemento:</th>
+								<td><%= address.complement %></td>
+							</tr>
+						</table>
+					</div>
+				</div>
+			<% end %>
 
-	<div class="modal-footer">
-		<%= link_to 'Voltar', from_clients_orders_path(@order.status.status.downcase), class: "btn btn-success" %>
+		</div>
+
+		<div class="modal-footer">
+			<%= link_to 'Voltar', from_clients_orders_path(@order.status.status.downcase), class: "btn btn-success" %>
+		</div>
 	</div>
 </div>

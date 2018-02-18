@@ -1,36 +1,39 @@
-<%= form_for @product, validate: true do |f| %>
-<% if @product.errors.any? %>
-<div id="error_explanation">
-	<h2><%= pluralize(@product.errors.count, "error") %> prohibited this product from being saved:</h2>
+<%= form_for [@predio, @shop, @product], validate: true do |f| %>
+	<% if @product.errors.any? %>
+		<div id="error_explanation">
+			<h2><%= pluralize(@product.errors.count, "error") %> prohibited this product from being saved:</h2>
 
-	<ul>
-		<% @product.errors.full_messages.each do |message| %>
-		<li><%= message %></li>
-		<% end %>
-	</ul>
-</div>
-<% end %>
-<div class="form-group">
-	<label class="fileContainer">
+			<ul>
+				<% @product.errors.full_messages.each do |message| %>
+					<li><%= message %></li>
+				<% end %>
+			</ul>
+		</div>
+	<% end %>
+
+	<div class="form-group">
+		<label class="fileContainer">
 			Clique aqui para ativar o carregador de arquivos!
 			<%= f.file_field :image %>
-	</label>
-</div>
-<div class="form-group">
-	<%= f.label 'Nome do produto *' %><br>
-	<%= f.text_field :name, autofocus: true, class:"form-control black-border", placeholder:"Nome do produto" %>
-</div>
-<div class="form-group">
-	<%= f.label "Preço *" %><br>
-	<%= f.number_field :price, required: true, class:"form-control black-border", placeholder:"0.00" %>
-</div>
-<div class="form-group">
-	<%= f.label "Escolha a loja onde você irá adicionar o produto *" %><br>
-	<%= f.collection_select :shop_id, @shops, :id, :name, {}, { class: 'form-control black-border', required: true } %>
-</div>
-<br />
-<div class="actions">
-	<hr>
-	<%= f.submit "Listo", class:"btn btn-sm btn-primary btn-black", style:'text-align: center' %>
-</div>
+		</label>
+	</div>
+	<div class="form-group">
+		<%= f.label 'Nome do produto *' %><br>
+		<%= f.text_field :name, autofocus: true, class:"form-control black-border", placeholder:"Nome do produto" %>
+	</div>
+	<div class="form-group">
+		<%= f.label "Preço *" %><br>
+		<%= f.number_field :price, required: true, class:"form-control black-border", placeholder:"0.00" %>
+	</div>
+	<div class="form-group">
+		<%= f.label "Loja" %><br>
+		<%= f.hidden_field :shop_id, value: @shop.id %>
+		<%= text_field_tag :shop_name, @shop.name, class: 'form-control black-border', disabled: true %>
+	</div>
+
+	<br />
+	<div class="actions">
+		<hr>
+		<%= f.submit "Listo", class:"btn btn-sm btn-primary btn-black", style:'text-align: center' %>
+	</div>
 <% end %>

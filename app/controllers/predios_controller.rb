@@ -1,7 +1,8 @@
 class PrediosController < ApplicationController
-	before_action :check_if_user_is_logged_in, except: [:home]
-	before_action :set_predio, only: [:show, :edit, :update, :destroy]
+	before_action :check_if_user_is_logged_in, except: [ :home, :shops ]
+	before_action :set_predio, only: [:shops, :show, :edit, :update, :destroy]
 
+	# GET /
 	def home
 		@predios = Predio.joins(:shops).distinct
 	end

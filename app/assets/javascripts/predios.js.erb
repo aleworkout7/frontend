@@ -1,0 +1,17 @@
+function redirectToShop(predio) {
+	if (predio) {
+		window.location.href = predio;
+	}
+}
+
+$(".btn-edificios").unbind().click(function(e) {
+	e.preventDefault();
+
+	let path = $('.edificios').find("option[data-path]:selected").data("path");
+	redirectToShop(path);
+});
+
+$('.edificios').unbind().change((event) => {
+	let path = $(event.target).find("option[data-path]:selected").data("path");
+	redirectToShop(path);
+});

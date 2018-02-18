@@ -1,44 +1,46 @@
-<%= form_for @shop, validate: true do |f| %>
-  <% if @shop.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@shop.errors.count, "error") %> prohibited this shop from being saved:</h2>
-      <ul>
-      <% @shop.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-  <div class="form-group">
-    <%= f.label 'A loja está aberta?' %> <br>
-    <%= f.check_box :available, style: 'width: 25px;' %>
-  </div>
-  <div class="form-group">
-    <%= f.label 'Nome da loja' %><br>
-    <%= f.text_field :name, autofocus: true, class:"form-control black-border", placeholder:"Nome da loja" %>
-  </div>
-  <div class="form-group">
-    <%= f.label "Número de contato" %><br>
-    <%= f.text_field :number, class:"form-control black-border", placeholder:"Número de contato" %>
-  </div>
-  <div class="form-group">
-    <%= f.label 'Foto da loja' %><br>
-    <label class="fileContainer">
-      Tamanho sugerido para imagem da loja (400x100)
-      <%= f.file_field :image %>
-    </label>
-  </div>
-  <div class="form-group">
-    <%= f.label 'Prédio a que pertence' %><br>
-    <%= f.collection_select :predio_id, @predios, :id, :name,{}, {class: 'form-control black-border'} %>
-  </div>
-  <div class="form-group">
-    <%= f.label "Categoria de loja" %><br>
-    <%= f.collection_select :category_id, @categories, :id, :name,{}, {class: 'form-control black-border'} %>
-  </div>
-  <div class="actions">
-    <hr>
-    <%= f.submit "Listo", class:"btn btn-sm btn-primary btn-black", style:'text-align: center' %>
-  </div>
-  <br />
+<%= form_for [@predio, @shop], validate: true do |f| %>
+	<% if @shop.errors.any? %>
+		<div id="error_explanation">
+			<h2><%= pluralize(@shop.errors.count, "error") %> prohibited this shop from being saved:</h2>
+			<ul>
+				<% @shop.errors.full_messages.each do |message| %>
+					<li><%= message %></li>
+				<% end %>
+			</ul>
+		</div>
+	<% end %>
+
+	<div class="form-group">
+		<%= f.label 'A loja está aberta?' %> <br>
+		<%= f.check_box :available, style: 'width: 25px;' %>
+	</div>
+	<div class="form-group">
+		<%= f.label 'Nome da loja' %><br>
+		<%= f.text_field :name, autofocus: true, class:"form-control black-border", placeholder:"Nome da loja" %>
+	</div>
+	<div class="form-group">
+		<%= f.label "Número de contato" %><br>
+		<%= f.text_field :number, class:"form-control black-border", placeholder:"Número de contato" %>
+	</div>
+	<div class="form-group">
+		<%= f.label 'Foto da loja' %><br>
+		<label class="fileContainer">
+			Tamanho sugerido para imagem da loja (400x100)
+			<%= f.file_field :image %>
+		</label>
+	</div>
+	<div class="form-group">
+		<%= f.label 'Prédio a que pertence' %><br>
+		<%= f.hidden_field :predio_id, value: @predio.id %>
+		<%= text_field_tag :predio_name, @predio.name, class: 'form-control black-border', disabled: true %>
+	</div>
+	<div class="form-group">
+		<%= f.label "Categoria de loja" %><br>
+		<%= f.collection_select :category_id, @categories, :id, :name,{}, {class: 'form-control black-border'} %>
+	</div>
+	<div class="actions">
+		<hr>
+		<%= f.submit "Listo", class:"btn btn-sm btn-primary btn-black", style:'text-align: center' %>
+	</div>
+	<br />
 <% end %>

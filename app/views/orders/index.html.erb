@@ -1,14 +1,16 @@
-<div class="row">
-	<div class="modal-header">
-		<h4 class="modal-title" id="small-modal-label">Pedidos</h4>
-	</div>
-
-	<div class="modal-body" align="center">
-		<div class="col-md-6">
-			<%= link_to "Pedido feitos como cliente", to_shops_orders_path, class: "btn btn-success" %>
+<div class="container">
+	<div class="row">
+		<div class="modal-header">
+			<h3 class="modal-title text-center">Pedidos</h3>
 		</div>
-		<div class="col-md-6">
-			<%= link_to "Pedidos recevedos como vendedor", from_clients_orders_path, class: "btn btn-success" %>
+
+		<div class="modal-body" align="center">
+			<div class="col-md-6">
+				<%= link_to "Pedido feitos como cliente", to_shops_orders_path, class: "btn btn-success" %>
+			</div>
+			<div class="col-md-6">
+				<%= link_to "Pedidos recevedos como vendedor", from_clients_orders_path, class: "btn btn-success" %>
+			</div>
 		</div>
 	</div>
 </div>

@@ -1,0 +1,28 @@
+<div class="col-sm-6 col-md-4">
+	<div class="thumbnail margin-top-40">
+		<div class="price-product">
+			<span><%= format_currency product.price %></span>
+		</div>
+
+		<%= image_tag(product.image_url, class: "img-responsive aspect", style:"padding-top: 35px;") %>
+
+		<div class="caption" style="text-align: center;">
+			<h3><%= product.name.truncate(17) %></h3>
+
+			<% if user_signed_in? && current_user.is_my_shop?(@shop) %>
+				<%= link_to 'Editar', edit_predio_shop_product_path(@predio, @shop, product), role: 'button', class: 'btn btn-success btn-sm' %>
+				<%= link_to 'Eliminar', predio_shop_product_path(@predio, @shop, product), method: :delete, data: { confirm: 'Tem certeza que deseja excluir o produto?' }, role: 'button', class: 'btn btn-success btn-sm' %>
+			<% end %>
+		</div>
+
+		<% unless current_user.try(:is_my_shop?, @shop) %>
+			<% unless is_in_cart? product %>
+				<%= link_to add_to_cart_predio_shop_path(@predio, @shop, product), class: 'btn-plus', data: { turbolinks: false } do %>
+					<img src="https://s3.amazonaws.com/predios/plus.png" class="plus">
+				<% end %>
+			<% else %>
+				<p class="alreadyCart">Já adicionado no carrinho</p>
+			<% end %>
+		<% end %>
+	</div>
+</div>

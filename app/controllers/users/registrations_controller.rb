@@ -67,7 +67,8 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
 	def after_update_path_for(resource)
 		if params[:cart].present?
-			cart_shop_path(id: params[:cart])
+			shop = Shop.find(params[:cart])
+			cart_predio_shop_path(shop.predio, shop)
 		else
 			root_path
 		end

@@ -1,68 +1,70 @@
-<b>Datos de cuenta bancaria</b><br/><br/>
-<p>CuentaRUT: <b>18329606</b></p>
-<p>RUT: <b>18329606-K</b></p>
-<p>Nombre: <b>Alejandro G. Navarro</b></p>
-<p>Email: <b>prediosaplicativo@gmail.com</b></p>
-<hr />
-<p>1 mes de membresía:</p><b>$6000.-</b><br/>
-<hr />
+<div class="container">
+	<b>Datos de cuenta bancaria</b><br/><br/>
+	<p>CuentaRUT: <b>18329606</b></p>
+	<p>RUT: <b>18329606-K</b></p>
+	<p>Nombre: <b>Alejandro G. Navarro</b></p>
+	<p>Email: <b>prediosaplicativo@gmail.com</b></p>
+	<hr />
+	<p>1 mes de membresía:</p><b>$6000.-</b><br/>
+	<hr />
 
-<% if user_signed_in? %>
+	<% if user_signed_in? %>
 
-	<% unless current_user.has_subscription? %>
+		<% unless current_user.has_subscription? %>
 
-		<%= link_to "Assinar", do_subscription_path, class: "btn btn-success" %>
-
-	<% else %>
-
-		<% if @subscription.present? %>
-
-			<!-- Tem assinatura agora, mas nunca teve antes && primeira cobrança ainda vai chegar -->
-			<% is_free_subscription = !current_user.had_subscription_before? && @subscription.next_charge_at > Time.now %>
-
-			<table class="table table-hover">
-				<tr>
-					<th>Status:</th>
-					<td>
-						<% if is_free_subscription %>
-							Você está experimentando o teste gratis de PrediosApp. Pode cancelar quando quiser.
-						<% else %>
-							Pagamento ao dia.
-						<% end %>
-					</td>
-				</tr>
-
-				<tr>
-					<th>Assinatura aprovada em:</th>
-					<td><%= format_datetime @subscription.created_at %></td>
-				</tr>
-
-				<% unless is_free_subscription %>
-					<tr>
-						<th>Próxima cobrança em:</th>
-						<td><%= format_date @subscription.next_charge_at %></td>
-					</tr>
-				<% end %>
-
-			</table>
+			<%= link_to "Assinar", do_subscription_path, class: "btn btn-success" %>
 
 		<% else %>
 
-			<table class="table table-hover">
-				<tr>
-					<th>Você possui uma assinatura em PrediosApp</th>
-				</tr>
-			</table>
+			<% if @subscription.present? %>
 
+				<!-- Tem assinatura agora, mas nunca teve antes && primeira cobrança ainda vai chegar -->
+				<% is_free_subscription = !current_user.had_subscription_before? && @subscription.next_charge_at > Time.now %>
+
+				<table class="table table-hover">
+					<tr>
+						<th>Status:</th>
+						<td>
+							<% if is_free_subscription %>
+								Você está experimentando o teste gratis de PrediosApp. Pode cancelar quando quiser.
+							<% else %>
+								Pagamento ao dia.
+							<% end %>
+						</td>
+					</tr>
+
+					<tr>
+						<th>Assinatura aprovada em:</th>
+						<td><%= format_datetime @subscription.created_at %></td>
+					</tr>
+
+					<% unless is_free_subscription %>
+						<tr>
+							<th>Próxima cobrança em:</th>
+							<td><%= format_date @subscription.next_charge_at %></td>
+						</tr>
+					<% end %>
+
+				</table>
+
+			<% else %>
+
+				<table class="table table-hover">
+					<tr>
+						<th>Você possui uma assinatura em PrediosApp</th>
+					</tr>
+				</table>
+
+			<% end %>
+
+			<hr>
+
+			<%= link_to "Cancelar Assinatura", cancel_subscription_path, class: "btn btn-primary", "data-confirm": "Seguro desea cancelar a assinatura?" %>
 		<% end %>
 
-		<hr>
+	<% else %>
 
-		<%= link_to "Cancelar Assinatura", cancel_subscription_path, class: "btn btn-primary", "data-confirm": "Seguro desea cancelar a assinatura?" %>
+		<%= link_to "Assinar", new_user_session_path(do_subscription: true), class: "btn btn-success btn-large" %>
+
 	<% end %>
-
-<% else %>
-
-	<%= link_to "Assinar", new_user_session_path(do_subscription: true), class: "btn btn-success btn-large" %>
-
-<% end %>
+</div>

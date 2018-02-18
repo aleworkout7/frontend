@@ -7,7 +7,7 @@ class PagosController < ApplicationController
 	def index
 		if current_user.try(:has_subscription?)
 			@subscription = SubscriptionNotification.where(external_reference: current_user.id).last
-			@subscription = nil if @subscription.status != "authorized"
+			@subscription = nil if @subscription.try(:status) != "authorized"
 		end
 	end
 

@@ -21,8 +21,25 @@
 					<%= f.text_field :phone, class:"form-control phone", placeholder:"Ingrese telefono", required: true %>
 				</div>
 
+				<% if @addresses.present? %>
+					<table class="table table-hover address_options">
+						<% @addresses.each do |a| %>
+							<tr>
+								<td style="display: flex;flex-wrap: wrap;align-items: center;">
+									<%= radio_button_tag 'address_ids[]', a.id, false, class: "address_radio_button", data: { number: a.number, block: a.block, floor: a.floor, complement: a.complement } %>
+		        					<span style="padding: 0 15px;"><%= "Apartamento: #{a.number} - Bloco: #{a.block} - Andar: #{a.floor} " %></span>
+								</td>
+							</tr>
+						<% end %>
+					</table>
+				<% end %>
+
 				<%= fields_for :addresses, f.object.address do |ff| %>
 					<hr>
+
+					<% unless cart.blank? %>
+						<%= ff.hidden_field :id %>
+					<% end %>
 
 					<div class="form-group">
 						<%= ff.label "Predio *" %><br />
@@ -31,43 +48,54 @@
 					</div>
 					<div class="form-group">
 						<%= ff.label "Numero apartamento" %><br />
-						<%= ff.text_field :number, class:"form-control", placeholder:"Ingrese numero apartamento" %>
+						<%= ff.text_field :number, class:"form-control apartament-field", placeholder:"Ingrese numero apartamento" %>
 					</div>
 					<div class="form-group">
 						<%= ff.label "Bloco" %><br />
-						<%= ff.text_field :block, class:"form-control", placeholder:"Ingrese bloco" %>
+						<%= ff.text_field :block, class:"form-control block-field", placeholder:"Ingrese bloco" %>
 					</div>
 					<div class="form-group">
 						<%= ff.label "Numero de piso" %><br />
-						<%= ff.number_field :floor, class:"form-control", placeholder:"Ingrese numero piso" %>
+						<%= ff.number_field :floor, class:"form-control floor-field", placeholder:"Ingrese numero piso" %>
 					</div>
 					<div class="form-group">
-						<%= ff.label "Complement" %><br />
-						<%= ff.text_field :complement, class:"form-control", placeholder:"Ingrese complement" %>
+						<%= ff.label "Complemento" %><br />
+						<%= ff.text_field :complement, class:"form-control complement-field", placeholder:"Ingrese complement" %>
 					</div>
 				<% end %>
 
 				<hr>
 
-				<div class="form-group">
-					<%= f.label "Contraseña" %>
-					<% if @minimum_password_length %>
-						<em>(<%= @minimum_password_length %> caracteres mínimos)</em>
-					<% end %><br />
-					<%= f.password_field :password, autocomplete: "off", class:"form-control", placeholder:"Ingrese contraseña" %>
-				</div>
-				<div class="form-group">
-					<%= f.label "Confirmar Contraseña" %><br/>
-					<%= f.password_field :password_confirmation, autocomplete: "off", class:"form-control", placeholder:"Ingrese confirmación de contraseña" %>
-				</div>
-
-				<hr>
-
-				<div class="row actions">
-					<div class="col-md-6">
-						<%= f.submit "Editar cuenta", class:"btn btn-sm btn-primary user-submit" %>
+				<% if cart.blank? %>
+					<div class="form-group">
+						<%= f.label "Contraseña" %>
+						<% if @minimum_password_length %>
+							<em>(<%= @minimum_password_length %> caracteres mínimos)</em>
+						<% end %><br />
+						<%= f.password_field :password, autocomplete: "off", class:"form-control", placeholder:"Ingrese contraseña" %>
 					</div>
-				</div>
+					<div class="form-group">
+						<%= f.label "Confirmar Contraseña" %><br/>
+						<%= f.password_field :password_confirmation, autocomplete: "off", class:"form-control", placeholder:"Ingrese confirmación de contraseña" %>
+					</div>
+
+					<hr>
+
+					<div class="row actions">
+						<div class="col-md-6">
+							<%= f.submit "Editar cuenta", class:"btn btn-sm btn-primary user-submit" %>
+						</div>
+					</div>
+
+				<% else %>
+
+					<div class="row actions">
+						<div class="col-md-6">
+							<%= f.submit "Confirmar", class:"btn btn-sm btn-success user-submit" %>
+						</div>
+					</div>
+
+				<% end %>
 			</div>
 		</div>
 	</div>
@@ -90,5 +118,14 @@ $(".predio-select").change(function(){
 		$("#predio-msg").fadeOut();
 		$(".user-submit").removeProp("disabled");
 	}
+});
+
+$(".address_radio_button").click(function() {
+	let $radio = $(this);
+
+	$(".apartament-field").val($radio.data("number"));
+	$(".block-field").val($radio.data("block"));
+	$(".floor-field").val($radio.data("floor"));
+	$(".complement-field").val($radio.data("complement"));
 });
 </script>

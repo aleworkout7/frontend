@@ -10,9 +10,9 @@ role :db,  %w{deployer@104.131.1.109 }
 # This can be used to drop a more detailed server definition into the
 # server list. The second argument is a, or duck-types, Hash and is
 # used to set extended properties on the server.
-  ['104.131.1.109'].each do |apps|
-    server apps , user: 'deployer', roles: %w{ web app db }, primary: true
-  end
+['104.131.1.109'].each do |apps|
+	server apps , user: 'deployer', roles: %w{ web app db }, primary: true
+end
 
 set :application, 'predios_app'
 set :branch, 'development'
@@ -43,8 +43,8 @@ set :puma_preload_app, false
 set :nginx_use_ssl, false
 
 set :ssh_options, {
-    keys: %w(~/.ssh/id_rsa),
-    user: ENV["server_username"],
-    password: ENV["server_password"],
-    auth_methods: %w(publickey password)
+	keys: %w(~/.ssh/id_rsa),
+	user: ENV["server_username"],
+	password: ENV["server_password"],
+	auth_methods: %w(publickey password)
 }

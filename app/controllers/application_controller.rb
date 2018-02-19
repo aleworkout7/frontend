@@ -26,6 +26,10 @@ class ApplicationController < ActionController::Base
 		end
 	end
 
+	def after_sign_out_path_for(resource)
+		new_user_session_path
+	end
+
 	def check_if_user_is_logged_in
 		return redirect_to new_user_registration_path unless user_signed_in?
 		return redirect_to root_path unless current_user.admin?

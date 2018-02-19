@@ -53,9 +53,13 @@ Rails.application.routes.draw do
 		end
 	end
 
-	post 'mp/notifications' => "pagos#mp_notification", :as => :mp_notifications
-	get 'do_subscription' => "pagos#do_subscription", :as => :do_subscription
-	get 'cancel_subscription' => "pagos#cancel_subscription", :as => :cancel_subscription
+	scope :mp do
+		post 'notifications' => "pagos#mp_notification", :as => :mp_notifications
+		get 'do_subscription' => "pagos#do_subscription", :as => :mp_do_subscription
+		get 'cancel_subscription' => "pagos#cancel_subscription", :as => :mp_cancel_subscription
+	end
+
+	get 'users', to: redirect('/users/sign_up')
 	get 'users/:id/shops(/:predio_id)' => 'users#shops', :as => :user_shops
-	get '/search' => "predios#search", :as => :search_predios
+	get 'search' => "predios#search", :as => :search_predios
 end

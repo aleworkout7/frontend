@@ -61,18 +61,26 @@
 
 						<div class="row">
 							<div class="col-md-12">
-								<%= f.text_area :observation, class: "form-control", placeholder: "Insira aqui observações sobre seu pedido para o vendedor..." %>
+								<% if @shop.predio.id != current_user.address.try(:predio).try(:id) %>
+									<%= f.text_area :observation, class: "form-control", placeholder: "Insira aqui observações sobre seu pedido para o vendedor...", disabled: true %>
+								<% else %>
+									<%= f.text_area :observation, class: "form-control", placeholder: "Insira aqui observações sobre seu pedido para o vendedor..." %>
+								<% end %>
 							</div>
 							<div class="col-md-6" style="padding:12px;">
-								<%= f.select :money_exchange, [
-									["-- selecione seu troco --", 0],
-									["R$ 100,00", 100],
-									["R$ 50,00", 50],
-									["R$ 20,00", 20],
-									["R$ 10,00", 10],
-									["R$ 5,00", 5],
-									["R$ 2,00", 2]
-								], {}, class: "form-control" %>
+								<% if @shop.predio.id != current_user.address.try(:predio).try(:id) %>
+									<%= f.select :money_exchange, [["-- selecione seu troco --", 0]], {}, class: "form-control", disabled: true %>
+								<% else %>
+									<%= f.select :money_exchange, [
+										["-- selecione seu troco --", 0],
+										["R$ 100,00", 100],
+										["R$ 50,00", 50],
+										["R$ 20,00", 20],
+										["R$ 10,00", 10],
+										["R$ 5,00", 5],
+										["R$ 2,00", 2]
+									], {}, class: "form-control" %>
+								<% end %>
 							</div>
 							<div class="col-md-6" style="padding:12px;text-align: right;">
 								<strong>Total: <span id="cart-total-price"><%= calculate_total_cart @cart %></span></strong>
@@ -86,7 +94,7 @@
 				<div class="row actions">
 					<div align="center" class="col-sm-12">
 						<%= link_to "Vaciar carro", clear_cart_predio_shop_path(@predio, @shop), class: "btn btn-primary", "data-toggle": "modal", "data-target": "#vacia-modal" %>
-						<%= link_to "Continuar comprando", predio_shop_path(@predio, @shop), class: "btn" %>
+						<%= link_to "Voltar para loja", predio_shop_path(@predio, @shop), class: "btn" %>
 						<% if @shop.predio.id != current_user.address.try(:predio).try(:id) %>
 							<%= submit_tag "Confirmar pedido", name: nil, class: "btn btn-success", disabled: true %>
 						<% elsif !current_user.valid_register? %>

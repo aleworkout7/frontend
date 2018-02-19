@@ -20,10 +20,10 @@ set :rails_env, "production"
 set :default_env, { rvm_bin_path: '~/.rvm/bin' }
 
 set(:config_files, %w(
-  nginx.conf
-  log_rotation
-  unicorn_init.sh
-  database.yml
+	nginx.conf
+	log_rotation
+	unicorn_init.sh
+	database.yml
 ))
 
 
@@ -32,9 +32,9 @@ set :nginx_location, "/etc/nginx"
 
 #set simlinks
 namespace :app do
-  task :update_rvm_key do
-    execute :gpg, "--keyserver hkp://keys.gnupg.net --recv-keys D39DC0E3"
-  end
+	task :update_rvm_key do
+		execute :gpg, "--keyserver hkp://keys.gnupg.net --recv-keys D39DC0E3"
+	end
 end
 
 # namespace :figaro do
@@ -53,44 +53,44 @@ end
 #before "rvm1:install:rvm", "app:update_rvm_key"
 
 namespace :deploy do
-  # check that all the local changes are pushed to the remote develop branch
-  # before :deploy, "deploy:git_sync"
+	# check that all the local changes are pushed to the remote develop branch
+	# before :deploy, "deploy:git_sync"
 
-  # restart nginx
-  after :deploy, "deploy:restart"
+	# restart nginx
+	after :deploy, "deploy:restart"
 
-  #  before :deploy, "deploy:check_revision"
-  #  after 'deploy:symlink:shared', 'deploy:compile_assets_locally'
-  after :finishing, 'deploy:cleanup'
+	#  before :deploy, "deploy:check_revision"
+	#  after 'deploy:symlink:shared', 'deploy:compile_assets_locally'
+	after :finishing, 'deploy:cleanup'
 
-  desc 'Runs rake db:seed'
-  task :seed do
-    on primary fetch(:migration_role) do
-      within release_path do
-        with rails_env: fetch(:rails_env) do
-          execute :rake, "db:seed"
-        end
-      end
-    end
-  end
+	desc 'Runs rake db:seed'
+	task :seed do
+		on primary fetch(:migration_role) do
+			within release_path do
+				with rails_env: fetch(:rails_env) do
+					execute :rake, "db:seed"
+				end
+			end
+		end
+	end
 
-  desc 'Restart application'
-  task :restart do
-    on roles(:app), in: :sequence, wait: 5 do
-      # Your restart mechanism here, for example:
-      # execute :sudo, "./restart.sh"
-      execute :touch, release_path.join('tmp/restart.txt')
-    end
-  end
+	desc 'Restart application'
+	task :restart do
+		on roles(:app), in: :sequence, wait: 5 do
+			# Your restart mechanism here, for example:
+			# execute :sudo, "./restart.sh"
+			execute :touch, release_path.join('tmp/restart.txt')
+		end
+	end
 
-  after :publishing, :restart
+	after :publishing, :restart
 
-  after :restart, :clear_cache do
-    on roles(:web), in: :groups, limit: 3, wait: 10 do
-      # Here we can do anything such as:
-      # within release_path do
-      #   execute :rake, 'cache:clear'
-      # end
-    end
-  end
+	after :restart, :clear_cache do
+		on roles(:web), in: :groups, limit: 3, wait: 10 do
+			# Here we can do anything such as:
+			# within release_path do
+			#   execute :rake, 'cache:clear'
+			# end
+		end
+	end
 end

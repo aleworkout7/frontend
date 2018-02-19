@@ -10,5 +10,5 @@ Rails.application.config.assets.version = '1.0'
 # application.js, application.css, and all non-JS/CSS in app/assets folder are already added.
 # Rails.application.config.assets.precompile += %w( search.js )
 
-Rails.application.config.assets.precompile += %w( accounts.js alejandros.js bancos.js cart.js categories.js members.js menu.js pages.js pagos.js predios.js products.js queries.js shops.js orders.js order_status.js sessions.js registrations.js users.js cities.js housing_sets.js districts.js)
-Rails.application.config.assets.precompile += %w( accounts.css alejandros.css bancos.css cart.css categories.css members.css menu.css pages.css pagos.css predios.css products.css queries.css shops.css orders.css order_status.css sessions.css registrations.css users.css cities.css housing_sets.css districts.css)
+Rails.application.config.assets.precompile += %w( accounts.js alejandros.js bancos.js cart.js categories.js members.js menu.js pages.js pagos.js predios.js products.js queries.js shops.js orders.js order_status.js sessions.js registrations.js users.js cities.js housing_sets.js districts.js passwords.js )
+Rails.application.config.assets.precompile += %w( accounts.css alejandros.css bancos.css cart.css categories.css members.css menu.css pages.css pagos.css predios.css products.css queries.css shops.css orders.css order_status.css sessions.css registrations.css users.css cities.css housing_sets.css districts.css passwords.css )

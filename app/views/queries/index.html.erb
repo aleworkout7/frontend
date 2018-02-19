@@ -1,22 +1,52 @@
 <div class="container" style="margin-top:25px">
-  <div class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
-    <div class="panel panel-default">
-      <div class="row">
-        <div class="col-md-12">
-          <p class="title-edit">Puedes escribirnos al whatsapp si:</p>
-        </div>
-      </div>
-      <hr>
-      <div class="panel-body">
-        <ul>
-            <li>Quieres tener tu propia tienda</li>
-            <li>Tu edificio no aparece en la lista de edificios</li>
-            <li>Tienes dudas o consultas</li>
-            <li>Tienes sugerencias o reclamos</li>
-        </ul>
-        <h3>+569 3346 4921</h3>
-        <h3>+559 92981 395001</h3>
-      </div>
-    </div>
-  </div>
+	<div class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+		<div class="panel panel-default">
+			<div class="row">
+				<div class="col-md-12">
+					<p class="title-edit">Puedes escribirnos al whatsapp si:</p>
+				</div>
+			</div>
+			<hr>
+			<div class="panel-body">
+				<ul>
+					<li>Quieres tener tu propia tienda</li>
+					<li>Tu edificio no aparece en la lista de edificios</li>
+					<li>Tienes dudas o consultas</li>
+					<li>Tienes sugerencias o reclamos</li>
+				</ul>
+				<h3>+569 3346 4921</h3>
+				<h3>+559 92981 395001</h3>
+
+				<hr>
+
+				<hr>
+
+				<h3>Contato</h3>
+
+				<hr>
+
+				<%= form_for(Contact.new, url: queries_path, method: :post) do |f| %>
+					<div class="form-group">
+						<%= f.label :email %><br>
+						<%= f.email_field :email, class:"form-control black-border", required: true, placeholder: "Insira seu email aqui" %>
+					</div>
+					<div class="form-group">
+						<%= f.label 'Telefone' %><br>
+						<%= f.text_field :phone, class:"phone form-control black-border", required: true, placeholder: "(00) 0000-00000" %>
+					</div>
+					<div class="form-group">
+						<%= f.label 'Cidade' %><br>
+						<%= f.text_field :city, class:"form-control black-border", required: true, placeholder: "Insira sua cidade aqui" %>
+					</div>
+					<div class="form-group">
+						<%= f.label 'Comentários' %><br>
+						<%= f.text_area :comment, class:"form-control black-border", required: true, rows: 5, placeholder: "Insira seu comentário aqui" %>
+					</div>
+					<div class="actions">
+						<%= f.submit "Salvar", class: "btn btn-success" %>
+					</div>
+				<% end %>
+			</div>
+		</div>
+	</div>
 </div>

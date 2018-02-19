@@ -29,7 +29,14 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
 		user = User.where(email: params[:user][:email]).first
 		if user.present?
-			address = Address.new(params[:addresses].permit!)
+			if params[:addresses][:id].present?
+				id = params[:addresses].delete(:id)
+				address = Address.find(id)
+				address.update_attributes(params[:addresses].permit!)
+			else
+				address = Address.new(params[:addresses].permit!)
+			end
+
 			user.addresses << address
 		end
 	end
@@ -67,6 +74,8 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
 	def after_update_path_for(resource)
 		if params[:cart].present?
+			flash[:notice] = "Agora só precisa confirmar seu pedido"
+
 			shop = Shop.find(params[:cart])
 			cart_predio_shop_path(shop.predio, shop)
 		else
@@ -82,6 +91,10 @@ class Users::RegistrationsController < Devise::RegistrationsController
 	protected
 
 	def update_resource(resource, params)
-		resource.update_without_password(params)
+		if params[:cart].present?
+			resource.update_without_password(params)
+		else
+			resource.update(params)
+		end
 	end
 end

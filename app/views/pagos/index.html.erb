@@ -12,7 +12,7 @@
 
 		<% unless current_user.has_subscription? %>
 
-			<%= link_to "Assinar", do_subscription_path, class: "btn btn-success" %>
+			<%= link_to "Assinar", mp_do_subscription_path, class: "btn btn-success" %>
 
 		<% else %>
 
@@ -59,7 +59,7 @@
 
 			<hr>
 
-			<%= link_to "Cancelar Assinatura", cancel_subscription_path, class: "btn btn-primary", "data-confirm": "Seguro desea cancelar a assinatura?" %>
+			<%= link_to "Cancelar Assinatura", mp_cancel_subscription_path, class: "btn btn-primary", "data-confirm": "Seguro desea cancelar a assinatura?" %>
 		<% end %>
 
 	<% else %>

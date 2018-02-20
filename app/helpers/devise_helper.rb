@@ -8,6 +8,7 @@ module DeviseHelper
 	def devise_error_messages!
 		return "" if resource.errors.empty?
 
+		resource.errors.delete(:password_confirmation)
 		messages = resource.errors.full_messages.map { |msg| content_tag(:p, msg) }.join
 		sentence = I18n.t(	"errors.messages.not_saved",
 							count: resource.errors.count,

@@ -5,7 +5,7 @@
 </div>
 <% end %>
 
-<%= devise_error_messages!(password_confirmation: "As senhas não correspondem") %>
+<%= devise_error_messages!(password_confirmation: "As senhas não correspondem", current_password: "Senha atual é inválida") %>
 
 <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
 <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>

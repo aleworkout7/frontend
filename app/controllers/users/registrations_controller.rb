@@ -14,11 +14,12 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
 	# GET /resource/edit
 	def edit
-		super
-
 		if current_user.address.blank?
 			current_user.addresses << Address.new
+			return redirect_to edit_user_registration_path
 		end
+
+		super
 
 		if params[:cart].present?
 			@predio = Shop.find(params[:cart]).predio

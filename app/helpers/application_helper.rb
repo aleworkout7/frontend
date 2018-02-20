@@ -28,6 +28,21 @@ module ApplicationHelper
 		cart.count
 	end
 
+	def model_error_messages! model
+		return "" if model.blank?
+		return "" if model.errors.empty?
+
+		messages = resource.errors.full_messages.map { |msg| content_tag(:p, msg) }.join
+		html = <<-HTML
+			<div class="alert alert-dismissable alert-danger text-center">
+				<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+				#{messages}
+			</div>
+		HTML
+
+		html.html_safe
+	end
+
 	private
 
 	def extract_cart_from_session shop

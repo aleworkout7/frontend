@@ -22,4 +22,11 @@ module DeviseHelper
 
 		html.html_safe
 	end
+
+	def devise_error_messages_without_alert_div
+		return [] if resource.errors.empty?
+
+		resource.errors.full_messages.map { |msg| content_tag(:p, msg) }
+	end
+
 end

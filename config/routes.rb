@@ -15,7 +15,7 @@ Rails.application.routes.draw do
 	resources :housing_sets
 	resources :districts
 	resources :cities
-
+	resources :contacts
 
 	resources :queries
 	resources :accounts

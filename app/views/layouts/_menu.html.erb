@@ -5,16 +5,16 @@
 	<ul class="nav-mob">
 		<% if user_signed_in? %>
 			<li><%= link_to current_user.email, edit_user_registration_path %></li>
-			<li><%= link_to 'Cerrar sesión', destroy_user_session_path, method: :delete %></li>
+			<li><%= link_to 'Encerrar sessão', destroy_user_session_path, method: :delete %></li>
 		<% else %>
-			<li><%= link_to 'Iniciar sesión', new_user_session_path %></li>
+			<li><%= link_to 'Iniciar sessão', new_user_session_path %></li>
 		<% end %>
 
 		<hr>
 
 		<li><%= link_to "Inicio", root_path %></li>
-		<li><%= link_to "Pagos", pagos_path %></li>
-		<li><%= link_to "Consultas", queries_path %></li>
+		<li><%= link_to "Assinaturas", pagos_path %></li>
+		<li><%= link_to "Consultas", new_contact_path %></li>
 
 		<% if user_signed_in? %>
 			<li><%= link_to "Minhas lojas", user_shops_path(current_user) %></li>
@@ -22,6 +22,8 @@
 			<hr>
 			<% if current_user.admin? %>
 				<li><%= link_to "Alejandros", alejandros_path %></li>
+				<li><%= link_to "Contatos", contacts_path %></li>
+
 				<li><%= link_to "Predios", predios_path %></li>
 				<li><%= link_to "Conjuntos", housing_sets_path %></li>
 				<li><%= link_to "Bairros", districts_path %></li>

@@ -1,0 +1,11 @@
+<div class="container">
+	<% if @contact.is_answered? %>
+		<h1>Ver Contato</h1>
+	<% else %>
+		<h1>Reponder Contato</h1>
+	<% end %>
+
+	<%= render 'form' %>
+
+	<%= link_to 'Voltar', contacts_path, class: "btn btn-primary btn-sm" %>
+</div>

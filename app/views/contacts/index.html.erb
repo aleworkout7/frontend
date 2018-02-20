@@ -1,0 +1,36 @@
+<div class="container">
+	<h1>Contatos</h1>
+	<hr>
+
+	<table class="table table-hover table-striped">
+		<thead>
+			<tr>
+				<th>Email</th>
+				<th>Telefone</th>
+				<th>Cidade</th>
+				<th>Comentários</th>
+				<th colspan="3"></th>
+			</tr>
+		</thead>
+
+		<tbody>
+			<% @contacts.each do |contact| %>
+			<tr>
+				<td><%= contact.email %></td>
+				<td><%= contact.phone %></td>
+				<td><%= contact.city %></td>
+				<td><%= contact.comment %></td>
+				<td>
+					<% if contact.is_answered? %>
+						<%= link_to 'Ver resposta', edit_contact_path(contact), class: "btn btn-success btn-sm" %>
+					<% else %>
+						<%= link_to 'Responder', edit_contact_path(contact), class: "btn btn-success btn-sm" %>
+					<% end %>
+					
+					<%= link_to 'Eliminar', contact, method: :delete, class: "btn btn-primary btn-sm", data: { confirm: 'Tem certeza que deseja excluir?' } %>
+				</td>
+			</tr>
+			<% end %>
+		</tbody>
+	</table>
+</div>

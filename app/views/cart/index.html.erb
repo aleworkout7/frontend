@@ -69,10 +69,10 @@
 							</div>
 							<div class="col-md-6" style="padding:12px;">
 								<% if @shop.predio.id != current_user.address.try(:predio).try(:id) %>
-									<%= f.select :money_exchange, [["-- selecione seu troco --", 0]], {}, class: "form-control", disabled: true %>
+									<%= f.select :money_exchange, [["-- troco para --", 0]], {}, class: "form-control", disabled: true %>
 								<% else %>
 									<%= f.select :money_exchange, [
-										["-- selecione seu troco --", 0],
+										["-- troco para --", 0],
 										["R$ 100,00", 100],
 										["R$ 50,00", 50],
 										["R$ 20,00", 20],

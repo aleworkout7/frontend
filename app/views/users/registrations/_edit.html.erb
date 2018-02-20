@@ -5,20 +5,20 @@
 	<div class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
 		<div class="panel panel-default">
 			<div class="panel-heading">
-				<h3 class="panel-title"><strong>Editar cuenta </strong></h3>
+				<h3 class="panel-title"><strong>Editar conta </strong></h3>
 			</div>
 			<div class="panel-body">
 				<div class="form-group">
-					<%= f.label "Nombre *" %><br />
-					<%= f.text_field :name, autofocus: true, class:"form-control", placeholder:"Ingrese nombre", required: true %>
+					<%= f.label "Nome *" %><br />
+					<%= f.text_field :name, autofocus: true, class:"form-control", placeholder:"Insira o nome", required: true %>
 				</div>
 				<div class="form-group">
 					<%= f.label "Email *" %><br />
-					<%= f.email_field :email, class:"form-control", placeholder:"Ingrese email", required: true, readonly: true %>
+					<%= f.email_field :email, class:"form-control", placeholder:"Insira o email", required: true, readonly: true %>
 				</div>
 				<div class="form-group">
-					<%= f.label "Telefono *" %><br />
-					<%= f.text_field :phone, class:"form-control phone", placeholder:"Ingrese telefono", required: true %>
+					<%= f.label "Telefone *" %><br />
+					<%= f.text_field :phone, class:"form-control phone", placeholder:"Insira o telefone", required: true %>
 				</div>
 
 				<% if @addresses.present? %>
@@ -42,48 +42,50 @@
 					<% end %>
 
 					<div class="form-group">
-						<%= ff.label "Predio *" %><br />
+						<%= ff.label "Prédio *" %><br />
 						<%= ff.select :predio_id, Predio.all.collect { |p| [ p.name, p.id ] }, { prompt: "Elige un predio" }, { class: "predio-select form-control", data: { predio: (session[:predio_id] || predio.try(:id)) }, required: true } %>
 						<span style="display:none;color: red;" id="predio-msg">O prédio deve ser o mesmo prédio da loja que está sendo feito o pedido (<%= (session[:predio_name] || predio.try(:name)) %>)</span>
 					</div>
 					<div class="form-group">
-						<%= ff.label "Numero apartamento" %><br />
-						<%= ff.text_field :number, class:"form-control apartament-field", placeholder:"Ingrese numero apartamento" %>
+						<%= ff.label "Número do apartamento" %><br />
+						<%= ff.text_field :number, class:"form-control apartament-field", placeholder:"Insira número do apartamento" %>
 					</div>
 					<div class="form-group">
 						<%= ff.label "Bloco" %><br />
-						<%= ff.text_field :block, class:"form-control block-field", placeholder:"Ingrese bloco" %>
+						<%= ff.text_field :block, class:"form-control block-field", placeholder:"Insira o bloco" %>
 					</div>
 					<div class="form-group">
-						<%= ff.label "Numero de piso" %><br />
-						<%= ff.number_field :floor, class:"form-control floor-field", placeholder:"Ingrese numero piso" %>
+						<%= ff.label "Número do andar" %><br />
+						<%= ff.number_field :floor, class:"form-control floor-field", placeholder:"Insira número do andar" %>
 					</div>
 					<div class="form-group">
 						<%= ff.label "Complemento" %><br />
-						<%= ff.text_field :complement, class:"form-control complement-field", placeholder:"Ingrese complement" %>
+						<%= ff.text_field :complement, class:"form-control complement-field", placeholder:"Insira complemento" %>
 					</div>
 				<% end %>
 
 				<hr>
 
 				<% if cart.blank? %>
+					<h4>Troca de senha</h4>
+					<hr>
 					<div class="form-group">
-						<%= f.label "Contraseña" %>
+						<%= f.label "Senha" %>
 						<% if @minimum_password_length %>
 							<em>(<%= @minimum_password_length %> caracteres mínimos)</em>
 						<% end %><br />
-						<%= f.password_field :password, autocomplete: "off", class:"form-control", placeholder:"Ingrese contraseña" %>
+						<%= f.password_field :password, autocomplete: "off", class:"form-control", placeholder:"Insira senha" %>
 					</div>
 					<div class="form-group">
-						<%= f.label "Confirmar Contraseña" %><br/>
-						<%= f.password_field :password_confirmation, autocomplete: "off", class:"form-control", placeholder:"Ingrese confirmación de contraseña" %>
+						<%= f.label "Confirmar senha" %><br/>
+						<%= f.password_field :password_confirmation, autocomplete: "off", class:"form-control", placeholder:"Insira confirmação de senha" %>
 					</div>
 
 					<hr>
 
 					<div class="row actions">
 						<div class="col-md-6">
-							<%= f.submit "Editar cuenta", class:"btn btn-sm btn-primary user-submit" %>
+							<%= f.submit "Editar conta", class:"btn btn-sm btn-primary user-submit" %>
 						</div>
 					</div>
 

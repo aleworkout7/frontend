@@ -16,6 +16,10 @@ class Users::RegistrationsController < Devise::RegistrationsController
 	def edit
 		super
 
+		if current_user.address.blank?
+			current_user.addresses << Address.new
+		end
+
 		if params[:cart].present?
 			@predio = Shop.find(params[:cart]).predio
 			session[:predio_id] = @predio.id

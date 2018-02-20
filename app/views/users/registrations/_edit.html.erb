@@ -37,7 +37,7 @@
 				<%= fields_for :addresses, f.object.address do |ff| %>
 					<hr>
 
-					<% if cart.present? && ff.object.id.present? %>
+					<% if cart.present? && ff.object.present? %>
 						<%= ff.hidden_field :id %>
 					<% end %>
 

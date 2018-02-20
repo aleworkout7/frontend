@@ -34,34 +34,36 @@
 					</table>
 				<% end %>
 
-				<%= fields_for :addresses, f.object.address do |ff| %>
-					<hr>
+				<% if f.object.address.present? %>
+					<%= fields_for :addresses, f.object.address do |ff| %>
+						<hr>
 
-					<% if cart.present? && ff.object.present? %>
-						<%= ff.hidden_field :id %>
+						<% if cart.present? %>
+							<%= ff.hidden_field :id %>
+						<% end %>
+
+						<div class="form-group">
+							<%= ff.label "Prédio *" %><br />
+							<%= ff.select :predio_id, Predio.all.collect { |p| [ p.name, p.id ] }, { prompt: "Elige un predio" }, { class: "predio-select form-control", data: { predio: (session[:predio_id] || predio.try(:id)) }, required: true } %>
+							<span style="display:none;color: red;" id="predio-msg">O prédio deve ser o mesmo prédio da loja que está sendo feito o pedido (<%= (session[:predio_name] || predio.try(:name)) %>)</span>
+						</div>
+						<div class="form-group">
+							<%= ff.label "Número do apartamento" %><br />
+							<%= ff.text_field :number, class:"form-control apartament-field", placeholder:"Insira número do apartamento" %>
+						</div>
+						<div class="form-group">
+							<%= ff.label "Bloco" %><br />
+							<%= ff.text_field :block, class:"form-control block-field", placeholder:"Insira o bloco" %>
+						</div>
+						<div class="form-group">
+							<%= ff.label "Número do andar" %><br />
+							<%= ff.number_field :floor, class:"form-control floor-field", placeholder:"Insira número do andar" %>
+						</div>
+						<div class="form-group">
+							<%= ff.label "Complemento" %><br />
+							<%= ff.text_field :complement, class:"form-control complement-field", placeholder:"Insira complemento" %>
+						</div>
 					<% end %>
-
-					<div class="form-group">
-						<%= ff.label "Prédio *" %><br />
-						<%= ff.select :predio_id, Predio.all.collect { |p| [ p.name, p.id ] }, { prompt: "Elige un predio" }, { class: "predio-select form-control", data: { predio: (session[:predio_id] || predio.try(:id)) }, required: true } %>
-						<span style="display:none;color: red;" id="predio-msg">O prédio deve ser o mesmo prédio da loja que está sendo feito o pedido (<%= (session[:predio_name] || predio.try(:name)) %>)</span>
-					</div>
-					<div class="form-group">
-						<%= ff.label "Número do apartamento" %><br />
-						<%= ff.text_field :number, class:"form-control apartament-field", placeholder:"Insira número do apartamento" %>
-					</div>
-					<div class="form-group">
-						<%= ff.label "Bloco" %><br />
-						<%= ff.text_field :block, class:"form-control block-field", placeholder:"Insira o bloco" %>
-					</div>
-					<div class="form-group">
-						<%= ff.label "Número do andar" %><br />
-						<%= ff.number_field :floor, class:"form-control floor-field", placeholder:"Insira número do andar" %>
-					</div>
-					<div class="form-group">
-						<%= ff.label "Complemento" %><br />
-						<%= ff.text_field :complement, class:"form-control complement-field", placeholder:"Insira complemento" %>
-					</div>
 				<% end %>
 
 				<hr>

@@ -8,7 +8,7 @@ class CartController < ApplicationController
 		@cart = extract_cart_with_products_from_session
 		@addresses = current_user.addresses
 									.where(predio_id: @predio.id)
-									.where.not(id: current_user.address.id)
+									.where.not(id: current_user.address.try(:id))
 									.select("distinct on (floor, complement, block, number) *")
 
 		redirect_to predio_shop_path(@predio, @shop) if @cart.blank?

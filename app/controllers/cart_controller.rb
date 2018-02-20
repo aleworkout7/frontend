@@ -6,7 +6,10 @@ class CartController < ApplicationController
 
 	def index
 		@cart = extract_cart_with_products_from_session
-		@addresses = current_user.addresses.where(predio_id: @predio.id).where.not(id: current_user.address.id).distinct
+		@addresses = current_user.addresses
+									.where(predio_id: @predio.id)
+									.where.not(id: current_user.address.id)
+									.select("distinct on (floor, complement, block, number) *")
 
 		redirect_to predio_shop_path(@predio, @shop) if @cart.blank?
 	end

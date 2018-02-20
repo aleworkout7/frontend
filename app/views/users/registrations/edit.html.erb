@@ -1,14 +1,18 @@
 <% if params[:cart].present? %>
-	<div class="alert alert-dismissable alert-danger text-center">
-		<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-		É preciso atualizar seu cadastro antes de realizar o pedido.
-	</div>
+<div class="alert alert-dismissable alert-danger text-center">
+	<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+	É preciso atualizar seu cadastro antes de realizar o pedido.
+</div>
 <% end %>
 
-<%= devise_error_messages! %>
+<%= devise_error_messages!(password_confirmation: "As senhas não correspondem") %>
 
 <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-	<div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+<div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
 <% end %>
 
 <%= render partial: "/users/registrations/edit", locals: { cart: params[:cart], predio: nil } %>
+
+<% if params[:cart].blank? %>
+	<%= render partial: "/users/registrations/password" %>
+<% end %>

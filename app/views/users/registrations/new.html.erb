@@ -1,13 +1,6 @@
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
 
-<% if resource.errors[:password_confirmation].present? %>
-	<div class="alert alert-dismissable alert-danger text-center">
-		<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-		As senhas não correspondem
-	</div>
-<% end %>
-
-<%= devise_error_messages! %>
+<%= devise_error_messages!(password_confirmation: "As senhas não correspondem") %>
 
 <div class="container" style="margin-top:50px">
 	<div class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2 lateral-clean">

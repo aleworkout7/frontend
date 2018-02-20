@@ -8,12 +8,13 @@
 				<h3 class="panel-title"><strong>Editar conta </strong></h3>
 			</div>
 			<div class="panel-body">
+				<br>
 				<div class="form-group">
 					<%= f.label "Nome *" %><br />
 					<%= f.text_field :name, autofocus: true, class:"form-control", placeholder:"Insira o nome", required: true %>
 				</div>
 				<div class="form-group">
-					<%= f.label "Email *" %><br />
+					<%= f.label "E-mail *" %><br />
 					<%= f.email_field :email, class:"form-control", placeholder:"Insira o email", required: true, readonly: true %>
 				</div>
 				<div class="form-group">
@@ -68,38 +69,16 @@
 
 				<hr>
 
-				<% if cart.blank? %>
-					<h4>Troca de senha</h4>
-					<hr>
-					<div class="form-group">
-						<%= f.label "Senha" %>
-						<% if @minimum_password_length %>
-							<em>(<%= @minimum_password_length %> caracteres mínimos)</em>
-						<% end %><br />
-						<%= f.password_field :password, autocomplete: "off", class:"form-control", placeholder:"Insira senha" %>
-					</div>
-					<div class="form-group">
-						<%= f.label "Confirmar senha" %><br/>
-						<%= f.password_field :password_confirmation, autocomplete: "off", class:"form-control", placeholder:"Insira confirmação de senha" %>
-					</div>
-
-					<hr>
-
-					<div class="row actions">
-						<div class="col-md-6">
+				<div class="row actions">
+					<div class="col-md-6">
+						<% if cart.blank? %>
 							<%= f.submit "Editar conta", class:"btn btn-sm btn-primary user-submit" %>
-						</div>
-					</div>
-
-				<% else %>
-
-					<div class="row actions">
-						<div class="col-md-6">
+						<% else %>
 							<%= f.submit "Confirmar", class:"btn btn-sm btn-success user-submit" %>
-						</div>
+						<% end %>
 					</div>
+				</div>
 
-				<% end %>
 			</div>
 		</div>
 	</div>

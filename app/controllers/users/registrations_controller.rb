@@ -90,11 +90,13 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
 	protected
 
-	def update_resource(resource, params)
+	def update_resource(resource, uparams)
 		if params[:cart].present?
-			resource.update_without_password(params)
+			resource.update_without_password(uparams)
+		elsif params[:update_password].present?
+			resource.update_with_password(uparams)
 		else
-			resource.update(params)
+			resource.update(uparams)
 		end
 	end
 end

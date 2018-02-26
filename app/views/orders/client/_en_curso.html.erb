@@ -12,7 +12,7 @@
 		</tr>
 	</thead>
 	<tbody>
-		<% orders_by_status(orders, status).each do |order| %>
+		<% orders_by_id(orders, id).each do |order| %>
 			<tr>
 				<th>#<%= order.id %></th>
 				<th><%= order.shop.predio.name %></th>

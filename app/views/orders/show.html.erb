@@ -23,13 +23,9 @@
 					<td><%= format_datetime @order.status.created_at %></td>
 				</tr>
 				<tr>
-					<th>Telefone do vendedor:</th>
-					<td><%= @order.shop.user.phone %></td>
-				</tr>
-				<tr>
 					<td>
 						<br/>
-						<%= link_to 'Voltar', to_shops_orders_path, class: "btn btn-success" %>
+						<%= link_to 'Ver meus pedidos', to_shops_orders_path, class: "btn btn-success" %>
 					</td>
 				</tr>
 			</table>

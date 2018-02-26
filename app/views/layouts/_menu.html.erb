@@ -14,7 +14,7 @@
 
 		<li><%= link_to "Inicio", root_path %></li>
 		<li><%= link_to "Assinaturas", pagos_path %></li>
-		<li><%= link_to "Consultas", new_contact_path %></li>
+		<li><%= link_to "Fale conosco", new_contact_path %></li>
 
 		<% if user_signed_in? %>
 			<li><%= link_to "Minhas lojas", user_shops_path(current_user) %></li>
@@ -30,8 +30,6 @@
 				<li><%= link_to "Municipios", cities_path %></li>
 
 				<li><%= link_to "Categories", categories_path %></li>
-				<li><%= link_to "Bancos", bancos_path %></li>
-				<li><%= link_to "Tipos de cuenta", accounts_path %></li>
 			<% end %>
 		<% end %>
 	</ul>

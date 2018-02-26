@@ -1,18 +1,10 @@
 <div class="container">
-	<b>Datos de cuenta bancaria</b><br/><br/>
-	<p>CuentaRUT: <b>18329606</b></p>
-	<p>RUT: <b>18329606-K</b></p>
-	<p>Nombre: <b>Alejandro G. Navarro</b></p>
-	<p>Email: <b>prediosaplicativo@gmail.com</b></p>
-	<hr />
-	<p>1 mes de membresía:</p><b>$6000.-</b><br/>
-	<hr />
 
 	<% if user_signed_in? %>
 
 		<% unless current_user.has_subscription? %>
 
-			<%= link_to "Assinar", mp_do_subscription_path, class: "btn btn-success" %>
+			<%= link_to "Iniciar 15 dias gratis", mp_do_subscription_path, class: "btn btn-success" %>
 
 		<% else %>
 

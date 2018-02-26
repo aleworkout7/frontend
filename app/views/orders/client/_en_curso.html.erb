@@ -1,6 +1,7 @@
 <table class='table table-hover'>
 	<thead>
 		<tr>
+			<th>#</th>
 			<th>Prédio</th>
 			<th>Loja</th>
 			<th>Cliente</th>
@@ -13,6 +14,7 @@
 	<tbody>
 		<% orders_by_status(orders, status).each do |order| %>
 			<tr>
+				<th>#<%= order.id %></th>
 				<th><%= order.shop.predio.name %></th>
 				<th><%= order.shop.name %></th>
 				<td><%= order.user.name %></td>
@@ -22,7 +24,7 @@
 
 				<td>
 					<%= link_to 'Ver detalhes', show_from_clients_orders_path(status.try(:downcase), order), class: "btn btn-xs" %>
-					<%= link_to 'Aceitar pedido', order_accept_path(order), class: "btn btn-success btn-xs", "data-confirm": "Seguro desea aceitar el pedido" %>
+					<%= link_to 'Aceitar pedido', order_accept_path(order), class: "btn btn-success btn-xs", "data-confirm": "Tem certeza de que deseja aceitar o pedido?" %>
 					<%= link_to 'Cancelar pedido', order_canceling_path(order, status: OrderStatus::EN_CURSO), class: "btn btn-primary btn-xs" %>
 				</td>
 			</tr>

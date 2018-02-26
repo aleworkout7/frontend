@@ -23,6 +23,16 @@
 					<td><%= format_datetime @order.status.created_at %></td>
 				</tr>
 				<tr>
+					<th>Meu endereço informado:</th>
+					<% address = @order.user.address %>
+					<td>Prédio: <%= address.predio.name %></td>
+					<td>Bloco: <%= address.block %></td>
+					<td>Apartamento: <%= address.number %></td>
+					<td>Andar: <%= address.floor %></td>
+					<td>Complemento: <%= address.complement %></td>
+					<td><%= link_to 'Atualizar meu endereço', registration_path %></td>
+				</tr>
+				<tr>
 					<td>
 						<br/>
 						<%= link_to 'Ver meus pedidos', to_shops_orders_path, class: "btn btn-success" %>

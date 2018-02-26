@@ -3,7 +3,7 @@
 
 		<div style="margin: 5%;">
 			<div class="modal-header">
-				<h4 class="modal-title" id="small-modal-label">Carro de Compra</h4>
+				<h4 class="modal-title" id="small-modal-label">Carrinho de Compras</h4>
 			</div>
 
 			<div class="modal-body">
@@ -53,7 +53,7 @@
 							</div>
 
 							<div align="center" class="col-sm-1">
-								<%= link_to "Remove", remove_from_cart_predio_shop_path(@predio, @shop, product), "data-confirm": "Tem certeza?", "data-method": "delete" %>
+								<%= link_to "Excluir", remove_from_cart_predio_shop_path(@predio, @shop, product), "data-confirm": "Tem certeza?", "data-method": "delete" %>
 							</div>
 						</div>
 						<hr/>
@@ -61,9 +61,16 @@
 
 						<div class="row">
 							<div class="col-md-12">
-								<%= f.text_area :observation, class: "form-control", placeholder: "Insira aqui observações sobre seu pedido para o vendedor..." %>
+								<% if @shop.predio.id != current_user.address.try(:predio).try(:id) %>
+									<%= f.text_area :observation, class: "form-control", placeholder: "(opcional) Insira aqui observações sobre seu pedido para o vendedor...", disabled: true %>
+								<% else %>
+									<%= f.text_area :observation, class: "form-control", placeholder: "(opcional) Insira aqui observações sobre seu pedido para o vendedor..." %>
+								<% end %>
 							</div>
 							<div class="col-md-6" style="padding:12px;">
+								<% if @shop.predio.id != current_user.address.try(:predio).try(:id) %>
+									<%= f.select :money_exchange, [["-- troco para --", 0]], {}, class: "form-control", disabled: true %>
+								<% else %>
 									<%= f.select :money_exchange, [
 										["-- troco para --", 0],
 										["R$ 100,00", 100],
@@ -73,6 +80,7 @@
 										["R$ 5,00", 5],
 										["R$ 2,00", 2]
 									], {}, class: "form-control" %>
+								<% end %>
 							</div>
 							<div class="col-md-6" style="padding:12px;text-align: right;">
 								<strong>Total: <span id="cart-total-price"><%= calculate_total_cart @cart %></span></strong>
@@ -86,8 +94,10 @@
 				<div class="row actions">
 					<div align="center" class="col-sm-12">
 						<%= link_to "Vaciar carro", clear_cart_predio_shop_path(@predio, @shop), class: "btn btn-primary", "data-toggle": "modal", "data-target": "#vacia-modal" %>
-						<%= link_to "Voltar para loja", predio_shop_path(@predio, @shop), class: "btn" %>
-						<% if !current_user.valid_register? %>
+						<%= link_to "Voltar para loja", predio_shop_path(@predio, @shop), class: "btn btn-warning" %>
+						<% if @shop.predio.id != current_user.address.try(:predio).try(:id) %>
+							<%= submit_tag "Confirmar pedido", name: nil, class: "btn btn-success", disabled: true %>
+						<% elsif !current_user.valid_register? %>
 							<%= submit_tag "Confirmar pedido", name: nil, class: "btn btn-success btn-cart-submit" %>
 						<% else %>
 							<%= submit_tag "Confirmar pedido", name: nil, class: "btn btn-success", disable_with: "Confirmando...", "data-confirm": "Tem certeza de que deseja confirmar o pedido?" %>
@@ -99,12 +109,25 @@
 	<% end %>
 
 	<!-- CONFIRMAR PREDIO -->
+	<% if @predio.id != current_user.address.try(:predio).try(:id) %>
+		<div class="text-center row">
+			<h4>Você está no <%= @predio.name %>?</h4>
 
-	
+			<%= form_for(current_user, as: :user, url: registration_path(:user), html: { method: :put }) do |f| %>
+				<%= f.hidden_field :email, value: current_user.email %>
+				<%= hidden_field_tag :cart, @shop.id %>
+				<%= fields_for :addresses, f.object.address do |ff| %>
+					<%= ff.hidden_field :predio_id, value: @predio.id %>
+				<% end %>
+
+				<%= f.submit "Clique aqui para confirmar", name: nil, class: "btn btn-success", disable_with: "Confirmando...", "data-confirm": "Confimar que você está no #{@predio.name}?" %>
+			<% end %>
+		</div>
+	<% else %>
 		<div class="text-center row">
 			<h4 class="alert alert-info">Você está comprando no <%= @predio.name %></h4>
 		</div>
-	
+	<% end %>
 
 	<%= render partial: "modal_clear_cart" %>
 	<%

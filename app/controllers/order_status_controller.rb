@@ -7,7 +7,7 @@ class OrderStatusController < ApplicationController
 			if order.is_canceled?
 				format.html { redirect_to from_clients_orders_path(status: OrderStatus::CANCELADO.downcase), notice: 'Pedido foi cancelado pelo cliente.' }
 			else
-				order_status = OrderStatus.new(order_id: params[:order_id], user_id: current_user.id, status: OrderStatus::ACEPTADO)
+				order_status = OrderStatus.new(order_id: params[:order_id], user_id: current_user.id, status: OrderStatus::ACEITO)
 				if order_status.save
 					format.html { redirect_to from_clients_orders_path(status: OrderStatus::ACEITO.downcase), notice: 'Pedido aceito.' }
 				else

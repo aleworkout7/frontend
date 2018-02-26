@@ -30,7 +30,7 @@
 				<td>
 					<%= link_to 'Ver detalhes', show_from_clients_orders_path(status.try(:downcase), order), class: "btn btn-xs" %>
 					<%= link_to 'Marcar como entregue', order_finish_path(order), class: "btn btn-success btn-xs", "data-confirm": "Tem certeza? O pedido ficará como entregue" %>
-					<%= link_to 'Cancelar pedido', order_canceling_path(order, status: OrderStatus::ACEPTADO), class: "btn btn-primary btn-xs" %>
+					<%= link_to 'Cancelar pedido', order_canceling_path(order, status: OrderStatus::ACEITO), class: "btn btn-primary btn-xs" %>
 				</td>
 			</tr>
 		<% end %>

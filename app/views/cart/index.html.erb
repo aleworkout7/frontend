@@ -95,12 +95,10 @@
 					<div align="center" class="col-sm-12">
 						<%= link_to "Vaciar carro", clear_cart_predio_shop_path(@predio, @shop), class: "btn btn-primary", "data-toggle": "modal", "data-target": "#vacia-modal" %>
 						<%= link_to "Voltar para loja", predio_shop_path(@predio, @shop), class: "btn" %>
-						<% if @shop.predio.id != current_user.address.try(:predio).try(:id) %>
-							<%= submit_tag "Confirmar pedido", name: nil, class: "btn btn-success", disabled: true %>
-						<% elsif !current_user.valid_register? %>
+						<% if !current_user.valid_register? %>
 							<%= submit_tag "Confirmar pedido", name: nil, class: "btn btn-success btn-cart-submit" %>
 						<% else %>
-							<%= submit_tag "Confirmar pedido", name: nil, class: "btn btn-success", disable_with: "Confirmando...", "data-confirm": "Seguro desea confimar el pedido" %>
+							<%= submit_tag "Confirmar pedido", name: nil, class: "btn btn-success", disable_with: "Confirmando...", "data-confirm": "Tem certeza de que deseja confirmar o pedido?" %>
 						<% end %>
 					</div>
 				</div>
@@ -109,25 +107,12 @@
 	<% end %>
 
 	<!-- CONFIRMAR PREDIO -->
-	<% if @predio.id != current_user.address.try(:predio).try(:id) %>
-		<div class="text-center row">
-			<h4>Você está no <%= @predio.name %>?</h4>
 
-			<%= form_for(current_user, as: :user, url: registration_path(:user), html: { method: :put }) do |f| %>
-				<%= f.hidden_field :email, value: current_user.email %>
-				<%= hidden_field_tag :cart, @shop.id %>
-				<%= fields_for :addresses, f.object.address do |ff| %>
-					<%= ff.hidden_field :predio_id, value: @predio.id %>
-				<% end %>
-
-				<%= f.submit "Clique aqui para confirmar", name: nil, class: "btn btn-success", disable_with: "Confirmando...", "data-confirm": "Confimar que você está no #{@predio.name}?" %>
-			<% end %>
-		</div>
-	<% else %>
+	
 		<div class="text-center row">
 			<h4 class="alert alert-info">Você está comprando no <%= @predio.name %></h4>
 		</div>
-	<% end %>
+	
 
 	<%= render partial: "modal_clear_cart" %>
 	<%

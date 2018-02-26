@@ -7,9 +7,9 @@ class OrderStatusController < ApplicationController
 			if order.is_canceled?
 				format.html { redirect_to from_clients_orders_path(status: OrderStatus::CANCELADO.downcase), notice: 'Pedido foi cancelado pelo cliente.' }
 			else
-				order_status = OrderStatus.new(order_id: params[:order_id], user_id: current_user.id, status: OrderStatus::ACEITO)
+				order_status = OrderStatus.new(order_id: params[:order_id], user_id: current_user.id, status: OrderStatus::ACEPTADO)
 				if order_status.save
-					format.html { redirect_to from_clients_orders_path(status: OrderStatus::ACEITO.downcase), notice: 'Pedido aceito.' }
+					format.html { redirect_to from_clients_orders_path(status: OrderStatus::ACEPTADO.downcase), notice: 'Pedido aceito.' }
 				else
 					format.html { redirect_to from_clients_orders_path }
 				end
@@ -27,7 +27,7 @@ class OrderStatusController < ApplicationController
 			else
 				order_status = OrderStatus.new(order_id: params[:order_id], user_id: current_user.id, status: OrderStatus::FINALIZADO)
 				if order_status.save
-					format.html { redirect_to from_clients_orders_path(status: OrderStatus::FINALIZADO.downcase), notice: 'Pedido entregue.' }
+					format.html { redirect_to from_clients_orders_path(status: OrderStatus::FINALIZADO.downcase), notice: 'Pedido finalizado.' }
 				else
 					format.html { redirect_to from_clients_orders_path }
 				end

@@ -4,10 +4,10 @@ class OrderStatus < ActiveRecord::Base
 
 	after_save :notify_users
 
-	EN_CURSO = 'EN_CURSO'
-	ACEPTADO = 'ACEPTADO'
+	EN_CURSO = 'EM ANDAMENTO'
+	ACEPTADO = 'ACEITO'
 	CANCELADO = 'CANCELADO'
-	FINALIZADO = 'FINALIZADO'
+	FINALIZADO = 'ENTREGUE'
 
 	def self.constants
         [

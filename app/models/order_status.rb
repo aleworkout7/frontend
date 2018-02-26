@@ -4,7 +4,7 @@ class OrderStatus < ActiveRecord::Base
 
 	after_save :notify_users
 
-	EN_CURSO = 'EM ANDAMENTO'
+	EN_CURSO = 'EM_ANDAMENTO'
 	ACEPTADO = 'ACEITO'
 	CANCELADO = 'CANCELADO'
 	FINALIZADO = 'ENTREGUE'

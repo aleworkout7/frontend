@@ -25,7 +25,7 @@ class OrdersController < ApplicationController
 		end
 
 		@orders = Order.clients_orders(current_user)
-		@status = params[:status].downcase
+		@status = params[:id].downcase
 		render "orders/client/index"
 	end
 

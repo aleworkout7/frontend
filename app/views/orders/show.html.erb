@@ -25,12 +25,30 @@
 				<tr>
 					<th>Meu endereço informado:</th>
 					<% address = @order.user.address %>
-					<td>Prédio: <%= address.predio.name %></td>
-					<td>Bloco: <%= address.block %></td>
-					<td>Apartamento: <%= address.number %></td>
-					<td>Andar: <%= address.floor %></td>
-					<td>Complemento: <%= address.complement %></td>
-					<td><%= link_to 'Atualizar meu endereço', registration_path(current_user) %></td>
+				</tr>
+				<tr>
+					<th>Prédio:</th>
+					<td><%= address.predio.name %></td>	
+				</tr>
+				<tr>
+					<th>Bloco:</th>
+					<td><%= address.block %></td>
+				</tr>
+				<tr>
+					<th>Apartamento:</th>
+					<td><%= address.number %></td>
+				</tr>
+				<tr>
+					<th>Andar:</th>
+					<td><%= address.floor %></td>
+				</tr>
+				<tr>
+					<th>Complemento:</th>
+					<td><%= address.complement %></td>
+				</tr>
+				<tr>
+					<th></th>
+					<td><%= link_to 'Atualizar meu endereço agora', edit_user_registration_path %></td>
 				</tr>
 				<tr>
 					<td>

@@ -3,8 +3,9 @@
 	<% if user_signed_in? %>
 
 		<% unless current_user.has_subscription? %>
-
-			<%= link_to "Iniciar 15 dias gratis", mp_do_subscription_path, class: "btn btn-success" %>
+			
+			<p>A primeira assinatura sempre tem 15 dias gratis e pode cancelar quando quiser!</p>
+			<%= link_to "Assinar", mp_do_subscription_path, class: "btn btn-success" %>
 
 		<% else %>
 
@@ -51,7 +52,7 @@
 
 			<hr>
 
-			<%= link_to "Cancelar Assinatura", mp_cancel_subscription_path, class: "btn btn-primary", "data-confirm": "Seguro desea cancelar a assinatura?" %>
+			<%= link_to "Cancelar Assinatura", mp_cancel_subscription_path, class: "btn btn-primary", "data-confirm": "Tem certeza de que deseja cancelar sua assinatura?" %>
 		<% end %>
 
 	<% else %>

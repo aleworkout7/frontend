@@ -5,7 +5,7 @@
 	<table class="table table-hover table-striped">
 		<thead>
 			<tr>
-				<th>Email</th>
+				<th>E-mail</th>
 				<th>Telefone</th>
 				<th>Cidade</th>
 				<th>Comentários</th>
@@ -27,7 +27,7 @@
 						<%= link_to 'Responder', edit_contact_path(contact), class: "btn btn-success btn-sm" %>
 					<% end %>
 					
-					<%= link_to 'Eliminar', contact, method: :delete, class: "btn btn-primary btn-sm", data: { confirm: 'Tem certeza que deseja excluir?' } %>
+					<%= link_to 'Excluir', contact, method: :delete, class: "btn btn-primary btn-sm", data: { confirm: 'Tem certeza que deseja excluir?' } %>
 				</td>
 			</tr>
 			<% end %>

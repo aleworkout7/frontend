@@ -16,7 +16,7 @@
 				<%= form_for(Contact.new, url: queries_path, method: :post) do |f| %>
 					<div class="form-group">
 						<%= f.label :email %><br>
-						<%= f.email_field :email, class:"form-control black-border", required: true, placeholder: "Insira seu email aqui" %>
+						<%= f.email_field :email, class:"form-control black-border", required: true, placeholder: "Insira seu e-mail aqui" %>
 					</div>
 					<div class="form-group">
 						<%= f.label 'Telefone' %><br>
@@ -31,7 +31,7 @@
 						<%= f.text_area :comment, class:"form-control black-border", required: true, rows: 5, placeholder: "Insira seu comentário aqui" %>
 					</div>
 					<div class="actions">
-						<%= f.submit "Salvar", class: "btn btn-success" %>
+						<%= f.submit "Enviar", class: "btn btn-success" %>
 					</div>
 				<% end %>
 			</div>

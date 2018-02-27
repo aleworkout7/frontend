@@ -6,7 +6,7 @@ class ShopsController < ApplicationController
 
 	# GET /predios/:predio_id/shops
 	def index
-		@shops = Shop.search({ predio_id: @predio.id, search: params[:search], available: :true }).published
+		@shops = Shop.search({ predio_id: @predio.id, search: params[:search] }).published
 	end
 
 	# GET /shops/1

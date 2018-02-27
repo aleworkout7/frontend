@@ -19,13 +19,9 @@
 		<%= f.text_field :name, autofocus: true, class:"form-control black-border", placeholder:"Nome da loja" %>
 	</div>
 	<div class="form-group">
-		<%= f.label "Número de contato" %><br>
-		<%= f.text_field :number, class:"form-control black-border", placeholder:"Número de contato" %>
-	</div>
-	<div class="form-group">
 		<%= f.label 'Foto da loja' %><br>
 		<label class="fileContainer">
-			Tamanho sugerido para imagem da loja (400x100)
+			Tamanho sugerido para imagem da loja (400x300)
 			<%= f.file_field :image %>
 		</label>
 	</div>
@@ -35,12 +31,12 @@
 		<%= text_field_tag :predio_name, @predio.name, class: 'form-control black-border', disabled: true %>
 	</div>
 	<div class="form-group">
-		<%= f.label "Categoria de loja" %><br>
+		<%= f.label "Categoria da loja" %><br>
 		<%= f.collection_select :category_id, @categories, :id, :name,{}, {class: 'form-control black-border'} %>
 	</div>
 	<div class="actions">
 		<hr>
-		<%= f.submit "Listo", class:"btn btn-sm btn-primary btn-black", style:'text-align: center' %>
+		<%= f.submit "Salvar", class:"btn btn-sm btn-primary btn-black", style:'text-align: center' %>
 	</div>
 	<br />
 <% end %>

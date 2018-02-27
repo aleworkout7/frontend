@@ -6,7 +6,7 @@ class ShopsController < ApplicationController
 
 	# GET /predios/:predio_id/shops
 	def index
-		@shops = Shop.search({ predio_id: @predio.id, search: params[:search] }).published
+		@shops = Shop.search({ predio_id: @predio.id, search: params[:search], available: true }).published
 	end
 
 	# GET /shops/1
@@ -36,7 +36,7 @@ class ShopsController < ApplicationController
 		@shop.user_id = current_user.id if current_user
 		respond_to do |format|
 			if @shop.save
-				format.html { redirect_to predio_shop_path(@predio, @shop), notice: 'Tienda creada exitosamente.' }
+				format.html { redirect_to predio_shop_path(@predio, @shop), notice: 'Loja criada com successo.' }
 				format.json { render :show, status: :created, location: @shop }
 			else
 				format.html { render :new }
@@ -50,7 +50,7 @@ class ShopsController < ApplicationController
 	def update
 		respond_to do |format|
 			if @shop.update(shop_params)
-				format.html { redirect_to predio_shop_path(@predio, @shop), notice: 'Tienda actualizada exitosamente.' }
+				format.html { redirect_to predio_shop_path(@predio, @shop), notice: 'Loja atualizada com successo.' }
 				format.json { render :show, status: :ok, location: @shop }
 			else
 				format.html { render :edit }
@@ -67,7 +67,7 @@ class ShopsController < ApplicationController
 		end
 
 		respond_to do |format|
-			format.html { redirect_to predio_shops_path(@predio), notice: 'Tienda eliminada exitosamente.' }
+			format.html { redirect_to predio_shops_path(@predio), notice: 'Loja excluida com successo.' }
 			format.json { head :no_content }
 		end
 	end
@@ -91,6 +91,6 @@ class ShopsController < ApplicationController
 
 	# Never trust parameters from the scary internet, only allow the white list through.
 	def shop_params
-		params.require(:shop).permit(:image, :name, :greeting, :number, :whatsapp, :phone, :user_id, :predio_id, :category_id, :available)
+		params.require(:shop).permit(:image, :name, :user_id, :predio_id, :category_id, :available)
 	end
 end

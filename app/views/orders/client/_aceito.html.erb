@@ -1,38 +1,41 @@
-<table class='table table-hover'>
-	<thead>
-		<tr>
-			<th>#</th>
-			<th>Prédio</th>
-			<th>Loja</th>
-			<th>Cliente</th>
-			<th>Aceito em</th>
-			<th>Tempo que levou aceitarlo</th>
-			<th>Valor</th>
-			<th>Status</th>
-			<th>Telefone do cliente</th>
-
-			<th></th>
-		</tr>
-	</thead>
-	<tbody>
-		<% orders_by_status(orders, status).each do |order| %>
-			<tr>
-				<th>#<%= order.id %></th>
-				<th><%= order.shop.predio.name %></th>
-				<th><%= order.shop.name %></th>
-				<td><%= order.user.name %></td>
-				<td><%= format_datetime order.status.created_at %></td>
-				<td><%= time_spent_between_last_status(order) %></td>
-				<td><%= format_currency order.total %></td>
-				<td><%= status %></td>
-				<td><%= order.user.phone %></td>
-
-				<td>
-					<%= link_to 'Ver detalhes', show_from_clients_orders_path(status.try(:downcase), order), class: "btn btn-xs" %>
-					<%= link_to 'Marcar como entregue', order_finish_path(order), class: "btn btn-success btn-xs", "data-confirm": "Tem certeza? O pedido ficará como entregue" %>
-					<%= link_to 'Cancelar pedido', order_canceling_path(order, status: OrderStatus::ACEPTADO), class: "btn btn-primary btn-xs" %>
-				</td>
-			</tr>
-		<% end %>
-	</tbody>
-</table>
+<div id="no-more-tables">
+            <table class="col-md-12 table-bordered table-striped table-condensed cf">
+        		<thead class="cf">
+        			<tr>
+        				<th>#</th>
+        				<th>Prédio</th>
+        				<th>Loja</th>
+        				<th>Cliente</th>
+        				<th>Aceito depois de</th>
+        				<th>Depois de</th>
+        				<th>Valor</th>
+        				<th>Status</th>
+        				<th>Telefone do cliente</th>
+        			</tr>
+        		</thead>
+				<tbody>
+					<% orders_by_status(orders, status).each do |order| %>
+        			<tr>
+        				<td data-title="#">#<%= order.id %></td>
+        				<td data-title="Prédio"><%= order.shop.predio.name %></td>
+        				<td data-title="Loja"><%= link_to order.shop.name, predio_shop_path(order.shop.predio, order.shop) %></td>
+        				<td data-title="Cliente"><%= order.user.name %></td>
+        				<td data-title="Aceito em"><%= format_datetime order.status.created_at %></td>
+        				<td data-title="Aceito depois de"><%= time_spent_between_last_status(order) %></td>
+        				<td data-title="Valor"><%= format_currency order.total %></td>
+        				<td data-title="Status"><%= status %></td>
+        				<td data-title="Telefone do cliente"><%= order.user.phone %></td>
+        				<td>
+							<%= link_to 'Ver detalhes', show_from_clients_orders_path(status.try(:downcase), order), class: "btn btn-xs" %>
+						</td>
+						<td>
+							<%= link_to 'Marcar como entregue', order_finish_path(order), class: "btn btn-success btn-xs", "data-confirm": "Tem certeza? O pedido ficará como entregue" %>
+						</td>
+						<td>
+							<%= link_to 'Cancelar pedido', order_canceling_path(order, status: OrderStatus::ACEPTADO), class: "btn btn-primary btn-xs" %>
+						</td>
+        			</tr>
+        			<% end %>
+   				 </tbody>
+    		</table>
+</div>

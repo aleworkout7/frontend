@@ -1,37 +1,40 @@
-<table class='table table-hover'>
-	<thead>
-		<tr>
-			<th>#</th>
-			<th>Prédio</th>
-			<th>Loja</th>
-			<th>Nome do cliente</th>
-			<th>Valor</th>
-			<th>Tempo total de duração do pedido</th>
-			<th>Entregue em</th>
-			<th></th>
-		</tr>
-	</thead>
-	<tbody>
-		<% orders_by_status(orders, status).each do |order| %>
-			<tr>
-				<th>#<%= order.id %></th>
-				<th><%= order.shop.predio.name %></th>
-				<td><%= link_to order.shop.name, predio_shop_path(order.shop.predio, order.shop) %></td>
-				<td><%= order.user.name %></td>
-				<td><%= format_currency order.total %></td>
-				<td><%= time_spent_between_last_status order %></td>
-				<td><%= format_datetime order.status.created_at %></td>
-
-				<td><%= link_to 'Ver detalhes', show_from_clients_orders_path(status.try(:downcase), order) %></td>
-			</tr>
-		<% end %>
-	</tbody>
-</table>
-
 <% unless orders_by_status(orders, status).blank? %>
 <div class="row">
 	<div class="col-md-12">
-		<strong>Total:</strong> <i><%= format_currency orders_by_status(orders, status).sum(&:total) %></i>
+		<strong>Total em pedidos entregues:</strong> <i><%= format_currency orders_by_status(orders, status).sum(&:total) %></i>
 	</div>
 </div>
 <% end %>
+<div id="no-more-tables">
+            <table class="col-md-12 table-bordered table-striped table-condensed cf">
+        		<thead class="cf">
+        			<tr>
+        				<th>#</th>
+						<th>Prédio</th>
+						<th>Loja</th>
+						<th>Cliente</th>
+						<th>Valor</th>
+						<th>Duração do pedido</th>
+						<th>Entregue em</th>
+					</tr>
+        		</thead>
+				<tbody>
+					<% orders_by_status(orders, status).each do |order| %>
+        			<tr>
+        				<td data-title="#">#<%= order.id %></td>
+        				<td data-title="Prédio"><%= order.shop.predio.name %></td>
+        				<td data-title="Loja"><%= link_to order.shop.name, predio_shop_path(order.shop.predio, order.shop) %></td>
+        				<td data-title="Cliente"><%= order.user.name %></td>
+        				
+        				<td data-title="Valor"><%= format_currency order.total %></td>
+        				<td data-title="Duração do pedido"><%= time_spent_between_last_status order %></td>
+        				<td data-title="Entregue em"><%= format_datetime order.status.created_at %></td>
+        				
+        				<td>
+							<%= link_to 'Ver detalhes', show_from_clients_orders_path(status.try(:downcase), order), class: "btn btn-xs" %>
+						</td>
+        			</tr>
+        			<% end %>
+   				 </tbody>
+    		</table>
+</div>

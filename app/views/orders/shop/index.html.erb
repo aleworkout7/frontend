@@ -13,7 +13,10 @@
 				<% end %>
 			</div>
 
-			<%= render partial: "orders/shop/#{@status}.html.erb", locals: { status: @status.upcase, orders: @orders } %>
+			
 		</div>
+		
+		<%= render partial: "orders/shop/#{@status}.html.erb", locals: { status: @status.upcase, orders: @orders } %>
+	
 	</div>
 </div>

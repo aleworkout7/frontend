@@ -1,29 +1,31 @@
-<table class='table table-hover'>
-	<thead>
-		<tr>
-			<th>Prédio</th>
-			<th>Loja</th>
-			<th>Status</th>
-			<th>Criado em</th>
-			<th>Valor</th>
-
-			<th></th>
-		</tr>
-	</thead>
-	<tbody>
-		<% orders_by_status(orders, status).each do |order| %>
-			<tr>
-				<td><%= order.shop.predio.name %></td>
-				<td><%= order.shop.name %></td>
-				<td><%= status %></td>
-				<td><%= format_datetime order.status.created_at %></td>
-				<td><%= format_currency order.total %></td>
-
-				<td>
-					<%= link_to 'Ver detalhes', show_to_shops_orders_path(status.try(:downcase), order), class: "btn btn-xs" %>
-					<%= link_to 'Cancelar pedido', order_canceling_path(order, status: OrderStatus::EN_CURSO), class: "btn btn-primary btn-xs" %>
-				</td>
-			</tr>
-		<% end %>
-	</tbody>
-</table>
+<div id="no-more-tables">
+            <table class="col-md-12 table-bordered table-striped table-condensed cf">
+        		<thead class="cf">
+        			<tr>
+        				<th>Prédio</th>
+						<th>Loja</th>
+						<th>Status</th>
+						<th>Criado em</th>
+						<th>Valor</th>
+        			</tr>
+        		</thead>
+				<tbody>
+					<% orders_by_status(orders, status).each do |order| %>
+        			<tr>
+        				<td data-title="Prédio"><%= order.shop.predio.name %></td>
+        				<td data-title="Loja"><%= link_to order.shop.name, predio_shop_path(order.shop.predio, order.shop) %></td>
+        				<td data-title="Status"><%= status %></td>
+           				<td data-title="Criado em"><%= format_datetime order.status.created_at %></td>
+        				<td data-title="Valor"><%= format_currency order.total %></td>
+        				
+        				<td>
+							<%= link_to 'Ver detalhes', show_to_shops_orders_path(status.try(:downcase), order), class: "btn btn-xs" %>
+						</td>
+						<td>
+							<%= link_to 'Cancelar pedido', order_canceling_path(order, status: OrderStatus::EN_CURSO), class: "btn btn-primary btn-xs" %>
+						</td>
+        			</tr>
+        			<% end %>
+   				 </tbody>
+    		</table>
+</div>

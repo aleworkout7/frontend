@@ -6,15 +6,15 @@ class Shop < ActiveRecord::Base
 	belongs_to :predio
 	belongs_to :category
 	has_many :products, :dependent => :destroy
-	has_many :orders, :dependent => :nullify
+	has_many :orders
 
 	validates :name, :predio_id, presence: true
 
 
-	after_destroy :cancel_orders
+	before_destroy :cancel_orders
 
 	def cancel_orders
-		@orders = Order.where(shop_id: nil)
+		@orders = self.orders.includes(:order_statuses)
 		@orders.each do |o|
 			unless o.is_canceled?
 				order_status = OrderStatus.new
@@ -22,7 +22,10 @@ class Shop < ActiveRecord::Base
 				order_status.user_id = self.user_id
 				order_status.observation = "Serviço não disponivel"
 				order_status.status = OrderStatus::CANCELADO
-				order_status.save
+
+				o.shop_id = nil
+				o.order_statuses << order_status
+				o.save
 			end
 		end
 

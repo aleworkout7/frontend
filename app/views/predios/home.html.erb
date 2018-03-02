@@ -18,7 +18,14 @@
 
 	<div class="row">
 		<div class="col-md-12">
-			<br><br>
+			<% if @predios.present? %>
+				<hr>
+				<div class="text-center">
+					<h2 class="label label-primary" style="font-size: 14px; padding: 6px 10px; border-radius: 50px 50px 50px;"><%= @predios.count %></h2>
+				</div>
+				<hr>
+			<% end %>
+
 			<%= text_field_tag :search, nil, class: "form-control search-predios", placeholder: "Procure seu prédio" %>
 		</div>
 	</div>

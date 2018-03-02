@@ -17,7 +17,7 @@
 
 			<% if user_signed_in? && current_user.is_my_shop?(@shop) %>
 				<%= link_to 'Editar', edit_predio_shop_product_path(@predio, @shop, product), role: 'button', class: 'btn btn-success btn-sm' %>
-				<%= link_to 'Eliminar', predio_shop_product_path(@predio, @shop, product), method: :delete, data: { confirm: 'Tem certeza que deseja excluir o produto?' }, role: 'button', class: 'btn btn-success btn-sm' %>
+				<%= link_to 'Eliminar', predio_shop_product_path(@predio, @shop, product), method: :delete, data: { confirm: 'Ao eliminar este produto os pedidos em andamento ou aceitos serão cancelados. Continuar?' }, role: 'button', class: 'btn btn-success btn-sm' %>
 			<% end %>
 		</div>
 

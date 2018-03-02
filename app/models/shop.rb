@@ -6,8 +6,28 @@ class Shop < ActiveRecord::Base
 	belongs_to :predio
 	belongs_to :category
 	has_many :products, :dependent => :destroy
+	has_many :orders, :dependent => :nullify
 
 	validates :name, :predio_id, presence: true
+
+
+	after_destroy :cancel_orders
+
+	def cancel_orders
+		@orders = Order.where(shop_id: nil)
+		@orders.each do |o|
+			unless o.is_canceled?
+				order_status = OrderStatus.new
+				order_status.order_id = o.id
+				order_status.user_id = self.user_id
+				order_status.observation = "Serviço não disponivel"
+				order_status.status = OrderStatus::CANCELADO
+				order_status.save
+			end
+		end
+
+		true
+	end
 
 	def validate
 		true

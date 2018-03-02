@@ -14,8 +14,20 @@
 	<tbody>
 		<% orders_by_status(orders, status).each do |order| %>
 			<tr>
-				<td><%= order.shop.predio.name %></td>
-				<td><%= order.shop.name %></td>
+				<td>
+					<% if order.shop.present? %>
+						<%= order.shop.predio.name %>
+					<% else %>
+						Prédio não disponível
+					<% end %>
+				</td>
+				<td>
+					<% if order.shop.present? %>
+						<%= order.shop.name %>
+					<% else %>
+						Loja não disponível
+					<% end %>
+				</td>
 				<td><%= status %></td>
 				<td><%= order.status.observation %></td>
 				<td><%= order.canceled_by %></td>

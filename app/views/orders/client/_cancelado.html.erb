@@ -17,8 +17,22 @@
 		<% orders_by_status(orders, status).each do |order| %>
 			<tr>
 				<th>#<%= order.id %></th>
-				<th><%= order.shop.predio.name %></th>
-				<th><%= order.shop.name %></th>
+
+				<td>
+					<% if order.shop.present? %>
+						<%= order.shop.predio.name %>
+					<% else %>
+						Prédio não disponível
+					<% end %>
+				</td>
+				<td>
+					<% if order.shop.present? %>
+						<%= order.shop.predio.name %>
+					<% else %>
+						Prédio não disponível
+					<% end %>
+				</td>
+
 				<td><%= order.user.name %></td>
 				<td><%= status %></td>
 				<td><%= format_currency order.total %></td>

@@ -2,7 +2,7 @@ class OrderStatus < ActiveRecord::Base
 	belongs_to :order
 	belongs_to :user
 
-	after_save :notify_users
+	# after_save :notify_users
 
 	EN_CURSO = 'EM_ANDAMENTO'
 	ACEPTADO = 'ACEITO'
@@ -21,7 +21,7 @@ class OrderStatus < ActiveRecord::Base
 	def notify_users
 		order = self.order
 		client_id = order.user_id
-		seller_id = order.shop.user_id
+		seller_id = order.try(:shop).try(:user_id)
 
 		StatusWorker.perform_async(self.id, client_id, seller_id)
 

@@ -1,33 +1,35 @@
-<table class='table table-hover'>
-	<thead>
-		<tr>
-			<th>#</th>
-			<th>Prédio</th>
-			<th>Loja</th>
-			<th>Cliente</th>
-			<th>Status</th>
-			<th>Valor</th>
-			<th>Motivo</th>
-			<th>Cancelado por</th>
-			<th>Cancelado em</th>
-			<th></th>
-		</tr>
-	</thead>
-	<tbody>
-		<% orders_by_status(orders, status).each do |order| %>
-			<tr>
-				<th>#<%= order.id %></th>
-				<th><%= order.shop.predio.name %></th>
-				<th><%= order.shop.name %></th>
-				<td><%= order.user.name %></td>
-				<td><%= status %></td>
-				<td><%= format_currency order.total %></td>
-				<td><%= order.status.observation %></td>
-				<td><%= order.canceled_by %></td>
-				<td><%= format_datetime order.status.created_at %></td>
-
-				<td><%= link_to 'Ver detalhes', show_from_clients_orders_path(status.try(:downcase), order) %></td>
-			</tr>
-		<% end %>
-	</tbody>
-</table>
+<div id="no-more-tables">
+            <table class="col-md-12 table-bordered table-striped table-condensed cf">
+        		<thead class="cf">
+        			<tr>
+        				<th>#</th>
+        				<th>Prédio</th>
+        				<th>Loja</th>
+        				<th>Cliente</th>
+        				<th>Status</th>
+        				<th>Valor</th>
+        				<th>Motivo</th>
+        				<th>Cancelado por</th>
+						<th>Cancelado em</th>
+					</tr>
+        		</thead>
+				<tbody>
+					<% orders_by_status(orders, status).each do |order| %>
+        			<tr>
+        				<td data-title="#">#<%= order.id %></td>
+        				<td data-title="Prédio"><%= order.shop.predio.name %></td>
+        				<td data-title="Loja"><%= order.shop.name %></td>
+        				<td data-title="Cliente"><%= order.user.name %></td>
+        				<td data-title="Status"><%= status %></td>
+        				<td data-title="Valor"><%= format_currency order.total %></td>
+        				<td data-title="Motivo"><%= order.status.observation %></td>
+        				<td data-title="Cancelado por"><%= order.canceled_by %></td>
+						<td data-title="Cancelado em"><%= format_datetime order.status.created_at %></td>
+        				<td>
+							<%= link_to 'Ver detalhes', show_from_clients_orders_path(status.try(:downcase), order), class: "btn btn-xs" %>
+						</td>
+        			</tr>
+        			<% end %>
+   				 </tbody>
+    		</table>
+</div>

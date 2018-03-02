@@ -18,11 +18,15 @@
         			<tr>
         				<td data-title="#">#<%= order.id %></td>
         				<td data-title="Prédio"><%= order.shop.predio.name %></td>
-        				<td data-title="Loja"><%= order.shop.name %></td>
+        				<td data-title="Loja"><%= link_to order.shop.name, predio_shop_path(order.shop.predio, order.shop) %></td>
         				<td data-title="Cliente"><%= order.user.name %></td>
         				<td data-title="Status"><%= status %></td>
         				<td data-title="Valor"><%= format_currency order.total %></td>
-        				<td data-title="Motivo"><%= order.status.observation %></td>
+        				<% if order.status.observation.blank? %>
+        					<td data-title="Motivo">-</td>
+        				<% else %>
+        					<td data-title="Motivo"><%= order.status.observation %></td>
+        				<% end %>
         				<td data-title="Cancelado por"><%= order.canceled_by %></td>
 						<td data-title="Cancelado em"><%= format_datetime order.status.created_at %></td>
         				<td>

@@ -1,3 +1,10 @@
+<% unless orders_by_status(orders, status).blank? %>
+<div class="row">
+	<div class="col-md-12">
+		<strong>Total:</strong> <i><%= format_currency orders_by_status(orders, status).sum(&:total) %></i>
+	</div>
+</div>
+<% end %>
 <div id="no-more-tables">
             <table class="col-md-12 table-bordered table-striped table-condensed cf">
         		<thead class="cf">
@@ -7,7 +14,7 @@
 						<th>Loja</th>
 						<th>Cliente</th>
 						<th>Valor</th>
-						<th>Tempo total de duração do pedido</th>
+						<th>Duração do pedido</th>
 						<th>Entregue em</th>
 					</tr>
         		</thead>
@@ -20,7 +27,7 @@
         				<td data-title="Cliente"><%= order.user.name %></td>
         				
         				<td data-title="Valor"><%= format_currency order.total %></td>
-        				<td data-title="Tempo total de duração do pedido"><%= time_spent_between_last_status order %></td>
+        				<td data-title="Duração do pedido"><%= time_spent_between_last_status order %></td>
         				<td data-title="Entregue em"><%= format_datetime order.status.created_at %></td>
         				
         				<td>
@@ -31,12 +38,3 @@
    				 </tbody>
     		</table>
 </div>
-
-
-<% unless orders_by_status(orders, status).blank? %>
-<div class="row">
-	<div class="col-md-12">
-		<strong>Total:</strong> <i><%= format_currency orders_by_status(orders, status).sum(&:total) %></i>
-	</div>
-</div>
-<% end %>

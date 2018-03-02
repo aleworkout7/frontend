@@ -6,7 +6,7 @@
         				<th>Prédio</th>
         				<th>Loja</th>
         				<th>Cliente</th>
-        				<th>Aceito em</th>
+        				<th>Aceito depois de</th>
         				<th>Depois de</th>
         				<th>Valor</th>
         				<th>Status</th>
@@ -21,7 +21,7 @@
         				<td data-title="Loja"><%= link_to order.shop.name, predio_shop_path(order.shop.predio, order.shop) %></td>
         				<td data-title="Cliente"><%= order.user.name %></td>
         				<td data-title="Aceito em"><%= format_datetime order.status.created_at %></td>
-        				<td data-title="Depois de"><%= time_spent_between_last_status(order) %></td>
+        				<td data-title="Aceito depois de"><%= time_spent_between_last_status(order) %></td>
         				<td data-title="Valor"><%= format_currency order.total %></td>
         				<td data-title="Status"><%= status %></td>
         				<td data-title="Telefone do cliente"><%= order.user.phone %></td>

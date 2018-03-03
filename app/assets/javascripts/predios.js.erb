@@ -24,8 +24,11 @@ $('.edificios').unbind().change((event) => {
 */
 $(".search-predios").keyup(function() {
 	let search = $(this).val();
-	console.log(search);
-	$.get("/search", { search }, (data) => $("#predios").html(data));
+	$.get("/search", { search }, (data) => {
+		let $predios = $("#predios");
+		$predios.html(data);
+		$("#predios-amount").html($predios.children().size());
+	});
 });
 
 $("#link-help").unbind().click((e) => {

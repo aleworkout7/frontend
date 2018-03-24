@@ -15,7 +15,7 @@
 				</div>
 				<div class="form-group">
 					<%= f.label "E-mail *" %><br />
-					<%= f.email_field :email, class:"form-control", placeholder:"Insira o email", required: true, readonly: true %>
+					<%= f.email_field :email, class:"form-control", placeholder:"Insira o e-mail", required: true, readonly: true %>
 				</div>
 				<div class="form-group">
 					<%= f.label "Telefone *" %><br />
@@ -45,8 +45,7 @@
 
 						<div class="form-group">
 							<%= ff.label "Prédio *" %><br />
-							<%= ff.select :predio_id, Predio.all.collect { |p| [ p.name, p.id ] }, { prompt: "Elige un predio" }, { class: "predio-select form-control", data: { predio: (session[:predio_id] || predio.try(:id)) }, required: true } %>
-							<span style="display:none;color: red;" id="predio-msg">O prédio deve ser o mesmo prédio da loja que está sendo feito o pedido (<%= (session[:predio_name] || predio.try(:name)) %>)</span>
+							<%= ff.select :predio_id, Predio.all.collect { |p| [ p.name, p.id ] }, { prompt: "Elige un predio" }, { class: "predio-select form-control", data: { predio: (session[:predio_id] || predio.try(:id)) }, required: false } %>
 						</div>
 						<div class="form-group">
 							<%= ff.label "Número do apartamento" %><br />
@@ -72,7 +71,7 @@
 				<div class="row actions">
 					<div class="col-md-6">
 						<% if cart.blank? %>
-							<%= f.submit "Editar conta", class:"btn btn-sm btn-primary user-submit" %>
+							<%= f.submit "Salvar alterações", class:"btn btn-sm btn-primary user-submit" %>
 						<% else %>
 							<%= f.submit "Confirmar", class:"btn btn-sm btn-success user-submit" %>
 						<% end %>
@@ -87,21 +86,7 @@
 <% end %>
 
 <script type="text/javascript">
-$(".predio-select").change(function(){
-	let must_be_predio_id = $(this).data("predio");
-	if (must_be_predio_id == "" || must_be_predio_id == null || must_be_predio_id == undefined) {
-		return true;
-	}
 
-	let predio_id = $(this).val();
-	if (predio_id != must_be_predio_id) {
-		$("#predio-msg").fadeIn();
-		$(".user-submit").prop("disabled", "true");
-	} else {
-		$("#predio-msg").fadeOut();
-		$(".user-submit").removeProp("disabled");
-	}
-});
 
 $(".address_radio_button").click(function() {
 	let $radio = $(this);

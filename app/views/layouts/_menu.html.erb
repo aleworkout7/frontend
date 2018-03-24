@@ -5,7 +5,7 @@
 	<ul class="nav-mob">
 		<% if user_signed_in? %>
 			<li><%= link_to current_user.email, edit_user_registration_path %></li>
-			<li><%= link_to 'Encerrar sessão', destroy_user_session_path, method: :delete %></li>
+			<li><%= link_to 'Sair', destroy_user_session_path, method: :delete %></li>
 		<% else %>
 			<li><%= link_to 'Iniciar sessão', new_user_session_path %></li>
 		<% end %>
@@ -23,12 +23,10 @@
 			<% if current_user.admin? %>
 				<li><%= link_to "Alejandros", alejandros_path %></li>
 				<li><%= link_to "Contatos", contacts_path %></li>
-
 				<li><%= link_to "Predios", predios_path %></li>
 				<li><%= link_to "Conjuntos", housing_sets_path %></li>
 				<li><%= link_to "Bairros", districts_path %></li>
 				<li><%= link_to "Municipios", cities_path %></li>
-
 				<li><%= link_to "Categories", categories_path %></li>
 			<% end %>
 		<% end %>

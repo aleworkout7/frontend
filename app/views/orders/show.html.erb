@@ -1,7 +1,7 @@
 <div class="container">
 	<div class="row">
 		<div class="modal-header">
-			<h4 class="modal-title" id="small-modal-label">Detalhes do pedido (#<%= @order.id %>)</h4>
+			<h4 class="modal-title" id="small-modal-label">Confira seu pedido Nº<%= @order.id %>)</h4>
 		</div>
 
 		<div class="modal-body" align="center">
@@ -23,8 +23,7 @@
 					<td><%= format_datetime @order.status.created_at %></td>
 				</tr>
 				<tr>
-					<th>Meu endereço informado:</th>
-					<% address = @order.user.address %>
+					<th>Meu endereço informado</th>
 				</tr>
 				<tr>
 					<th>Prédio:</th>
@@ -48,12 +47,12 @@
 				</tr>
 				<tr>
 					<th></th>
-					<td><%= link_to 'Atualizar meu endereço agora', edit_user_registration_path %></td>
+					<td><%= link_to 'Atualizar meu endereço agora (opcional)', edit_user_registration_path %></td>
 				</tr>
 				<tr>
 					<td>
 						<br/>
-						<%= link_to 'Ver meus pedidos', to_shops_orders_path, class: "btn btn-success" %>
+						<%= link_to 'Voltar para o inicio', root_path, class: "btn btn-success" %>
 					</td>
 				</tr>
 			</table>

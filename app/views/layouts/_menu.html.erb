@@ -7,21 +7,14 @@
 			<li><a href="#"><%= current_user.email %></a></li>
 			<li><%= link_to "Editar meus dados", edit_user_registration_path %></li>
 			<li><%= link_to 'Sair', destroy_user_session_path, method: :delete %></li>
-		<% else %>
-			<li><%= link_to 'Iniciar sessão', new_user_session_path %></li>
-		<% end %>
-
-		<hr>
-
-		<li><%= link_to "Inicio", root_path %></li>
-		<li><%= link_to "Assinaturas", pagos_path %></li>
-		<li><%= link_to "Fale conosco", new_contact_path %></li>
-
-		<% if user_signed_in? %>
+			<hr />
+			<li><%= link_to "Inicio", root_path %></li>
+			<li><%= link_to "Assinaturas", pagos_path %></li>
+			<li><%= link_to "Fale conosco", new_contact_path %></li>
 			<li><%= link_to "Minhas lojas", user_shops_path(current_user) %></li>
 			<li><%= link_to "Ver pedidos", orders_path %></li>
-			<hr>
 			<% if current_user.admin? %>
+				<hr>
 				<li><%= link_to "Alejandros", alejandros_path %></li>
 				<li><%= link_to "Contatos", contacts_path %></li>
 				<li><%= link_to "Predios", predios_path %></li>
@@ -30,6 +23,11 @@
 				<li><%= link_to "Municipios", cities_path %></li>
 				<li><%= link_to "Categories", categories_path %></li>
 			<% end %>
+		<% else %>
+			<li><%= link_to 'Iniciar sessão', new_user_session_path %></li>
+			<li><%= link_to 'Criar conta', new_user_registration_path %></li>
+			<hr />
+			<li><%= link_to "Fale conosco", new_contact_path %></li>
 		<% end %>
 	</ul>
 </div>

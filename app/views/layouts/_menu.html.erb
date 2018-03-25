@@ -4,7 +4,7 @@
 	</div>
 	<ul class="nav-mob">
 		<% if user_signed_in? %>
-			<li><%= current_user.email %></li>
+			<li><p><%= current_user.email %></p></li>
 			<li><%= link_to "Editar meus dados", edit_user_registration_path %></li>
 			<li><%= link_to 'Sair', destroy_user_session_path, method: :delete %></li>
 		<% else %>

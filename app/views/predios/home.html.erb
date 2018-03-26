@@ -21,12 +21,12 @@
 			<% if @predios.present? %>
 				<hr>
 				<div class="text-center">
-					<h2 id="predios-amount" class="label label-primary" style="font-size: 14px; padding: 6px 10px; border-radius: 50px 50px 50px;"><%= @predios.count %></h2>
+					<h2 id="predios-amount" class="label label-primary" style="font-size: 14px; padding: 6px 10px; border-radius: 50px 50px 50px;"><%= @predios.count %> encontrados</h2>
 				</div>
 				<hr>
 			<% end %>
 
-			<%= text_field_tag :search, nil, class: "form-control search-predios", placeholder: "Procure seu prédio" %>
+			<%= text_field_tag :search, nil, class: "form-control search-predios", placeholder: "Procure por Bairro, Municipio, Conjunto" %>
 		</div>
 	</div>
 

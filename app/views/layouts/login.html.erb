@@ -33,7 +33,7 @@
 
 	<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
 		<div class="container-fluid">
-			<% if current_page?('/users/sign_up') || current_page?('/users/password/new') %>
+			<% if current_page?('/users/sign_up') || current_page?('/users/password/new') || current_page?('/shops/index') %>
 				<%= link_to raw('<img src="https://s3.amazonaws.com/predios/left.png" class="left">'), new_user_session_path %>
 			<% end %>
 

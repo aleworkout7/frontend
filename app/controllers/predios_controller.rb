@@ -8,7 +8,6 @@ class PrediosController < ApplicationController
 			return redirect_to new_user_registration_path
 		end
 		@predios = Predio.highlighteds
-		@texto = "encontrados"
 	end
 
 	# GET /search

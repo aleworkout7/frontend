@@ -7,8 +7,9 @@
 			<div class="predios-head">
 				<img src="https://s3.amazonaws.com/predios/loja.png">
 				<div>
-					<h2>Prédio: <%= @predio.name %></h2>
-					<h2 class="margin-top-0">Lojas: <%= @shops.count %></h2>
+					<h2></h2>
+					<h2 class="margin-top-0">Você está no: </h2>
+					<h2 class="margin-top-0"><%= @predio.name.truncate(15) %></h2>
 				</div>
 			</div>
 		</div>
@@ -16,8 +17,8 @@
 		<div class="col-md-12">
 			<%= form_tag(predio_shops_path(@predio), method:'get') do %>
 				<div>
-					<%= text_field_tag :search, params[:search], class: "input-search", placeholder: "Estou a procura de..." %>
-					<%= submit_tag "Busque", class: "input-btn-search", name: nil %>
+					<%= text_field_tag :search, params[:search], class: "input-search", placeholder: "Buscar..." %>
+					<%= submit_tag ">", class: "input-btn-search", name: nil %>
 				</div>
 			<% end %>
 		</div>
@@ -33,7 +34,7 @@
 			<% end %>
 
 			<p class="text-found">
-				<%= @shops.blank? ? "Ainda sem lojas." : "Lojas encontradas"  %>
+				<%= @shops.blank? "Ainda sem lojas." : "Lojas encontradas: #{@shops.count}"  %>
 			</p>
 		</div>
 	</div>

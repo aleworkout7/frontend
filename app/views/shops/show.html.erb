@@ -8,11 +8,11 @@
 				</div>
 
 				<div class="col-md-4">
-					<h1 class="margin-top-0"><%= @shop.name %></h1>
+					<h1 class="margin-top-0"><%= @shop.name.truncate(15) %></h1>
 					<div class="inline">
 						<img src="https://s3.amazonaws.com/predios/build.png" class="build">
 						<h1 class="build-name">
-							<%= @shop.predio.name %>
+							<%= @shop.predio.name.truncate(15) %>
 						</h1>
 					</div>
 				</div>
@@ -47,7 +47,7 @@
 			<% end %>
 
 			<p class="text-found">
-				<%= @products.blank? ? "Nenhum producto encontrado" : "Produtos encontrados"  %>
+				<%= @products.blank? "Nenhum producto encontrado" : "Produtos encontrados"  %>
 			</p>
 		</div>
 	</div>

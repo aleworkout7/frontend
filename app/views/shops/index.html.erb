@@ -34,7 +34,7 @@
 			<% end %>
 
 			<p class="text-found">
-				<%= @shops.blank? "Ainda sem lojas." : "Lojas encontradas: #{@shops.count}"  %>
+				<%= @shops.blank? ? "Ainda sem lojas." : "Lojas encontradas: #{@shops.count}"  %>
 			</p>
 		</div>
 	</div>

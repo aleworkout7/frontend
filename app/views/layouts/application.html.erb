@@ -35,6 +35,12 @@
 		<div class="container-fluid">
 			<% if current_page?('/users/password/new') || controller_name == "registrations" %>
 				<%= link_to raw('<img src="https://s3.amazonaws.com/predios/left.png" class="left">'), new_user_session_path %>
+			<% elsif current_page?('/shops/index') %>
+				<%= link_to raw('<img src="https://s3.amazonaws.com/predios/left.png" class="left">'), root_path %>
+			<% else %>
+				<% if current_page?(controller_name: 'shops', action: 'show') %>
+					<%= link_to raw('<img src="https://s3.amazonaws.com/predios/left.png" class="left">'), root_path %>
+				<% end %>
 			<% end %>
 
 			<img src="https://s3.amazonaws.com/predios/burger.png" class="burger">

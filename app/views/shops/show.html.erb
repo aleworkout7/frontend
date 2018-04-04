@@ -26,8 +26,8 @@
 		<div class="col-md-12">
 			<%= form_tag(predio_shop_path(@predio, @shop), method: "get") do %>
 				<div class="">
-					<%= text_field_tag :q, params[:q], class: "input-search", placeholder: 'Estou a procura de...' %>
-					<%= submit_tag "Busque", class: "input-btn-search", name: nil %>
+					<%= text_field_tag :q, params[:q], class: "input-search", placeholder: 'Buscar...' %>
+					<%= submit_tag ">", class: "input-btn-search", name: nil %>
 				</div>
 			<% end %>
 		</div>

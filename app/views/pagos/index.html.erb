@@ -4,7 +4,7 @@
 
 		<% unless current_user.has_subscription? %>
 			
-			<p>A primeira assinatura sempre tem 15 dias gratis e pode cancelar quando quiser!</p>
+			<p style="color: black;">A primeira assinatura sempre tem 15 dias gratis e pode cancelar quando quiser!</p>
 			<%= link_to "Assinar", mp_do_subscription_path, class: "btn btn-success" %>
 
 		<% else %>

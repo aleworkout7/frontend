@@ -1,11 +1,15 @@
 <div class="container">
 	<div class="row">
 		<div class="modal-header">
-			<h4 class="modal-title" id="small-modal-label">Confira seu pedido Nº<%= @order.id %>)</h4>
+			<h4 class="modal-title" id="small-modal-label">Confira seu pedido</h4>
 		</div>
 
 		<div class="modal-body" align="center">
 			<table class='table table-hover'>
+				<tr>
+					<th>Nº Pedido:</th>
+					<td><%= @order.id %></td>
+				</tr>
 				<tr>
 					<th>Tienda:</th>
 					<td><%= @order.shop.name %></td>

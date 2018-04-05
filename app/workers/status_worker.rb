@@ -22,7 +22,7 @@ class StatusWorker
 		# Check for who will receive
 		if order_status.user.id == seller.try(:id)
 			OrderStatusMailer.new_status_for_client(order_status, client).deliver_later
-		elsif client.present?
+		elsif client.present? && (order_status.status != OrderStatus::EN_CURSO)
 			OrderStatusMailer.new_status_for_seller(order_status, seller).deliver_later
 		end
 

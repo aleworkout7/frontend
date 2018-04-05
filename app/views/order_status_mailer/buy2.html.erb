@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+</head>
+<body>
+	<h1>Oi, <%= @user.name %></h1>
+	<p>
+		O pedido <strong>#<%= @status.order.id %></strong> foi criado no sistema. O cliente está aguardando você.
+	</p>
+	<p>
+		Pode ver o pedido diretamente no aplicativo seguindo o seguinte enlace:
+	</p>
+	<a href="http://www.prediosapp.com.br/orders/clients/em_andamento">Ver pedido no aplicativo</a>
+</body>
+</html>

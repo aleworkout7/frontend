@@ -13,11 +13,10 @@ class StatusWorker
 		if order_status.status == OrderStatus::EN_CURSO && client.present?
 			# Client create an order
 			OrderStatusMailer.buy(order_status, client).deliver_later
-
+			OrderStatusMailer.buy2(order_status, seller).deliver_later
 		elsif order_status.status == OrderStatus::FINALIZADO && seller.present?
 			# Seller finish an order
 			OrderStatusMailer.delivered(order_status, seller).deliver_later
-
 		end
 
 		# Check for who will receive
@@ -25,6 +24,7 @@ class StatusWorker
 			OrderStatusMailer.new_status_for_seller(order_status, seller).deliver_later
 		elsif client.present?
 			OrderStatusMailer.new_status_for_client(order_status, client).deliver_later
+			
 		end
 
 	end

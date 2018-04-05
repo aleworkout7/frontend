@@ -6,7 +6,15 @@
 <body>
 	<h1>Oi, <%= @user.name %></h1>
 	<p>
-		O pedido <strong>#<%= @status.order.id %></strong> foi criado. Agora ele possui o status <strong><%= @status.status %></strong>
+		O pedido <strong>#<%= @status.order.id %></strong> foi criado no sistema. Quando o vendedor aceite o pedido,
+		você receberá uma notificação por e-mail. Mesmo se ele cancelar.
 	</p>
+	<p>
+		O status atual do seu pedido é <strong><%= @status.status %></strong>
+	</p>
+	<p>
+		Também pode conferir seu pedido diretamente no aplicativo seguindo o seguinte enlace:
+	</p>
+	<a href="http://www.prediosapp.com.br/orders/shops/em_andamento">Ver pedido no aplicativo</a>
 </body>
 </html>

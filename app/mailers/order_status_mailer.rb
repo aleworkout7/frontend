@@ -5,6 +5,12 @@ class OrderStatusMailer < ApplicationMailer
 		@status = order_status
 		mail(to: @user.email, subject: 'Predios - Pedido criado')
 	end
+	
+	def buy2(order_status, user)
+		@user = user
+		@status = order_status
+		mail(to: @user.email, subject: 'Predios - Novo pedido')
+	end
 
 	def delivered(order_status, user)
 		@user = user
